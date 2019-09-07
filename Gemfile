@@ -15,6 +15,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara'
   gem 'rspec-rails'
+  gem 'rubocop', '~> 0.74.0', require: false
   gem 'selenium-webdriver'
 end
 
