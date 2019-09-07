@@ -12,6 +12,7 @@ RSpec.feature "User log in", type: :feature do
   scenario "with invalid credentials" do
     invalid_log_in(user)
     expect(current_path).to eq "/login"
+    expect(page).to have_content('Invalid email/password combination')
     expect(page).not_to have_content('This is your dashboard, ' + user.first_name)
   end
 end
