@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: user_email)
     if user && user.authenticate(user_password)
       log_in user
+      redirect_to dashboard_path
     else
       render 'new'
     end

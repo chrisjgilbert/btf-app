@@ -6,3 +6,12 @@ def valid_user_signup_params(user)
     password: user.password
   }
 end
+
+def invalid_user_signup_params
+  {
+    first_name: '',
+    last_name: '',
+    email: 'chris.com',
+    password: ''
+  }
+end
