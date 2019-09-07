@@ -10,6 +10,7 @@ gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.3'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'uglifier'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
