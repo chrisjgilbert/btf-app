@@ -1,15 +1,15 @@
 language: ruby
+rvm:
+  - 2.5.1
 services:
   - postgresql
 cache:
 - bundler
 before_script:
-- bundle exec rake db:create
-- bundle exec rake db:migrate
-- bundle exec rake assets:precompile
+- psql -c 'create database btf_app_test;' -U postgres
+- rails db:migrate
 script:
-  - rspec
-  - rubocop
+  - bin/rake
 deploy:
   provider: heroku
   api_key:
