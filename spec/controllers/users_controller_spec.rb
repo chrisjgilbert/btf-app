@@ -14,7 +14,7 @@ RSpec.describe UsersController, type: :controller do
   describe "POST #create" do
     context 'with valid user sign up params' do
       it "redirects to user dashboard" do
-        
+        post :create, params: { user: valid_user_signup_params(user) }
         expect(response).to redirect_to dashboard_path(user)
       end
       it "creates a new user account with valid attributes" do
