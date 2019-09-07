@@ -86,3 +86,9 @@ def invalid_log_in(user)
     click_button "Log in"
   end
 end
+
+def logout
+  within ".header-navigation" do
+    click_link('Log out')
+  end
+end
