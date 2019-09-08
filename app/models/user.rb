@@ -40,4 +40,8 @@ class User < ApplicationRecord
   def password_reset_expired?
     password_reset_sent_at < 2.hours.ago
   end
+
+  def destroy_password_reset_digest
+    update_columns(password_reset_digest: nil, password_reset_sent_at: nil)
+  end
 end
