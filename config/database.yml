@@ -83,3 +83,5 @@ production:
   database: btf-app_production
   username: btf-app
   password: <%= ENV['BTF-APP_DATABASE_PASSWORD'] %>
+  url:  <%= ENV["DATABASE_URL"] %>
+  pool: <%= ENV["DB_POOL"] || ENV['RAILS_MAX_THREADS'] || 5 %>
