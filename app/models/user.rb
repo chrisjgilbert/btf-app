@@ -31,14 +31,13 @@ class User < ApplicationRecord
     UserMailer.password_reset(self).deliver_now
   end
 
-  def authenticated?(attribute, token)
-    digest = "#{attribute}_digest"
+  def authenticated_for_password_reset?(token)
+    return false if self.password_reset_digest.nil?
 
-    return false if digest.nil?
-    BCrypt::Password.new(digest).is_password?(token)
+    BCrypt::Password.new(self.password_reset_digest).is_password?(token)
   end
 
   def password_reset_expired?
-    reset_sent_at < 2.hours.ago
+    password_reset_sent_at < 2.hours.ago
   end
 end
