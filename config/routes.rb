@@ -12,4 +12,7 @@ Rails.application.routes.draw do
 
     # Dashboard
     get '/dashboard',   to: 'dashboards#show'
+
+    # Passowrd Resets
+    resources :password_resets, only: [:new, :create, :edit, :update]
 end

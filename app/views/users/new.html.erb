@@ -1,7 +1,7 @@
 <h1>Sign up</h1>
 
 <%= form_for(@user, url: signup_path) do |f| %>
-  <%= render 'shared/user_signup_error_messages' %>
+  <%= render 'shared/user_error_messages' %>
 
   <%= f.label :first_name %>
   <%= f.text_field :first_name %>

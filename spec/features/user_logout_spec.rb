@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "User log out", type: :feature do
-  let(:not_signed_up_user)       { FactoryBot.build(:user) }
+  let(:not_signed_up_user) { FactoryBot.build(:user) }
   let(:signed_up_user) { FactoryBot.create(:user) }
   
   scenario "sign up then log out" do
