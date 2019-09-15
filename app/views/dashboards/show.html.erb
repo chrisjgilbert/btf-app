@@ -1,1 +1,10 @@
-<h1>This is your dashboard, <%= @user.first_name %></h1>
+<h1>This is your dashboard, <%= @current_user.first_name %></h1>
+
+<% unless @current_user.has_created_a_team? %>
+  <%= link_to 'Make your picks', new_team_path %>
+<% end %>
+
+<% if @current_user.has_created_a_team? %>
+  <% team = @current_user.team %>
+  <%= link_to team.name, team_path(team) %>
+<% end %>

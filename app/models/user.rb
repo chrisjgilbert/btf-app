@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   attr_accessor :password_reset_token
 
+  has_one :team, dependent: :destroy
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   
   before_save { email.downcase! }
@@ -44,4 +46,9 @@ class User < ApplicationRecord
   def destroy_password_reset_digest
     update_columns(password_reset_digest: nil, password_reset_sent_at: nil)
   end
+
+  def has_created_a_team?
+    Team.where(user_id: self.id).exists?
+  end
+
 end

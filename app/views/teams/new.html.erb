@@ -1,0 +1,8 @@
+<h1>Make your picks</h1>
+
+<%= form_for(@team, url: teams_path) do |f| %>
+  <%= render 'shared/team_error_messages' %>
+  <%= f.label :name, 'Team name' %>
+  <%= f.text_field :name %>
+  <%= f.submit 'Submit' %>
+<% end %>
