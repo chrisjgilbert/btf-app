@@ -3,6 +3,8 @@ class TeamsController < ApplicationController
   
   def new
     @team = Team.new
+    @competitions = Competition.all
+    @picks = @team.picks.build
   end
 
   def create
@@ -22,7 +24,7 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:name)
+    params.require(:team).permit(:name, picks_attributes: [:id, :competitor_id])
   end
 
   def user_has_already_created_a_team

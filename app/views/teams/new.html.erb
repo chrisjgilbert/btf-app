@@ -4,5 +4,12 @@
   <%= render 'shared/team_error_messages' %>
   <%= f.label :name, 'Team name' %>
   <%= f.text_field :name %>
+
+  <% @competitions.each do |competition| %>
+  <%= f.fields_for :picks do |pick| %>
+    <%= pick.collection_select :competitor_id, Competitor.where(competition_id: competition.id), :id , :name, include_blank: false %>
+    <% end %>
+  <% end %>
+
   <%= f.submit 'Submit' %>
 <% end %>
