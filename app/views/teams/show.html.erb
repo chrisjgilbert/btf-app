@@ -1,0 +1,7 @@
+<h1>View team <%= @team.name %></h1>
+
+<ul>
+<% @team.picks.each do |pick| %>
+  <li><%= pick.competitor.name %> for <%= pick.competitor.competition.name %> </li>
+<% end %>
+</ul>

@@ -1,4 +1,18 @@
 FactoryBot.define do
+  factory :pick do
+    team { nil }
+    competitor { nil }
+  end
+
+  factory :competitor do
+    name { "MyString" }
+    competition { nil }
+  end
+
+  factory :competition do
+    name { "MyString" }
+  end
+
   sequence :email do |n|
     "person#{n}@example.com"
   end

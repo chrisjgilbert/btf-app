@@ -15,4 +15,7 @@ Rails.application.routes.draw do
 
     # Passowrd Resets
     resources :password_resets, only: [:new, :create, :edit, :update]
+
+    # Teams
+    resources :teams, only: [:new, :create, :show]
 end

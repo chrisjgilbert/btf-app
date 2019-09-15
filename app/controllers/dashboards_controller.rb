@@ -1,8 +1,9 @@
 class DashboardsController < ApplicationController
   include SessionsHelper
+  include TeamsHelper
 
   def show 
-    @user = current_user
+    @current_user = current_user
   end
   
 end
