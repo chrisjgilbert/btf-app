@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   include TeamsHelper
   before_action :user_has_already_created_a_team, only: [:new, :create]
+  before_action :before_update_team_deadline, only: [:edit, :update]
   
   def new
     @team = Team.new
@@ -29,9 +30,12 @@ class TeamsController < ApplicationController
 
   def update
     @team = Team.find(params[:id])
-    @team.update(team_params)
-    update_team_success_flash_message
-    redirect_to @team
+    if @team.update(team_params)
+      update_team_success_flash_message
+      redirect_to @team
+    else
+      render 'new'
+    end
   end
 
   private
@@ -43,6 +47,13 @@ class TeamsController < ApplicationController
   def user_has_already_created_a_team
     if Team.where(user_id: current_user.id).exists?
       flash[:danger] = 'Team already created'
+      redirect_to dashboard_path
+    end
+  end
+
+  def before_update_team_deadline
+    unless before_update_team_deadline?
+      flash[:danger] = 'Cheeky. The deadline has passed to update your team.'
       redirect_to dashboard_path
     end
   end

@@ -6,4 +6,6 @@
 <% end %>
 </ul>
 
-<p>You can update your team until 31st December 2019. <%= link_to 'Click here', edit_team_path(@team) %> to do so.</p>
+<% if before_update_team_deadline? && @team.user == current_user %>
+  <p>You can update your team until 31st December 2019. <%= link_to 'Click here', edit_team_path(@team) %> to do so.</p>
+<% end %>
