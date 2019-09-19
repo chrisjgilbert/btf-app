@@ -1,0 +1,16 @@
+<h1>Update team name and your picks</h1>
+<p>You can come back and upate these before midnight on 31st Decemeber 2019.</p>
+<%= form_for(@team, url: team_path(params[:id]), method: :patch) do |f| %>
+  <%= render 'shared/team_error_messages' %>
+  <%= f.label :name, 'Your team name' %>
+  <%= f.text_field :name %>
+
+  <% competition_id = 1 %>
+  <%= f.fields_for :picks do |pick| %>
+    <%= Competition.find(competition_id).name %>
+    <%= pick.collection_select :competitor_id, Competitor.where(competition_id: competition_id), :id , :name, include_blank: false %>
+    <% competition_id += 1 %>
+  <% end %>
+
+  <%= f.submit 'Submit' %>
+<% end %>

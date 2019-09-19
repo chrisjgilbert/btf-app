@@ -1,7 +1,9 @@
-<h1>View team <%= @team.name %></h1>
+<h1><%= @team.name %></h1>
 
 <ul>
 <% @team.picks.each do |pick| %>
   <li><%= pick.competitor.name %> for <%= pick.competitor.competition.name %> </li>
 <% end %>
 </ul>
+
+<p>You can update your team until 31st December 2019. <%= link_to 'Click here', edit_team_path(@team) %> to do so.</p>

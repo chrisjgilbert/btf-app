@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  include TeamsHelper
   before_action :user_has_already_created_a_team, only: [:new, :create]
   
   def new
@@ -10,7 +11,7 @@ class TeamsController < ApplicationController
   def create
     @team = current_user.build_team(team_params)
     if @team.save
-      flash[:success] = 'Team created'
+      create_team_success_flash_message
       redirect_to dashboard_path
     else
       render 'new'
@@ -19,6 +20,18 @@ class TeamsController < ApplicationController
   
   def show
     @team = Team.find(params[:id])
+  end
+  
+  def edit
+    @team = Team.find(params[:id])
+    @picks = @team.picks
+  end
+
+  def update
+    @team = Team.find(params[:id])
+    @team.update(team_params)
+    update_team_success_flash_message
+    redirect_to @team
   end
 
   private
