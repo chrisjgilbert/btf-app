@@ -47,14 +47,14 @@ class TeamsController < ApplicationController
 
   def user_has_already_created_a_team
     if Team.where(user_id: current_user.id).exists?
-      flash[:danger] = 'Team already created'
+      team_already_created_flash_message
       redirect_to dashboard_path
     end
   end
 
   def before_update_team_deadline
     unless before_update_team_deadline?
-      flash[:danger] = 'Cheeky. The deadline has passed to update your team.'
+      past_deadline_flash_message
       redirect_to dashboard_path
     end
   end
