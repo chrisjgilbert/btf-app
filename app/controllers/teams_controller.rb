@@ -21,17 +21,11 @@ class TeamsController < ApplicationController
   
   def show
     @team = Team.find(params[:id])
-    p "*SHOW"*100
-    @team.picks.each { |pick| p pick.competitor.name }
-    p "*SHOW"*100
   end
   
   def edit
     @team = Team.find(params[:id])
-    p "*EDIT"*100
-    @team.picks.each { |pick| p pick.competitor.name }
-    p "*EDIT"*100
-    @picks = @team.picks.order(:id)
+    @picks = @team.picks
   end
 
   def update
@@ -39,7 +33,7 @@ class TeamsController < ApplicationController
     if @team.update(team_params)
       update_team_success_flash_message
       redirect_to @team
-    else
+    else 
       render 'edit'
     end
   end

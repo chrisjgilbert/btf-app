@@ -1,7 +1,7 @@
 <h1><%= @team.name %></h1>
 
 <ul>
-<% @team.picks.order(:id).each do |pick| %>
+<% @team.picks.each do |pick| %>
   <li><%= pick.competitor.name %> for <%= pick.competitor.competition.name %> </li>
 <% end %>
 </ul>
