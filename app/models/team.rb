@@ -1,6 +1,6 @@
 class Team < ApplicationRecord
   belongs_to :user
-  has_many :picks
+  has_many :picks, -> { order(created_at: :asc) }
   has_many :competitors, through: :picks
   accepts_nested_attributes_for :picks
 

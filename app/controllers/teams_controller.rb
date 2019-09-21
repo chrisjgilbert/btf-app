@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
   def new
     @team = Team.new
     @competitions = Competition.all
-    @picks = @team.picks.build
+    @competitions.count.times { @team.picks.build }
   end
 
   def create
@@ -21,11 +21,17 @@ class TeamsController < ApplicationController
   
   def show
     @team = Team.find(params[:id])
+    p "*SHOW"*100
+    @team.picks.each { |pick| p pick.competitor.name }
+    p "*SHOW"*100
   end
   
   def edit
     @team = Team.find(params[:id])
-    @picks = @team.picks
+    p "*EDIT"*100
+    @team.picks.each { |pick| p pick.competitor.name }
+    p "*EDIT"*100
+    @picks = @team.picks.order(:id)
   end
 
   def update
@@ -34,7 +40,7 @@ class TeamsController < ApplicationController
       update_team_success_flash_message
       redirect_to @team
     else
-      render 'new'
+      render 'edit'
     end
   end
 

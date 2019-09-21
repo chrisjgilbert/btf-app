@@ -7,7 +7,7 @@
 
   <% competition_id = 1 %>
   <%= f.fields_for :picks do |pick| %>
-    <%= Competition.find(competition_id).name %>
+    <%= pick.label Competition.find(competition_id).name %>
     <%= pick.collection_select :competitor_id, Competitor.where(competition_id: competition_id), :id , :name, include_blank: false %>
     <% competition_id += 1 %>
   <% end %>
