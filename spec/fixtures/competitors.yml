@@ -1,0 +1,28 @@
+england:
+  id: 1
+  name: 'England'
+  competition_id: 1
+new_zealand:
+  id: 2
+  name: 'New Zealand'
+  competition_id: 1
+wales:
+  id: 3
+  name: 'Wales'
+  competition_id: 1
+ben_stokes:
+  id: 4
+  name: 'Ben Stokes'
+  competition_id: 2
+steve_smith:
+  id: 5
+  name: 'Steve Smith'
+  competition_id: 2
+harry_kane:
+  id: 6
+  name: 'Harry Kane'
+  competition_id: 3
+ben_stokes:
+  id: 7
+  name: 'Sergio Aguero'
+  competition_id: 3

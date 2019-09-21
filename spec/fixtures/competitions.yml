@@ -1,0 +1,9 @@
+rugby_world_cup:
+  id: 1
+  name: 'Rugby World Cup'
+ashes:
+  id: 2
+  name: 'Ashes'
+golden_boot:
+  id: 3
+  name: 'Golden Boot'
