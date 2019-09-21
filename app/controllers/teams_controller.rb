@@ -16,7 +16,7 @@ class TeamsController < ApplicationController
     @team = current_user.build_team(team_params)
     if @team.save
       create_team_success_flash_message
-      redirect_to dashboard_path
+      redirect_to @team
     else
       render 'new'
     end
