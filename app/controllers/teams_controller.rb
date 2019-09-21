@@ -1,12 +1,13 @@
 class TeamsController < ApplicationController
   include TeamsHelper
   before_action :user_has_already_created_a_team, only: [:new, :create]
-  before_action :before_update_team_deadline, only: [:edit, :update]
+  before_action :before_update_team_deadline,     only: [:edit, :update]
+  before_action :set_team,                        only: [:show, :edit, :update]
+  before_action :load_all_competitions,           only: [:new, :create, :edit, :update]
+  before_action :load_all_competitors,            only: [:new, :create, :edit, :update]
   
   def new
     @team = Team.new
-    @competitions = Competition.all
-    @competitors = Competitor.all
     @picks = @competitions.count.times { @team.picks.build }
   end
 
@@ -21,18 +22,13 @@ class TeamsController < ApplicationController
   end
   
   def show
-    @team = Team.find(params[:id])
   end
   
   def edit
-    @competitions = Competition.all
-    @competitors = Competitor.all
-    @team = Team.find(params[:id])
     @picks = @team.picks
   end
 
   def update
-    @team = Team.find(params[:id])
     if @team.update(team_params)
       update_team_success_flash_message
       redirect_to @team
@@ -59,5 +55,17 @@ class TeamsController < ApplicationController
       flash[:danger] = 'Cheeky. The deadline has passed to update your team.'
       redirect_to dashboard_path
     end
+  end
+
+  def set_team
+    @team = Team.find(params[:id])
+  end
+
+  def load_all_competitions
+    @competitions = Competition.all
+  end
+
+  def load_all_competitors
+    @competitors = Competitor.all
   end
 end
