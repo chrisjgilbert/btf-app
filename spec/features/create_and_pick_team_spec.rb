@@ -14,4 +14,16 @@ RSpec.feature "Create team", type: :feature do
 
     expect(page).to have_selector('h1', text: 'New Team')
   end
+
+  scenario "with invalid credentials" do
+    valid_sign_up(user)
+    expect(current_path).to eq "/dashboard"
+    expect(page).to have_content "We notice you haven't made your picks yet. click here to do so."
+    click_link "click here"
+    
+    fill_in :team_name, with: ''
+    click_button 'Submit'
+    expect(page).to have_content("Name can't be blank")
+    expect(page).not_to have_selector('h1', text: 'New Team')
+  end
 end
