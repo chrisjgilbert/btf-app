@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Create team", type: :feature do
+RSpec.feature "Create team and picks", type: :feature do
   let(:user) { FactoryBot.build(:user) }
   fixtures :competitions
   fixtures :competitors
