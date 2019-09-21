@@ -5,11 +5,12 @@
   <%= f.label :name, 'Your team name' %>
   <%= f.text_field :name %>
 
-  <% competition_id = 1 %>
+  <% index = 0 %>
   <%= f.fields_for :picks do |pick| %>
-    <%= pick.label Competition.find(competition_id).name %>
-    <%= pick.collection_select :competitor_id, Competitor.where(competition_id: competition_id), :id , :name, include_blank: false %>
-    <% competition_id += 1 %>
+    <% competition = @competitions[index] %>
+    <%= pick.label competition.name %>
+    <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name, include_blank: false %>
+    <% index += 1 %>
   <% end %>
 
   <%= f.submit 'Submit' %>

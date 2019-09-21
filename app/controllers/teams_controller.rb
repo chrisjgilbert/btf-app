@@ -6,7 +6,8 @@ class TeamsController < ApplicationController
   def new
     @team = Team.new
     @competitions = Competition.all
-    @competitions.count.times { @team.picks.build }
+    @competitors = Competitor.all
+    @picks = @competitions.count.times { @team.picks.build }
   end
 
   def create
@@ -24,6 +25,8 @@ class TeamsController < ApplicationController
   end
   
   def edit
+    @competitions = Competition.all
+    @competitors = Competitor.all
     @team = Team.find(params[:id])
     @picks = @team.picks
   end
