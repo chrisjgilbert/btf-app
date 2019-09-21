@@ -22,6 +22,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop', '~> 0.74.0', require: false
   gem 'selenium-webdriver'
+  gem 'timecop'
 end
 
 group :development do
