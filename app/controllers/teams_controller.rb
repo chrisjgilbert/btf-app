@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   include TeamsHelper
+  before_action :logged_in_user
   before_action :user_has_already_created_a_team, only: [:new, :create]
   before_action :before_update_team_deadline,     only: [:edit, :update]
   before_action :set_team,                        only: [:show, :edit, :update]
@@ -42,6 +43,7 @@ class TeamsController < ApplicationController
   def team_params
     params.require(:team).permit(:name, picks_attributes: [:id, :competitor_id])
   end
+
 
   def user_has_already_created_a_team
     if Team.where(user_id: current_user.id).exists?
