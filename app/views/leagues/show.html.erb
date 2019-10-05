@@ -1,2 +1,6 @@
-<h1>Leagues#show</h1>
-<p>Find me in app/views/leagues/show.html.erb</p>
+<h1><%= @league.name %></h1>
+<ul>
+  <% @league.league_memberships.each do |league_membership| %>
+    <li><%= league_membership.team.name %></li>
+  <% end %>
+</ul>
