@@ -10,6 +10,6 @@ class League < ApplicationRecord
   end
 
   def is_btf_main_league?
-    self.id == 1
+    self.id == 1 # BTF Main League's ID is 1
   end
 end
