@@ -1,4 +1,14 @@
 FactoryBot.define do
+  factory :league_membership do
+    league { nil }
+    team { nil }
+  end
+
+  factory :league do
+    name { "MyString" }
+    user { nil }
+  end
+
   factory :competition do |comp|
     comp.sequence(:name) { |n| "Competition #{n}" }
   end
