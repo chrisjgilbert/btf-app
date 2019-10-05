@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_action :redirect_to_dashboard_if_logged_in, except: [:destroy]
   include SessionsHelper
 
   def new
@@ -28,5 +29,11 @@ class SessionsController < ApplicationController
 
   def user_password
     params[:session][:password]
+  end
+
+  def redirect_to_dashboard_if_logged_in
+    if logged_in?
+      redirect_to dashboard_path
+    end
   end
 end

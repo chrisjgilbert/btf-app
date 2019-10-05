@@ -1,5 +1,7 @@
 class LeagueMembershipsController < ApplicationController
   include LeagueMembershipsHelper
+  before_action :logged_in_user
+
   def create
     league_membership = LeagueMembership.new(league_membership_params)
     league = league_membership.league
