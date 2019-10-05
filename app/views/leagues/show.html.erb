@@ -20,5 +20,5 @@
 <p><%= link_to 'View all leagues', leagues_path %></p>
 
 <% if current_user.owns_league?(league_id) %>
-  <a href="whatsapp://send?text=<%= request.original_url %>">Invite friends to join <%= league_name %> by sharing on WhatsApp!</a>
+  <a href="whatsapp://send?text=<%= request.original_url %>?invite=true">Invite friends to join <%= league_name %> by sharing on WhatsApp!</a>
 <% end %>
