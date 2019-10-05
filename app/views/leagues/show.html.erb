@@ -4,4 +4,8 @@
     <li><%= link_to league_membership.team.name, league_membership.team %></li>
   <% end %>
 </ul>
-<p><%= link_to 'Back to all leagues', leagues_path %></p>
+<p><%= link_to 'View all leagues', leagues_path %></p>
+
+<% if @league.user == current_user %>
+  <a href="whatsapp://send?text=<%= request.original_url %>">Invite friends to join <%= @league.name %> by sharing on WhatsApp!</a>
+<% end %>

@@ -1,5 +1,6 @@
 class LeaguesController < ApplicationController
   include LeaguesHelper
+  before_action :logged_in_user
   before_action :user_has_already_created_a_league, only: [:create, :new]
 
   def index
@@ -14,7 +15,7 @@ class LeaguesController < ApplicationController
     @league = League.new(league_params)
     @league.user = current_user
     if @league.save
-      add_team_to_league(@league, current_user.team)
+      add_team_to_league(@league.id, current_user.team.id)
       league_successfully_created_flash_message
       redirect_to @league
     else
@@ -32,12 +33,8 @@ class LeaguesController < ApplicationController
     params.require(:league).permit(:name)
   end
 
-  def add_team_to_league(league, team)
-    league_membership = LeagueMembership.new(league_id: league.id, team_id: team.id)
-    unless league_membership.save
-      unsuccessful_add_users_team_to_league_flash_message
-      render 'new'
-    end
+  def add_team_to_league(team_id, league_id)
+    LeagueMembership.add_team_to_league(team_id: team_id, league_id: league_id)
   end
 
   def user_has_already_created_a_league

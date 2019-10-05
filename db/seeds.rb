@@ -31,3 +31,5 @@ a = Competition.create(name: 'Ashes Player of the Series', start_date: (Date.tod
 ashes.each do |player|
   Competitor.create(name: player, competition_id: a.id)
 end
+
+League.create(name: 'The BTF Main League')

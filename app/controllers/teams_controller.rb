@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   include TeamsHelper
+  include LeaguesHelper
   before_action :logged_in_user
   before_action :user_has_already_created_a_team, only: [:new, :create]
   before_action :before_update_team_deadline,     only: [:edit, :update]
@@ -15,7 +16,7 @@ class TeamsController < ApplicationController
   def create
     @team = current_user.build_team(team_params)
     if @team.save
-      join_main_btf_league(@team)
+      add_new_team_to_btf_main_league(@team.id)
       create_team_success_flash_message
       redirect_to @team
     else
@@ -71,8 +72,7 @@ class TeamsController < ApplicationController
     @competitors = Competitor.all
   end
 
-  def join_main_btf_league(team)
-    # 1 being the main leagues's id
-    LeagueMembership.create(league_id: 1, team_id: team.id)
+  def add_new_team_to_btf_main_league(team_id)
+    LeagueMembership.join_main_btf_league(team_id)
   end
 end
