@@ -13,5 +13,6 @@
       <li><%= link_to league_membership.league.name, league_path(league_membership.league) %></li>
     <%end %>
   </ul>
-  <%= link_to 'View all leagues', leagues_path %>
+  <p><%= link_to 'Create your own mini league', new_league_path %></p>
+  <p><%= link_to 'View all leagues', leagues_path %></p>
 <% end %>

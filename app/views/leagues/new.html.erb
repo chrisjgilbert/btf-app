@@ -1,2 +1,12 @@
-<h1>Leagues#new</h1>
-<p>Find me in app/views/leagues/new.html.erb</p>
+<h1>Create your own mini league</h1>
+
+<p>Your team will automatically be a member of a league you create.</p>
+
+<%= form_for @league do |f| %>
+  <%= render 'shared/league_error_messages' %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit "Create league" %>
+<% end %>
