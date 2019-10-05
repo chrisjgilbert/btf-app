@@ -1,6 +1,6 @@
 <h1><%= @league.name %></h1>
 <ul>
   <% @league.league_memberships.each do |league_membership| %>
-    <li><%= league_membership.team.name %></li>
+    <li><%= link_to league_membership.team.name, league_membership.team %></li>
   <% end %>
 </ul>
