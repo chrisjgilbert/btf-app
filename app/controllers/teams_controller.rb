@@ -43,7 +43,7 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:name, picks_attributes: [:id, :competitor_id])
+    params.require(:team).permit(:name, :captain_id, picks_attributes: [:id, :competitor_id])
   end
 
   def user_has_already_created_a_team

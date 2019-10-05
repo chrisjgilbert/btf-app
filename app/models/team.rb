@@ -16,4 +16,8 @@ class Team < ApplicationRecord
   def belongs_to_league?(league_id)
     LeagueMembership.where(team_id: self.id, league_id: league_id).exists?
   end
+
+  def captain
+    Competitor.find(self.captain_id)
+  end
 end
