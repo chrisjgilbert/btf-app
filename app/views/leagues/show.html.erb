@@ -1,11 +1,24 @@
-<h1><%= @league.name %></h1>
+<% league = @league %>
+<% league_id = league.id %>
+<% league_name = league.name %>
+
+<h1><%= league_name %></h1>
+
+<% unless current_user.owns_league?(league_id) || league.is_btf_main_league? %>
+  <% if current_user.team.belongs_to_league?(league_id)%>
+    <%= button_to "Leave league", league_membership_path , method: :delete, params: { league_id: league_id, team_id: current_user.team.id } %>
+  <% else %>
+    <%= button_to "Join league", league_memberships_path , method: :post, params: { league_id: league_id, team_id: current_user.team.id } %>
+  <% end %>
+<% end %>
+
 <ul>
-  <% @league.league_memberships.each do |league_membership| %>
+  <% league.league_memberships.each do |league_membership| %>
     <li><%= link_to league_membership.team.name, league_membership.team %></li>
   <% end %>
 </ul>
 <p><%= link_to 'View all leagues', leagues_path %></p>
 
-<% if @league.user == current_user %>
-  <a href="whatsapp://send?text=<%= request.original_url %>">Invite friends to join <%= @league.name %> by sharing on WhatsApp!</a>
+<% if current_user.owns_league?(league_id) %>
+  <a href="whatsapp://send?text=<%= request.original_url %>">Invite friends to join <%= league_name %> by sharing on WhatsApp!</a>
 <% end %>

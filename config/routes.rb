@@ -21,4 +21,7 @@ Rails.application.routes.draw do
 
     # Leagues
     resources :leagues, only: [:index, :new, :create, :show]
+
+    # League memberships
+    resources :league_memberships, only: [:create, :destroy]
 end

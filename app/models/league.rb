@@ -8,4 +8,8 @@ class League < ApplicationRecord
   def join(team_id)
     LeagueMembership.create(league_id: self.id, team_id: team_id)
   end
+
+  def is_btf_main_league?
+    self.id == 1
+  end
 end

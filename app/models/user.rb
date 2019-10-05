@@ -56,4 +56,7 @@ class User < ApplicationRecord
     League.where(user_id: self.id).exists?
   end
 
+  def owns_league?(league_id)
+    League.where(id: league_id, user_id: self.id).exists?
+  end
 end

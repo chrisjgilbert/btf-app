@@ -12,4 +12,8 @@ class Team < ApplicationRecord
   def join_main_btf_league
     LeagueMembership.create(team_id: self.id, league_id: 1) # 1 is the BTF Main League
   end
+
+  def belongs_to_league?(league_id)
+    LeagueMembership.where(team_id: self.id, league_id: league_id).exists?
+  end
 end
