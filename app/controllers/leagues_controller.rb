@@ -15,7 +15,7 @@ class LeaguesController < ApplicationController
     @league = League.new(league_params)
     @league.user = current_user
     if @league.save
-      add_team_to_league(@league.id, current_user.team.id)
+      @league.join(@current_user.team.id)
       league_successfully_created_flash_message
       redirect_to @league
     else
@@ -31,10 +31,6 @@ class LeaguesController < ApplicationController
 
   def league_params
     params.require(:league).permit(:name)
-  end
-
-  def add_team_to_league(team_id, league_id)
-    LeagueMembership.add_team_to_league(team_id: team_id, league_id: league_id)
   end
 
   def user_has_already_created_a_league

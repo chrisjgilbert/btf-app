@@ -7,7 +7,7 @@
 <% if @current_user.has_created_a_team? %>
   <% team = @current_user.team %>
   <p>View your team: <%= link_to "#{team.name}", team_path(team) %></p>
-  <p>Your leagues:</p>
+  <p>Leagues you are competing in:</p>
   <ul>
     <% team.league_memberships.each do |league_membership| %>
       <li><%= link_to league_membership.league.name, league_path(league_membership.league) %></li>

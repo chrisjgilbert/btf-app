@@ -16,7 +16,7 @@ class TeamsController < ApplicationController
   def create
     @team = current_user.build_team(team_params)
     if @team.save
-      add_new_team_to_btf_main_league(@team.id)
+      @team.join_main_btf_league
       create_team_success_flash_message
       redirect_to @team
     else
@@ -70,9 +70,5 @@ class TeamsController < ApplicationController
 
   def load_all_competitors
     @competitors = Competitor.all
-  end
-
-  def add_new_team_to_btf_main_league(team_id)
-    LeagueMembership.join_main_btf_league(team_id)
   end
 end

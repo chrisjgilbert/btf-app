@@ -9,4 +9,7 @@ class Team < ApplicationRecord
   validates :user_id, presence: true
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
 
+  def join_main_btf_league
+    LeagueMembership.create(team_id: self.id, league_id: 1) # 1 is the BTF Main League
+  end
 end
