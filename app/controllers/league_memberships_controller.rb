@@ -9,7 +9,7 @@ class LeagueMembershipsController < ApplicationController
   def destroy
     league_membership = LeagueMembership.where(league_membership_params).first
     league_membership.destroy
-    redirect_to leagues_path
+    redirect_to league_membership.league
   end
 
   private
