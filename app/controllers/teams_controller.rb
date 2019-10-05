@@ -15,6 +15,7 @@ class TeamsController < ApplicationController
   def create
     @team = current_user.build_team(team_params)
     if @team.save
+      join_main_btf_league(@team)
       create_team_success_flash_message
       redirect_to @team
     else
@@ -44,7 +45,6 @@ class TeamsController < ApplicationController
     params.require(:team).permit(:name, picks_attributes: [:id, :competitor_id])
   end
 
-
   def user_has_already_created_a_team
     if Team.where(user_id: current_user.id).exists?
       team_already_created_flash_message
@@ -69,5 +69,10 @@ class TeamsController < ApplicationController
 
   def load_all_competitors
     @competitors = Competitor.all
+  end
+
+  def join_main_btf_league(team)
+    # 1 being the main leagues's id
+    LeagueMembership.create(league_id: 1, team_id: team.id)
   end
 end

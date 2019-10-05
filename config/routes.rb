@@ -18,4 +18,7 @@ Rails.application.routes.draw do
 
     # Teams
     resources :teams, only: [:new, :create, :show, :edit, :update]
+
+    # Leagues
+    resources :leagues, only: [:new, :create, :show]
 end
