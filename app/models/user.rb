@@ -2,6 +2,7 @@ class User < ApplicationRecord
   attr_accessor :password_reset_token
 
   has_one :team, dependent: :destroy
+  has_one :league, dependent: :destroy
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   
@@ -49,6 +50,10 @@ class User < ApplicationRecord
 
   def has_created_a_team?
     Team.where(user_id: self.id).exists?
+  end
+
+  def has_created_a_league?
+    League.where(user_id: self.id).exists?
   end
 
 end

@@ -13,6 +13,8 @@
       <li><%= link_to league_membership.league.name, league_path(league_membership.league) %></li>
     <%end %>
   </ul>
-  <p><%= link_to 'Create your own mini league', new_league_path %></p>
+  <% unless @current_user.has_created_a_league? %>
+    <p><%= link_to 'Create your own mini league', new_league_path %></p>
+  <% end %>
   <p><%= link_to 'View all leagues', leagues_path %></p>
 <% end %>
