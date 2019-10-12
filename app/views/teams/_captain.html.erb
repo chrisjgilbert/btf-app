@@ -1,6 +1,13 @@
 <label for="team_captain_id">Captain</label>
 <select name="team[captain_id]" id="team_captain_id">
-  <% @captain_options.each do |option| %>
-    <option value="<%= option.id %>"><%= option.name %> for <%= option.competition.name %></option>
+  <% if @current_user.has_created_a_team? %>
+    <% @captain_options.each do |option| %>
+      <option value="<%= option.id %>" selected="<%= option.captains_teams?(current_user.team) ? 'selected' : '' %>"><%= option.name %> for <%= option.competition.name %></option>
+    <% end %>
+  <% else %>
+      <% @captain_options.each do |option| %>
+      <option value="<%= option.id %>"><%= option.name %> for <%= option.competition.name %></option>
+    <% end %>
   <% end %>
 </select>
+

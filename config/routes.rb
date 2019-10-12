@@ -19,7 +19,8 @@ Rails.application.routes.draw do
     # Teams
     resources :teams, only: [:new, :create, :show, :edit, :update]
 
-    post 'teams/update_captain_choices', to: 'teams#update_captain_choices'
+    # Set dyniamic captain options
+    post '/set_captain_options', to: 'teams#set_captain_options'
 
     # Leagues
     resources :leagues, only: [:index, :new, :create, :show]

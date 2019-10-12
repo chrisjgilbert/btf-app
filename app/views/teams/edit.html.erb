@@ -11,8 +11,9 @@
     <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name, include_blank: false %>
   <% end %>
 
-  <%= f.label :captain_id, 'Captain' %>
-  <%= f.collection_select :captain_id, @competitors, :id , :name, include_blank: false %>
+  <div id="team_captain_id">
+  <%# The captain dropdown is dynamically rendered in here %>
+  </div>
 
   <%= f.submit 'Submit' %>
 <% end %>
