@@ -29,6 +29,7 @@ class TeamsController < ApplicationController
   
   def edit
     @picks = @team.picks
+    @current_captain = @team.captain
   end
 
   def update
@@ -44,6 +45,9 @@ class TeamsController < ApplicationController
     if captain_options_params[:currentCaptainId]
       @captain_options = Competitor.find(captain_options_params[:captainOptions])
       @current_captain = Competitor.find(captain_options_params[:currentCaptainId])
+    elsif @current_user.team
+      @current_captain = @current_user.team.captain
+      @captain_options = Competitor.find(captain_options_params[:captainOptions])
     else
       @captain_options = Competitor.find(captain_options_params[:captainOptions])
     end

@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function() {
   var pickIds = []
   var currentCaptainId;
 
-  function initializeInitialState() {
+  function initialize() {
     setInitialCaptaincyOptions();
     listenForSelectionChanges();
     listendForCurrentCaptainSelection();
@@ -56,5 +56,5 @@ $(document).on('turbolinks:load', function() {
     return true;
   };
 
-  initializeInitialState();
+  initialize();
 });
