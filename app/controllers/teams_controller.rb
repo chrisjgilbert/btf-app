@@ -41,7 +41,13 @@ class TeamsController < ApplicationController
   end
 
   def set_captain_options
-    @captain_options = Competitor.find(captain_options_params[:captainOptions])
+    if captain_options_params[:currentCaptainId]
+      @captain_options = Competitor.find(captain_options_params[:captainOptions])
+      @current_captain = Competitor.find(captain_options_params[:currentCaptainId])
+    else
+      @captain_options = Competitor.find(captain_options_params[:captainOptions])
+    end
+
     respond_to do |format|
       format.js { render action: :new }
     end

@@ -6,8 +6,7 @@
     <% end %>
   <% else %>
     <% @captain_options.each do |option| %>
-      <option value="<%= option.id %>"><%= option.name %> for <%= option.competition.name %></option>
+      <option value="<%= option.id %>" <%= @current_captain == option ? 'selected' : '' %>><%= option.name %> for <%= option.competition.name %></option>
     <% end %>
   <% end %>
 </select>
-

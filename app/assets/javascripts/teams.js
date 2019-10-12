@@ -2,14 +2,22 @@
 // All this logic will automatically be available in application.js.
 $(document).on('turbolinks:load', function() {
   var competitons = $('select');
+  var pickIds = []
+  var currentCaptainId;
 
   function initializeInitialState() {
-    competitons.each(function() {
-      updateOptions(competitons);
-    })
+    setInitialCaptaincyOptions();
+    listenForSelectionChanges();
+    listendForCurrentCaptainSelection();
   }
 
-  function listenForChanges() {
+  function setInitialCaptaincyOptions() {
+    competitons.each(function() {
+      updateOptions(competitons);
+    });
+  };
+
+  function listenForSelectionChanges() {
     competitons.each(function() {
       $(this).change(function() {
         updateOptions(competitons);
@@ -17,12 +25,25 @@ $(document).on('turbolinks:load', function() {
     });
   };
 
+  function listendForCurrentCaptainSelection() {
+    $('#team_captain_id').change(function() {
+      currentCaptainId = getCurrentCaptainId();
+      var data = {captainOptions : pickIds, currentCaptainId : currentCaptainId}
+      postData(data);
+    });
+  }
+
+  function getCurrentCaptainId() {
+    return $('#team_captain_id :selected').val();
+  }
+
   function updateOptions(competitons) {
-    var pickIds = []
+    currentCaptainId = getCurrentCaptainId();
+    pickIds = []
     competitons.each(function() {
       pickIds.push($(this).val())
     })
-    var data = {captainOptions : pickIds}
+    var data = {captainOptions : pickIds, currentCaptainId : currentCaptainId}
     postData(data);
   };
 
@@ -36,5 +57,4 @@ $(document).on('turbolinks:load', function() {
   };
 
   initializeInitialState();
-  listenForChanges();
 });
