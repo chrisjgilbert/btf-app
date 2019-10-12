@@ -40,10 +40,21 @@ class TeamsController < ApplicationController
     end
   end
 
+  def update_captain_choices
+    @captain_options = Competitor.find(captain_options_params)
+    respond_to do |format|
+      format.js { render action: :new }
+    end
+  end
+
   private
 
   def team_params
     params.require(:team).permit(:name, :captain_id, picks_attributes: [:id, :competitor_id])
+  end
+
+  def captain_options_params
+    params.require(:captainOptions)
   end
 
   def user_has_already_created_a_team

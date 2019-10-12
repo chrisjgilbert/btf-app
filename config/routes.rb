@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     # Teams
     resources :teams, only: [:new, :create, :show, :edit, :update]
 
+    post 'teams/update_captain_choices', to: 'teams#update_captain_choices'
+
     # Leagues
     resources :leagues, only: [:index, :new, :create, :show]
 

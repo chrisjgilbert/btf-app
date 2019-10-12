@@ -1,0 +1,6 @@
+<label for="team_captain_id">Captain</label>
+<select name="team[captain_id]" id="team_captain_id">
+  <% @captain_options.each do |option| %>
+    <option value="<%= option.id %>"><%= option.name %> for <%= option.competition.name %></option>
+  <% end %>
+</select>
