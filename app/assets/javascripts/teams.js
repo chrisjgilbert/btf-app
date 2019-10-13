@@ -6,6 +6,10 @@ function CaptainSelect(currentCaptainId) {
   this.competitons = $('select');
   this.pickIds = this.getCurrentPickIds();
 
+  this.initialize();
+}
+
+CaptainSelect.prototype.initialize = function() {
   this.setInitialOptions();
   this.listenForSelectionChanges();
   this.listendForCurrentCaptainSelection();
