@@ -40,6 +40,7 @@ class TeamsController < ApplicationController
       update_team_success_flash_message
       redirect_to @team
     else 
+      @current_captain = @team.captain
       render 'edit'
     end
   end
