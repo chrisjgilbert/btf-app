@@ -3,7 +3,7 @@
 $(document).on('turbolinks:load', function() {
   var competitons = $('select').slice(0, -1); // we don't want to select the captain dropdown
   var pickIds = []
-  var currentCaptainId = getCurrentCaptainId();
+  var currentCaptainId;
 
   function initialize() {
     listenForSelectionChanges();
@@ -13,7 +13,7 @@ $(document).on('turbolinks:load', function() {
   function listenForSelectionChanges() {
     competitons.each(function() {
       $(this).change(function() {
-        updateOptions(competitons);
+        updateOptions();
       });
     });
   };
@@ -38,22 +38,21 @@ $(document).on('turbolinks:load', function() {
     return pickIds;
   };
 
-  function updateOptions(competitons) {
+  function updateOptions() {
     var prevPickIds = pickIds;
     pickIds = getCurrentPickIds()
     currentCaptainId = getCurrentCaptainId();
-
     // if user replaces their current captain selecion, replace with replacement selection
-    if (!pickIds.includes(currentCaptainId)) {
+    if (!pickIds.includes(currentCaptainId) && prevPickIds.length > 0) {
       prevCaptainIndex = prevPickIds.indexOf(currentCaptainId)
       currentCaptainId = pickIds[prevCaptainIndex]
     }
-
     postData(pickIds, currentCaptainId);
   };
 
-  function postData(data) {
-    $.post("/set_captain_options", { data: {captainOptions : pickIds, currentCaptainId : currentCaptainId} } , function(data, status) {
+  function postData(pickIds, currentCaptainId) {
+    console.log(pickIds, currentCaptainId)
+    $.post("/set_captain_options", {data: {captainOptions : pickIds, currentCaptainId : currentCaptainId}}, function(data, status) {
       if (status != "success") {
         alert('Woah, we couldn"t update the captain choices. Please try again or contact us if the problem persists.');
       }
