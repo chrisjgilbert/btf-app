@@ -3,7 +3,7 @@
 <%= form_for(@team, url: teams_path) do |f| %>
   <%= render 'shared/team_error_messages' %>
   <%= f.label :name, 'Your team name' %>
-  <%= f.text_field :name, required: true %>
+  <%= f.text_field :name %>
 
   <%= f.fields_for :picks do |pick| %>
     <% competition = @competitions[pick.index] %>
