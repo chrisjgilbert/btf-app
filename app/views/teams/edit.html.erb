@@ -11,9 +11,7 @@
     <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name, include_blank: false %>
   <% end %>
 
-  <div id="team_captain_id">
-  <%# The captain dropdown is dynamically rendered in here %>
-  </div>
+  <%= render(:partial => 'teams/captain', :locals => { :captain_options => @captain_options }) %>
 
   <%= f.submit 'Submit' %>
 <% end %>

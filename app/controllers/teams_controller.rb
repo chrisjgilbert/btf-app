@@ -30,6 +30,7 @@ class TeamsController < ApplicationController
   
   def edit
     @picks = @team.picks
+    @captain_options = @picks.map { |pick| pick.competitor }
     @current_captain = @team.captain
   end
 
