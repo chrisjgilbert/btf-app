@@ -12,11 +12,11 @@
   <% end %>
 <% end %>
 
-<ul>
-  <% league.league_memberships.each do |league_membership| %>
-    <li><%= link_to league_membership.team.name, league_membership.team %></li>
+<ol>
+  <% league.teams.each do |team| %>
+    <li><%= link_to team.name, team %> (<%= team.points %>pts)</li>
   <% end %>
-</ul>
+</ol>
 <p><%= link_to 'View all leagues', leagues_path %></p>
 
 <% if current_user.owns_league?(league_id) %>
