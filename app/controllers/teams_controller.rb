@@ -11,7 +11,7 @@ class TeamsController < ApplicationController
   def new
     @team = Team.new
     @picks = @competitions.count.times { @team.picks.build }
-    @captain_options = @competitors
+    @current_captain = Competitor.find(1) # set this to be the first non favorite
   end
 
   def create
@@ -21,6 +21,7 @@ class TeamsController < ApplicationController
       create_team_success_flash_message
       redirect_to @team
     else
+      @current_captain = Competitor.find(team_params[:captain_id])
       render 'new'
     end
   end

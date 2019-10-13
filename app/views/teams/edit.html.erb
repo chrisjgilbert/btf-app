@@ -2,7 +2,7 @@
 <p>You can come back and upate these before midnight on 31st Decemeber 2019.</p>
 <%= form_for(@team, url: team_path(params[:id]), method: :patch) do |f| %>
   <%= render 'shared/team_error_messages' %>
-  <%= f.label :name, 'Your team name' %>
+  <%= f.label :name, 'Your team name', :required => true %>
   <%= f.text_field :name %>
   
   <%= f.fields_for :picks do |pick| %>
