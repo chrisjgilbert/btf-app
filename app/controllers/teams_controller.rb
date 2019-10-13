@@ -11,12 +11,13 @@ class TeamsController < ApplicationController
   def new
     @team = Team.new
     @picks = @competitions.count.times { @team.picks.build }
+    @captain_options = @competitors
   end
 
   def create
     @team = current_user.build_team(team_params)
     if @team.save
-      @team.join_main_btf_league
+      @team.join_main_btf_league # turn this into an after create action
       create_team_success_flash_message
       redirect_to @team
     else
@@ -42,15 +43,8 @@ class TeamsController < ApplicationController
   end
 
   def set_captain_options
-    if captain_options_params[:currentCaptainId]
-      @captain_options = Competitor.find(captain_options_params[:captainOptions])
-      @current_captain = Competitor.find(captain_options_params[:currentCaptainId])
-    elsif @current_user.team
-      @current_captain = @current_user.team.captain
-      @captain_options = Competitor.find(captain_options_params[:captainOptions])
-    else
-      @captain_options = Competitor.find(captain_options_params[:captainOptions])
-    end
+    @captain_options = Competitor.find(captain_options_params[:captainOptions])
+    @current_captain = Competitor.find(captain_options_params[:currentCaptainId])
 
     respond_to do |format|
       format.js { render action: :new }

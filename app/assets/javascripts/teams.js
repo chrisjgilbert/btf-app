@@ -1,21 +1,14 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 $(document).on('turbolinks:load', function() {
-  var competitons = $('select');
+  var competitons = $('select').slice(0, -1); // we don't want to select the captain dropdown
   var pickIds = []
-  var currentCaptainId;
+  var currentCaptainId = getCurrentCaptainId();
 
   function initialize() {
-    setInitialCaptaincyOptions();
     listenForSelectionChanges();
     listendForCurrentCaptainSelection();
   }
-
-  function setInitialCaptaincyOptions() {
-    competitons.each(function() {
-      updateOptions(competitons);
-    });
-  };
 
   function listenForSelectionChanges() {
     competitons.each(function() {
@@ -28,8 +21,8 @@ $(document).on('turbolinks:load', function() {
   function listendForCurrentCaptainSelection() {
     $('#team_captain_id').change(function() {
       currentCaptainId = getCurrentCaptainId();
-      var data = {captainOptions : pickIds, currentCaptainId : currentCaptainId}
-      postData(data);
+      pickIds = getCurrentPickIds();
+      postData(pickIds, currentCaptainId);
     });
   }
 
@@ -37,18 +30,30 @@ $(document).on('turbolinks:load', function() {
     return $('#team_captain_id :selected').val();
   }
 
-  function updateOptions(competitons) {
-    currentCaptainId = getCurrentCaptainId();
+  function getCurrentPickIds() {
     pickIds = []
     competitons.each(function() {
       pickIds.push($(this).val())
-    })
-    var data = {captainOptions : pickIds, currentCaptainId : currentCaptainId}
-    postData(data);
+    });
+    return pickIds;
+  };
+
+  function updateOptions(competitons) {
+    var prevPickIds = pickIds;
+    pickIds = getCurrentPickIds()
+    currentCaptainId = getCurrentCaptainId();
+
+    // if user replaces their current captain selecion, replace with replacement selection
+    if (!pickIds.includes(currentCaptainId)) {
+      prevCaptainIndex = prevPickIds.indexOf(currentCaptainId)
+      currentCaptainId = pickIds[prevCaptainIndex]
+    }
+
+    postData(pickIds, currentCaptainId);
   };
 
   function postData(data) {
-    $.post("/set_captain_options", { data: data } , function(data, status) {
+    $.post("/set_captain_options", { data: {captainOptions : pickIds, currentCaptainId : currentCaptainId} } , function(data, status) {
       if (status != "success") {
         alert('Woah, we couldn"t update the captain choices. Please try again or contact us if the problem persists.');
       }
