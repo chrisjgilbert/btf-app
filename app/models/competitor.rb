@@ -18,4 +18,14 @@ class Competitor < ApplicationRecord
   def favourite_status
     is_favourite? ? 'favourite' : ''
   end
+
+  def award_points(points)
+    current_points = self.points
+    new_points_total = current_points + points
+    if self.update(points: new_points_total)
+      "#{self.name} now has #{self.points} points. Previously they had #{current_points}"
+    else
+      "There was a problem updating #{self.name} points"
+    end
+  end
 end
