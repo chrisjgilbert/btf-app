@@ -6,4 +6,8 @@ class Competitor < ApplicationRecord
   def captains_teams?(team)
     team.captain_id == self.id
   end
+
+  def is_favourite?
+    Competition.where(favourite_id: self.id).exists?
+  end
 end

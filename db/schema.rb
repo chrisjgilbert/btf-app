@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_05_162647) do
+ActiveRecord::Schema.define(version: 2019_10_13_112941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2019_10_05_162647) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "start_date"
+    t.bigint "favourite_id"
+    t.index ["favourite_id"], name: "index_competitions_on_favourite_id"
   end
 
   create_table "competitors", force: :cascade do |t|
@@ -77,6 +79,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_162647) do
     t.datetime "password_reset_sent_at"
   end
 
+  add_foreign_key "competitions", "competitors", column: "favourite_id"
   add_foreign_key "competitors", "competitions"
   add_foreign_key "league_memberships", "leagues"
   add_foreign_key "league_memberships", "teams"
