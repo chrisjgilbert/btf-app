@@ -21,4 +21,28 @@ class Team < ApplicationRecord
   def captain
     Competitor.find(self.captain_id)
   end
+
+  def calculate_points
+    existing_points = self.points
+    new_points_total = 0
+    self.picks.each do |pick|
+      competitor = pick.competitor
+      if competitor == captain
+        new_points_total += (competitor.points * 2)
+      else
+        new_points_total += competitor.points
+      end
+    end
+
+    if update(points: new_points_total)
+      "#{self.name} now has #{self.points}. They previously had #{existing_points}"
+    else
+      "There was a problem updating #{self.name} points"
+    end
+  end
+
+  def players
+    self.picks.map(&:competitor)
+  end
+
 end
