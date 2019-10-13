@@ -86,7 +86,12 @@ FavouriteCount.prototype.listenForChanges = function() {
 },
 
 FavouriteCount.prototype.updateCount = function(count) {
-  $('.favourite-count').text(count);
+  $.post("/favourite_count", {data: {count : count}}, function(data, status) {
+    if (status != "success") {
+      alert('Woah, we couldn"t update your choices. Please try again or contact us if the problem persists.');
+    }
+  });
+  return true;
 },
 
 FavouriteCount.prototype.getCount = function() {

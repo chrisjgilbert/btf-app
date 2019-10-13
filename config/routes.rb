@@ -22,6 +22,9 @@ Rails.application.routes.draw do
     # Set dyniamic captain options
     post '/set_captain_options', to: 'teams#set_captain_options'
 
+    # Get favourite count
+    post '/favourite_count', to: 'teams#favourite_count'
+
     # Leagues
     resources :leagues, only: [:index, :new, :create, :show]
 

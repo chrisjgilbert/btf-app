@@ -13,7 +13,7 @@
 
   <div id="team_captain_id"></div>
 
-   <p>Favourites selected: <span class="favourite-count">0</span></p>
+  <p id="favourite_count">You currently have <%= pluralize(@favourite_count, 'favourite') %> selected</p>
 
   <%= f.submit 'Submit' %>
 
