@@ -4,7 +4,7 @@
 function CaptainSelect(currentCaptainId) {
   this.currentCaptainId = currentCaptainId;
   this.competitons = $('select');
-  this.pickIds = [];
+  this.pickIds = this.getCurrentPickIds();
 
   this.setInitialOptions();
   this.listenForSelectionChanges();
