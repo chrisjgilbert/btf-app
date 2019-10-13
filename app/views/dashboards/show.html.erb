@@ -6,11 +6,11 @@
 
 <% if @current_user.has_created_a_team? %>
   <% team = @current_user.team %>
-  <p>View your team: <%= link_to "#{team.name}", team_path(team) %></p>
+  <p>View your team: <%= link_to "#{team.name}", team_path(team) %> (<%= team.points %>pts)</p>
   <p>Leagues you are competing in:</p>
   <ul>
-    <% team.league_memberships.each do |league_membership| %>
-      <li><%= link_to league_membership.league.name, league_path(league_membership.league) %></li>
+    <% team.leagues.each do |league| %>
+      <li><%= link_to league.name, league_path(league) %> (<%= league.position(team).ordinalize %>)</li>
     <%end %>
   </ul>
   <% unless @current_user.has_created_a_league? %>

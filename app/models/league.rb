@@ -16,4 +16,8 @@ class League < ApplicationRecord
   def teams
     league_memberships.map { |lm| lm.team }.sort_by(&:points).reverse
   end
+
+  def position(team)
+    teams.index(team) + 1
+  end
 end

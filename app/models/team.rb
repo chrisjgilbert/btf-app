@@ -45,4 +45,7 @@ class Team < ApplicationRecord
     self.picks.map(&:competitor)
   end
 
+  def leagues
+    league_memberships.map(&:league)
+  end
 end

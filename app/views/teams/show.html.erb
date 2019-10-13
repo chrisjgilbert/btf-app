@@ -1,4 +1,4 @@
-<h1><%= @team.name %></h1>
+<h1><%= @team.name %> (<%= @team.points %>pts)</h1>
 <h2>Captain: <%= @team.captain.name %> in <%= @team.captain.competition.name %></h2>
 <ul>
 <% @team.picks.each do |pick| %>
