@@ -55,7 +55,7 @@ class TeamsController < ApplicationController
   end
 
   def favourite_count
-    @favourite_count = captain_options_params[:count]
+    @favourite_count = captain_options_params[:favouriteCount]
 
     respond_to do |format|
       format.js { render action: :favourite_count }

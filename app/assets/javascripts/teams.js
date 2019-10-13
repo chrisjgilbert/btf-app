@@ -86,7 +86,7 @@ FavouriteCount.prototype.listenForChanges = function() {
 },
 
 FavouriteCount.prototype.updateCount = function(count) {
-  $.post("/favourite_count", {data: {count : count}}, function(data, status) {
+  $.post("/favourite_count", {data: {favouriteCount : count}}, function(data, status) {
     if (status != "success") {
       alert('Woah, we couldn"t update your choices. Please try again or contact us if the problem persists.');
     }
