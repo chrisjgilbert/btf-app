@@ -10,4 +10,12 @@ class Competitor < ApplicationRecord
   def is_favourite?
     Competition.where(favourite_id: self.id).exists?
   end
+
+  def name_with_favourite_status
+    is_favourite? ? "#{name} (F)" : "#{name}"
+  end
+
+  def favourite_status
+    is_favourite? ? 'favourite' : ''
+  end
 end

@@ -8,10 +8,12 @@
   <%= f.fields_for :picks do |pick| %>
     <% competition = @competitions[pick.index] %>
     <%= pick.label competition.name %>
-    <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name, include_blank: false %>
+    <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, include_blank: false %>
   <% end %>
 
   <div id="team_captain_id"></div>
+
+  <p>Favourites selected: <span class="favourite-count">0</span></p>
 
   <%= f.submit 'Submit' %>
 
@@ -19,6 +21,7 @@
     <script type='text/javascript'>
       $(document).on('turbolinks:load', function() {
         new CaptainSelect('<%= @current_captain.id %>');
+        new FavouriteCount();
       });
     </script>
   <% end %>

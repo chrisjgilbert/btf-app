@@ -6,10 +6,6 @@ function CaptainSelect(currentCaptainId) {
   this.competitons = $('select');
   this.pickIds = this.getCurrentPickIds();
 
-  this.initialize();
-}
-
-CaptainSelect.prototype.initialize = function() {
   this.setInitialOptions();
   this.listenForSelectionChanges();
   this.listendForCurrentCaptainSelection();
@@ -69,4 +65,30 @@ CaptainSelect.prototype.postData = function(pickIds, currentCaptainId) {
     }
   });
   return true;
+}
+
+function FavouriteCount() {
+  this.competitons = $('select');
+  this.count = this.getCount();
+
+  this.updateCount(this.count);
+  this.listenForChanges();
+}
+
+FavouriteCount.prototype.listenForChanges = function() {
+  var self = this;
+  self.competitons.each(function() {
+    $(this).change(function() {
+      var count = self.getCount();
+      self.updateCount(count);
+    });
+  });
+},
+
+FavouriteCount.prototype.updateCount = function(count) {
+  $('.favourite-count').text(count);
+},
+
+FavouriteCount.prototype.getCount = function() {
+  return $("select option:selected").filter(":contains('F')").length
 }
