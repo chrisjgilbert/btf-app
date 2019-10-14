@@ -1,22 +1,22 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-function CaptainSelect(currentCaptainId) {
+function TeamSelection(currentCaptainId) {
   this.currentCaptainId = currentCaptainId;
   this.competitons = $('select');
   this.pickIds = this.getCurrentPickIds();
 
   this.setInitialOptions();
   this.listenForSelectionChanges();
-  this.listendForCurrentCaptainSelection();
+  this.listendForCurrentTeamSelectionion();
 }
 
-CaptainSelect.prototype.setInitialOptions = function() {
+TeamSelection.prototype.setInitialOptions = function() {
   this.pickIds = this.getCurrentPickIds();
   this.postData(pickIds, this.currentCaptainId);
 },
 
-CaptainSelect.prototype.listenForSelectionChanges = function() {
+TeamSelection.prototype.listenForSelectionChanges = function() {
   var self = this;
   self.competitons.each(function() {
     $(this).change(function() {
@@ -25,7 +25,7 @@ CaptainSelect.prototype.listenForSelectionChanges = function() {
   });
 },
 
-CaptainSelect.prototype.listendForCurrentCaptainSelection = function() {
+TeamSelection.prototype.listendForCurrentTeamSelectionion = function() {
   var self = this;
   $('#team_captain_id').change(function() {
     self.currentCaptainId = self.getCurrentCaptainId();
@@ -34,11 +34,11 @@ CaptainSelect.prototype.listendForCurrentCaptainSelection = function() {
   });
 },
 
-CaptainSelect.prototype.getCurrentCaptainId = function() {
+TeamSelection.prototype.getCurrentCaptainId = function() {
   return $('#team_captain_id :selected').val();
 },
 
-CaptainSelect.prototype.getCurrentPickIds = function() {
+TeamSelection.prototype.getCurrentPickIds = function() {
   var self = this;
   pickIds = []
   self.competitons.each(function() {
@@ -47,7 +47,7 @@ CaptainSelect.prototype.getCurrentPickIds = function() {
   return pickIds;
 },
 
-CaptainSelect.prototype.updateOptions = function() {
+TeamSelection.prototype.updateOptions = function() {
   var prevPickIds = this.pickIds;
   this.pickIds = this.getCurrentPickIds()
   this.currentCaptainId = this.getCurrentCaptainId();
@@ -58,42 +58,11 @@ CaptainSelect.prototype.updateOptions = function() {
   this.postData(this.pickIds, this.currentCaptainId);
 },
 
-CaptainSelect.prototype.postData = function(pickIds, currentCaptainId) {
-  $.post("/set_captain_options", {data: {captainOptions : pickIds, currentCaptainId : currentCaptainId}}, function(data, status) {
+TeamSelection.prototype.postData = function(pickIds, currentCaptainId) {
+  $.post("/team_selection", {data: {currentSelection : pickIds, currentCaptainId : currentCaptainId}}, function(data, status) {
     if (status != "success") {
       alert('Woah, we couldn"t update the captain choices. Please try again or contact us if the problem persists.');
     }
   });
   return true;
-}
-
-function FavouriteCount() {
-  this.competitons = $('select');
-  this.count = this.getCount();
-
-  this.updateCount(this.count);
-  this.listenForChanges();
-}
-
-FavouriteCount.prototype.listenForChanges = function() {
-  var self = this;
-  self.competitons.each(function() {
-    $(this).change(function() {
-      var count = self.getCount();
-      self.updateCount(count);
-    });
-  });
-},
-
-FavouriteCount.prototype.updateCount = function(count) {
-  $.post("/favourite_count", {data: {favouriteCount : count}}, function(data, status) {
-    if (status != "success") {
-      alert('Woah, we couldn"t update your choices. Please try again or contact us if the problem persists.');
-    }
-  });
-  return true;
-},
-
-FavouriteCount.prototype.getCount = function() {
-  return $("select option:selected").filter(":contains('F')").length
 }

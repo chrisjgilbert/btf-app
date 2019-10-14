@@ -20,8 +20,7 @@
   <% content_for :javascript do %>
     <script type='text/javascript'>
       $(document).on('turbolinks:load', function() {
-        new CaptainSelect('<%= @current_captain.id %>');
-        new FavouriteCount();
+        new TeamSelection('<%= @current_captain.id %>');
       });
     </script>
   <% end %>

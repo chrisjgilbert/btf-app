@@ -45,20 +45,14 @@ class TeamsController < ApplicationController
     end
   end
 
-  def set_captain_options
-    @captain_options = Competitor.find(captain_options_params[:captainOptions])
-    @current_captain = Competitor.find(captain_options_params[:currentCaptainId])
+  def team_selection
+    @current_captain = Competitor.find(team_selection_params[:currentCaptainId])
+    current_selection = Competitor.find(team_selection_params[:currentSelection])
+    @captain_options = current_selection.reject { |option| option.is_favourite? }
+    @favourite_count = current_selection.length - @captain_options.length 
 
     respond_to do |format|
-      format.js { render action: :new }
-    end
-  end
-
-  def favourite_count
-    @favourite_count = captain_options_params[:favouriteCount]
-
-    respond_to do |format|
-      format.js { render action: :favourite_count }
+      format.js { render action: :team_selection }
     end
   end
 
@@ -68,7 +62,7 @@ class TeamsController < ApplicationController
     params.require(:team).permit(:name, :captain_id, picks_attributes: [:id, :competitor_id])
   end
 
-  def captain_options_params
+  def team_selection_params
     params.require(:data)
   end
 
