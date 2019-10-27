@@ -47,7 +47,9 @@ class TeamsController < ApplicationController
   end
 
   def team_selection
-    @current_captain = Competitor.find(team_selection_params[:currentCaptainId])
+    if team_selection_params[:currentCaptainId].present?
+      @current_captain = Competitor.find(team_selection_params[:currentCaptainId])
+    end
     current_selection = Competitor.find(team_selection_params[:currentSelection])
     @captain_options = current_selection.reject { |option| option.is_favourite? }
     @favourite_count = current_selection.length - @captain_options.length 
