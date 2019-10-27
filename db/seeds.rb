@@ -13,23 +13,27 @@ golden_boot = ['Sergio Aguero', 'Harry Kane', 'Marcus Rashford']
 ashes = ['Steve Smith', 'Ben Stokes', 'Jofra Archer', 'David Warner']
 
 o = Competition.create(name: 'Olympics', start_date: (Date.today - 100))
-olympics.each do |player|
+olympics.each_with_index do |player, index|
   Competitor.create(name: player, competition_id: o.id)
 end
 
 r = Competition.create(name: 'Rugby World Cup', start_date: Date.today)
-rwc.each do |player|
+rwc.each do |player, index|
   Competitor.create(name: player, competition_id: r.id)
 end
 
 g = Competition.create(name: 'Premiership Football Golden Boot', start_date: (Date.today + 30))
-golden_boot.each do |player|
+golden_boot.each do |player, index|
   Competitor.create(name: player, competition_id: g.id)
 end
 
 a = Competition.create(name: 'Ashes Player of the Series', start_date: (Date.today - 10))
-ashes.each do |player|
+ashes.each do |player, |
   Competitor.create(name: player, competition_id: a.id)
+end
+
+Competition.all.each do |competition|
+  competition.update(favourite_id: 1)
 end
 
 League.create(name: 'The BTF Main League')

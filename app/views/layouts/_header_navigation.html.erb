@@ -1,10 +1,10 @@
 <div class="header-navigation">
   <ul>
-    <% if logged_in? %>
+    <% if logged_in? && activated? %>
       <li><%= link_to 'Log out', logout_path, method: :delete %></li>
-      <li><%= link_to 'My dashboard', dashboard_path %></li>
+      <li><%= link_to 'View dashboard', dashboard_path %></li>
       <% if current_user.team %>
-        <li><%= link_to 'My team', current_user.team %></li>
+        <li><%= link_to 'View team', current_user.team %></li>
       <% else %>
         <li><%= link_to "Pick team", new_team_path %></li>
       <% end %>

@@ -33,8 +33,7 @@ module SessionsHelper
 
   def activated_user
     unless activated?
-      store_location
-      flash[:danger] = 'Please activate your account'
+      flash[:danger] = 'Please activate your account to continue'
       redirect_to login_url
     end
   end
