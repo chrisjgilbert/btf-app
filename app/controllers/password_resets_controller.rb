@@ -42,7 +42,7 @@ class PasswordResetsController < ApplicationController
   def valid_user
     @user = User.find_by(email: user_email_params)
 
-    unless @user && @user.authenticated?(:password, params[:id])
+    unless @user && @user.authenticated?(:password_reset, params[:id])
       redirect_to root_url 
     end
   end
