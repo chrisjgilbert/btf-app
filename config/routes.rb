@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+    # homepage
+    get 'homepage/index'
+
+    # Root
     root to: 'sessions#new'
 
     # Sign Up
