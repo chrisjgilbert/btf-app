@@ -27,4 +27,7 @@ Rails.application.routes.draw do
 
     # League memberships
     resources :league_memberships, only: [:create, :destroy]
+
+    # Account activations
+    resources :account_activations, only: [:edit]
 end
