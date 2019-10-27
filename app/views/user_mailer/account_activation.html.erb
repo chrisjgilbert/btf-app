@@ -1,0 +1,9 @@
+<h1>Back The Favourite</h1>
+
+<p>Hi, <%= @user.first_name %>!</p>
+<p>
+Welcome, to Back The Favourite 2020! Click on the link below to activate your account:
+</p>
+<p>
+<%= link_to "Activate account", edit_account_activation_url(@user.activation_token, email: @user.email) %>
+</p>
