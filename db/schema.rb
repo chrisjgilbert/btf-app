@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_13_151505) do
+ActiveRecord::Schema.define(version: 2019_10_27_135553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,9 @@ ActiveRecord::Schema.define(version: 2019_10_13_151505) do
     t.string "password_digest"
     t.string "password_reset_digest"
     t.datetime "password_reset_sent_at"
+    t.string "activation_digest"
+    t.boolean "activated", default: false
+    t.datetime "activated_at"
   end
 
   add_foreign_key "competitions", "competitors", column: "favourite_id"
