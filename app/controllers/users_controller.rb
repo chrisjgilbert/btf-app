@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include UsersHelper
 
   def new
     @user = User.new
@@ -7,8 +8,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-      redirect_to dashboard_path
+      @user.send_activation_email
+      account_activation_email_send_flash_message(@user)
+      redirect_to root_url
     else
       render 'new'
     end

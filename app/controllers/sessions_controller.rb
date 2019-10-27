@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  before_action :redirect_to_dashboard_if_logged_in, except: [:destroy]
   include SessionsHelper
 
   def new
@@ -8,8 +7,13 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: user_email)
     if user && user.authenticate(user_password)
-      log_in user
-      redirect_back_or dashboard_path
+      if user.activated?
+        log_in user
+        redirect_back_or dashboard_path
+      else
+        flash[:warning] = 'Account not activated yet. Check your email for the activation link.'
+        redirect_to root_url
+      end
     else
       flash[:danger] = 'Invalid email/password combination'
       render 'new'
@@ -29,11 +33,5 @@ class SessionsController < ApplicationController
 
   def user_password
     params[:session][:password]
-  end
-
-  def redirect_to_dashboard_if_logged_in
-    if logged_in?
-      redirect_to dashboard_path
-    end
   end
 end

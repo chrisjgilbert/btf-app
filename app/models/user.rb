@@ -35,10 +35,19 @@ class User < ApplicationRecord
     UserMailer.password_reset(self).deliver_now
   end
 
-  def authenticated_for_password_reset?(token)
-    return false if self.password_reset_digest.nil?
+  def activate
+    update_columns(activated: true, activated_at: Time.zone.now)
+  end
 
-    BCrypt::Password.new(self.password_reset_digest).is_password?(token)
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
+  def authenticated?(attribute, token)
+    digest = self.send("#{attribute}_digest")
+    return false if digest.nil?
+
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   def password_reset_expired?
@@ -65,7 +74,7 @@ class User < ApplicationRecord
 
   def create_activation_digest
     self.activation_token = User.new_token
-    self.activation_digest = User.digest(activation_digest)
+    self.activation_digest = User.digest(activation_token)
   end
 
   def downcase_email

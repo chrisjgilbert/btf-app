@@ -14,6 +14,10 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def activated?
+    current_user.activated?
+  end
+
   def log_out
     session.delete(:user_id)
     @current_user = nil
@@ -23,6 +27,14 @@ module SessionsHelper
     unless logged_in?
       store_location
       flash[:danger] = 'Please login'
+      redirect_to login_url
+    end
+  end
+
+  def activated_user
+    unless activated?
+      store_location
+      flash[:danger] = 'Please activate your account'
       redirect_to login_url
     end
   end

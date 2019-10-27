@@ -2,6 +2,7 @@ class TeamsController < ApplicationController
   include TeamsHelper
   include LeaguesHelper
   before_action :logged_in_user
+  before_action :activated_user
   before_action :user_has_already_created_a_team, only: [:new, :create]
   before_action :before_update_team_deadline,     only: [:edit, :update]
   before_action :set_team,                        only: [:show, :edit, :update]
