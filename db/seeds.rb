@@ -32,9 +32,10 @@ ashes.each do |player, |
   Competitor.create(name: player, competition_id: a.id)
 end
 
-Competition.all.each do |competition|
-  fav = Competitor.where(competition_id: competition.id).first
-  competition.update(favourite_id: fav.id)
-end
+
+o.update_columns(favourite_id: 3)
+r.update_columns(favourite_id: 4)
+g.update_columns(favourite_id: 8)
+a.update_columns(favourite_id: 12)
 
 League.create(name: 'The BTF Main League')
