@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_27_135553) do
+ActiveRecord::Schema.define(version: 2019_11_03_135053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_10_27_135553) do
     t.datetime "updated_at", null: false
     t.date "start_date"
     t.bigint "favourite_id"
+    t.datetime "end_date", default: "2020-12-31 00:00:00"
     t.index ["favourite_id"], name: "index_competitions_on_favourite_id"
   end
 
