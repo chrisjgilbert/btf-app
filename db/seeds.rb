@@ -1,41 +1,68 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'csv'
 
+Dir.glob("#{Rails.root}/db/seeds/*.csv").map do |file|
+  competition = nil
+  favourite = nil
+  competitor = nil
+  competitor_count = 0
 
-olympics = ['Usain Bolt', 'Justin Gatlin', 'Phil Anscombe']
-rwc = ['England', 'Wales', 'New Zealand', 'South Africa']
-golden_boot = ['Sergio Aguero', 'Harry Kane', 'Marcus Rashford']
-ashes = ['Steve Smith', 'Ben Stokes', 'Jofra Archer', 'David Warner']
+  csv_text = File.read(file)
+  csv = CSV.parse(csv_text, :headers => false)
+  csv.each.with_index do |row, index|
 
-o = Competition.create(name: 'Olympics', start_date: (Date.today - 100))
-olympics.each_with_index do |player, index|
-  Competitor.create(name: player, competition_id: o.id)
+    if index == 0
+      puts "****ADDING NEW COMPETITON****"
+      puts "Creating #{row}"
+      competition = Competition.new(name: row.join)
+
+      if competition.save
+        puts "Created #{competition.name}"
+      else
+        puts "Failed to create #{competition.name}"
+      end
+
+    elsif index == 1
+      puts "Adding #{row} to #{competition.name}"
+      favourite = Competitor.new(name: row.join, competition_id: competition.id)
+
+      if favourite.save
+        puts "Created #{favourite.name} and added to #{competition.name}"
+        competitor_count += 1
+      else
+        puts "Failed to create #{favourite.name}"
+      end
+
+    else
+      puts "Adding #{row} to #{competition.name}"
+      competitor = Competitor.new(name: row.join, competition_id: competition.id)
+
+      if competitor.save
+        puts "Created #{competitor.name} to #{competition.name}"
+        competitor_count += 1
+      else
+        puts "Failed to create #{competitor.name}"
+      end
+    end
+  end
+
+  if competition.update(favourite_id: favourite.id)
+    puts "Added #{favourite.name} to #{competition.name}"
+  else
+    puts "Failed to add #{favourite.name} to #{competition.name}"
+  end
+
+  puts "************************"
+  puts "Created #{competition.name}..."
+  puts "The favourite is #{favourite.name}"
+  puts "Added #{competitor_count} competitors...."
+  puts "************************"
 end
 
-r = Competition.create(name: 'Rugby World Cup', start_date: Date.today)
-rwc.each do |player, index|
-  Competitor.create(name: player, competition_id: r.id)
+league = League.new(name: 'The BTF Main League')
+if league.save
+  puts "Created #{league.name}"
+else
+  puts "Failed to create #{league.name}"
 end
 
-g = Competition.create(name: 'Premiership Football Golden Boot', start_date: (Date.today + 30))
-golden_boot.each do |player, index|
-  Competitor.create(name: player, competition_id: g.id)
-end
-
-a = Competition.create(name: 'Ashes Player of the Series', start_date: (Date.today - 10))
-ashes.each do |player, |
-  Competitor.create(name: player, competition_id: a.id)
-end
-
-
-o.update_columns(favourite_id: 3)
-r.update_columns(favourite_id: 4)
-g.update_columns(favourite_id: 8)
-a.update_columns(favourite_id: 12)
-
-League.create(name: 'The BTF Main League')
+puts "Seeding complete"
