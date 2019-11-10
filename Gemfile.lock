@@ -46,10 +46,17 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     arel (9.0.0)
     ast (2.4.0)
+    autoprefixer-rails (9.7.1)
+      execjs
     bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
+    bootstrap-sass (3.4.1)
+      autoprefixer-rails (>= 5.2.1)
+      sassc (>= 2.0.0)
+    bootstrap_form (4.1.0)
+      rails (>= 5.0)
     builder (3.2.3)
     byebug (11.0.1)
     capybara (3.29.0)
@@ -175,6 +182,14 @@ GEM
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     rubyzip (1.2.4)
+    sassc (2.2.1)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     selenium-webdriver (3.142.4)
       childprocess (>= 0.5, < 3.0)
       rubyzip (~> 1.2, >= 1.2.2)
@@ -191,6 +206,7 @@ GEM
       sprockets (>= 3.0.0)
     thor (0.20.3)
     thread_safe (0.3.6)
+    tilt (2.0.10)
     timecop (0.9.1)
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
@@ -217,6 +233,8 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
+  bootstrap-sass (~> 3.4.1)
+  bootstrap_form (~> 4.0)
   byebug
   capybara
   database_cleaner
@@ -230,6 +248,7 @@ DEPENDENCIES
   rails-controller-testing
   rspec-rails
   rubocop (~> 0.74.0)
+  sassc-rails (>= 2.1.0)
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
