@@ -52,4 +52,12 @@ class Team < ApplicationRecord
   def leagues
     league_memberships.map(&:league)
   end
+
+  def favourites
+    self.picks.select { |pick| pick.competitor.is_favourite? }
+  end
+
+  def favourites_count
+    favourites.count
+  end
 end

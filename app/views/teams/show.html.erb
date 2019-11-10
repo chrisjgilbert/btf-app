@@ -1,15 +1,31 @@
-<h1><%= @team.name %> (<%= @team.points %>pts)</h1>
-<h2>Captain: <%= @team.captain.name %> in <%= @team.captain.competition.name %></h2>
-<ul>
-<% @team.picks.each do |pick| %>
-  <li><%= pick.competitor.name %> for <%= pick.competitor.competition.name %> </li>
-<% end %>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h3 class="text-muted">Team name</h3>
+      <h4><%= @team.name %></h4>
+      <h3 class="text-muted">Points</h3>
+      <h4><%= @team.points %></h4>
+      <h3 class="text-muted">Captain</h3>
+      <h4><%= @team.captain.name %> for <%= @team.captain.competition.name %></h4>
+      <h3 class="text-muted">Favourites (<%= @team.favourites_count %>)</h3>
+      <% @team.favourites.each do |pick| %>
+        <li class="list-group-item"><%= pick.competitor.name %> for <%= pick.competitor.competition.name %></li>
+      <% end %>
+      </ul>
+      <h3 class="text-muted">All picks</h3>
+      <ul class="list-group"">
+      <% @team.picks.each do |pick| %>
+        <li class="list-group-item"><%= pick.competitor.name_with_favourite_status %> for <%= pick.competitor.competition.name %></li>
+      <% end %>
+      </ul>
 
-<% if before_update_team_deadline? && @team.user == current_user %>
-  <p>You can update your team until 31st December 2019. <%= link_to 'Click here', edit_team_path(@team) %> to do so.</p>
-<% end %>
+      <% if before_update_team_deadline? && @team.user == current_user %>
+        <h4>You can update your team until 31st December 2019. <%= link_to 'Click here', edit_team_path(@team) %> to do so.</h4>
+      <% end %>
 
-<% if !before_update_team_deadline? %>
-  <p>The team update deadline has now passed.</p>
-<% end %>
+      <% if !before_update_team_deadline? %>
+        <p>The team update deadline has now passed.</p>
+      <% end %>
+    </div>
+  </div>
+</div>
