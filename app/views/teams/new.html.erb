@@ -5,7 +5,7 @@
     <div class="col-md-6 col-md-offset-3">
       <%= bootstrap_form_for(@team, url: teams_path) do |f| %>
         <%= render 'shared/team_error_messages' %>
-        <%= f.text_field :name, label: "Your team name (can't be blank)" %>
+        <%= f.text_field :name, label: "Your team name (can't be blank)", :required => true %>
         <%= f.fields_for :picks do |pick| %>
           <% competition = @competitions[pick.index] %>
           <%= pick.label competition.name %>
@@ -25,6 +25,3 @@
     </div>
   </div>
 </div>
-
-
-

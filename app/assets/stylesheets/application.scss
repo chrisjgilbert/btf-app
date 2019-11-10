@@ -16,3 +16,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "rails_bootstrap_forms";
+
+.over-fav-limit
+{
+  color: #dc3545;
+}
+.under-fav-limit
+{
+  color: #28a745;
+}

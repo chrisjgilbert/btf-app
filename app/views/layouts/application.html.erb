@@ -8,10 +8,11 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <%= render 'layouts/header_navigation' %>
   <body>
-    <%= render 'layouts/header_navigation' %>
-    <%= render 'shared/flash_messages' %>
+    <div class="container">
+      <%= render 'shared/flash_messages' %>
+    </div>
     <%= yield %>
     <%= yield :javascript %>
   </body>
