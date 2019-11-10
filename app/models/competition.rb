@@ -6,7 +6,12 @@ class Competition < ApplicationRecord
   #   order('competitions.start_date').take(index).last
   # end
 
+  def self.favourites
+    all.map(&:favourite_id)
+  end
+
   def favourite
     Competitor.find(self.favourite_id)
   end
+
 end

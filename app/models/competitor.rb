@@ -8,7 +8,7 @@ class Competitor < ApplicationRecord
   end
 
   def is_favourite?
-    Competition.where(favourite_id: self.id).exists?
+    Competition.favourites.include?(self.id)
   end
 
   def name_with_favourite_status

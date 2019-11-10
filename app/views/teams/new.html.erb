@@ -12,7 +12,7 @@
           <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, include_blank: false, hide_label: true %>
         <% end %>
         <div id="team_captain_id"></div>
-        <h3 id="favourite_count">You currently have <%= pluralize(@favourite_count, 'favourite') %> selected</h3>
+        <h3 id="favourite_count">You currently have <span class='fav-count'><%= pluralize(@favourite_count, 'favourite') %></span> selected</h3>
         <%= f.submit 'Submit', class: 'btn btn-primary btn-block' %>
         <% content_for :javascript do %>
           <script type='text/javascript'>

@@ -8,6 +8,7 @@ class TeamsController < ApplicationController
   before_action :set_team,                        only: [:show, :edit, :update]
   before_action :load_all_competitions,           only: [:new, :create, :edit, :update]
   before_action :load_all_competitors,            only: [:new, :create, :edit, :update]
+  skip_before_action :verify_authenticity_token,  only: [:team_selection]
   
   def new
     @team = Team.new
