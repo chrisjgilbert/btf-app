@@ -76,7 +76,7 @@ Dir.glob("#{Rails.root}/db/seeds/*.csv").map do |file|
   puts "************************"
 end
 
-ryder_cup = Competition.find(25)
+ryder_cup = Competition.find_by_name('Ryder Cup - Winners + Margin')
 ryder_cup.favourite_id = nil
 ryder_cup.save!
 
