@@ -36,4 +36,5 @@ Rails.application.routes.draw do
     resources :account_activations, only: [:edit]
 
     get '/rules-and-guidance', to: 'static#rules_and_guidance'
+    get '/blog', to: 'static#blog'
 end
