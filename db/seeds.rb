@@ -76,6 +76,12 @@ Dir.glob("#{Rails.root}/db/seeds/*.csv").map do |file|
   puts "************************"
 end
 
+ryder_cup = Competition.find(25)
+ryder_cup.favourite_id = nil
+ryder_cup.save!
+
+puts "Set #{ryder_cup.name} favourite id to be #{ryder_cup.favourite_id == nil ? 'nil' : 'not nil'}"
+
 # League creation
 league = League.new(name: 'The BTF Main League')
 if league.save
