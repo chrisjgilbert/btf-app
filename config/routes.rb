@@ -34,4 +34,6 @@ Rails.application.routes.draw do
 
     # Account activations
     resources :account_activations, only: [:edit]
+
+    get '/rules-and-guidance', to: 'static#rules_and_guidance'
 end

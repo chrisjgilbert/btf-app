@@ -8,6 +8,7 @@ class Competition < ApplicationRecord
 
   def self.favourites
     all.map(&:favourite_id)
+    # [21, 512, 1846, 170, 502, 916, 1852, 812, 662, 1166, 9, 1877, 1784, 2001, 861, 1816, 926, 202, 1, 1466, 832, 1484, 2027, 146, 1804]
   end
 
   def favourite
