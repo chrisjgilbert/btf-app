@@ -14,7 +14,7 @@
 
 <ol>
   <% league.teams.each do |team| %>
-    <li><%= link_to team.name, team %> (<%= team.points %>pts)</li>
+    <li><%= team.name %> (<%= team.user.first_name %> <%= team.user.last_name %>)</li>
   <% end %>
 </ol>
 <p><%= link_to 'View all leagues', leagues_path %></p>
