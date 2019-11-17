@@ -3,6 +3,7 @@
     <div class="col-md-6 col-md-offset-3">
       <h1 class="text-center">Update team name and your picks</h1>
       <h5 class="text-center">You can come back and upate these before midnight on 31st Decemeber 2019.</h5>
+      <h3 id="favourite_count">You currently have <span class='fav-count'><%= pluralize(@favourite_count, 'favourite') %></span> selected</h3>
       <%= bootstrap_form_for(@team, url: team_path(params[:id]), method: :patch) do |f| %>
         <%= render 'shared/team_error_messages' %>
         <%= f.text_field :name, label: "Your team name (can't be blank)", :required => true %>
@@ -12,7 +13,6 @@
           <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, include_blank: false, hide_label: true %>
         <% end %>
         <div id="team_captain_id"></div>
-        <h3 id="favourite_count">You currently have <span class='fav-count'><%= pluralize(@favourite_count, 'favourite') %></span> selected</h3>
         <%= f.submit 'Submit', class: 'btn btn-primary btn-block' %>
         <% content_for :javascript do %>
           <script type='text/javascript'>
@@ -25,3 +25,42 @@
     </div>
   </div>
 </div>
+
+<style>
+  h3#favourite_count
+  {
+    position: sticky;
+    background-color: white;
+    top: 0;
+    text-align: center;
+  }
+  .scroll-padding
+  {
+    padding: 10px 0;
+  }
+  div#team_captain_id
+  {
+    margin-bottom: 20px;
+  }
+  form
+  {
+    padding: 0 20px;
+  }
+</style>
+<script>
+  var count = $('h3#favourite_count')
+  var stickyClassAdded = false;
+  $(document).on('scroll', function() {
+  var countPosition = count[0].getBoundingClientRect().top;
+    console.log(countPosition)
+    if (countPosition <= 1 && !stickyClassAdded) {
+      stickyClassAdded = true;
+      count.addClass('scroll-padding')
+    } else if (countPosition > 1 && stickyClassAdded) {
+      stickyClassAdded = false;
+      count.removeClass('scroll-padding')
+    }
+  });
+</script>
+
+
