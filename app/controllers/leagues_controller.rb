@@ -1,7 +1,7 @@
 class LeaguesController < ApplicationController
   include LeaguesHelper
   before_action :logged_in_user
-  before_action :user_has_already_created_a_league, only: [:create, :new]
+  # before_action :user_has_already_created_a_league, only: [:create, :new]
 
   def index
     @leagues = League.all
@@ -33,10 +33,10 @@ class LeaguesController < ApplicationController
     params.require(:league).permit(:name)
   end
 
-  def user_has_already_created_a_league
-    if League.where(user_id: current_user.id).exists?
-      league_already_created_flash_message
-      redirect_to dashboard_path
-    end
-  end
+  # def user_has_already_created_a_league
+  #   if League.where(user_id: current_user.id).exists?
+  #     league_already_created_flash_message
+  #     redirect_to dashboard_path
+  #   end
+  # end
 end

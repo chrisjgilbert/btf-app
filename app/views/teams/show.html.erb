@@ -5,17 +5,10 @@
       <h4><%= @team.name %></h4>
       <h3 class="text-muted">Points</h3>
       <h4><%= @team.points %></h4>
-      <h3 class="text-muted">Captain</h3>
-      <h4><%= @team.captain.name %> for <%= @team.captain.competition.name %></h4>
-      <h3 class="text-muted">Favourites (<%= @team.favourites_count %>)</h3>
-      <% @team.favourites.each do |pick| %>
-        <li class="list-group-item"><%= pick.competitor.name %> for <%= pick.competitor.competition.name %></li>
-      <% end %>
-      </ul>
-      <h3 class="text-muted">All picks</h3>
+      <h3 class="text-muted">Picks</h3>
       <ul class="list-group"">
       <% @team.picks.each do |pick| %>
-        <li class="list-group-item"><%= pick.competitor.name_with_favourite_status %> for <%= pick.competitor.competition.name %></li>
+        <li class="list-group-item <%= pick.competitor.is_favourite? ? 'favourite-color' : '' %> <%= pick.competitor.id == @team.captain.id ? 'captain-color' : '' %>"><%= pick.competitor.name_with_favourite_status %> for <%= pick.competitor.competition.name %></li>
       <% end %>
       </ul>
 
@@ -29,3 +22,16 @@
     </div>
   </div>
 </div>
+
+<style>
+  .favourite-color
+  {
+    background-color: #FFEF6F;
+    border: 1px solid #FFEF6F;
+  }
+  .captain-color
+  {
+    background-color: #91d67c;
+    border: 1px solid #91d67c;
+  }
+</style>

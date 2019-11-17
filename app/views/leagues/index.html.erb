@@ -1,6 +1,17 @@
-<h1>All leagues</h1>
-<ul>
-  <% @leagues.each do |league| %>
-    <li><%= link_to league.name, league %></li>
-  <% end %>
-</ul>
+<div class="container">
+  <div class="row">
+  <h1>Leagues</h1>
+    <ul>
+      <% @leagues.each do |league| %>
+        <% if league.is_btf_main_league? %>
+          <li><h3><%= link_to league.name, league %></h3></li>
+          <h3>User created leagues</h3>
+          <i><%= link_to 'Create your own mini league', new_league_path %></i>
+        <% else %>
+          <li><%= link_to league.name, league %> (<%= league.user.first_name %> <%= league.user.last_name %>)</li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+

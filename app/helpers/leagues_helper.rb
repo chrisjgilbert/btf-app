@@ -4,7 +4,7 @@ module LeaguesHelper
   end
 
   def league_successfully_created_flash_message
-    flash[:success] = 'League successfully created!'
+    flash[:info] = 'League successfully created!'
   end
 
   def unsuccessful_add_users_team_to_league_flash_message

@@ -30,7 +30,7 @@ class PasswordResetsController < ApplicationController
     elsif @user.update_attributes(user_params)
       log_in @user
       @user.destroy_password_reset_digest
-      flash[:success] = "Password has been updated"
+      flash[:info] = "Password has been updated"
       redirect_to dashboard_path
     else
       render 'edit'

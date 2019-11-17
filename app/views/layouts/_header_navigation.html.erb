@@ -14,18 +14,18 @@
     <div class="collapse navbar-collapse" id="navbar-collapsable">
       <ul class="nav navbar-nav foo" id="menu">
         <% if logged_in? && activated? %>
-          <li>
-            <%= link_to 'View dashboard', dashboard_path %>
-          </li>
           <% if current_user.team %>
             <li>
-              <%= link_to 'View team', current_user.team %>
+              <%= link_to 'Team', current_user.team %>
             </li>
           <% else %>
             <li>
-            <%= link_to "Pick team", new_team_path %>
+            <%= link_to "Team", new_team_path %>
             </li>
           <% end %>
+            <li>
+              <%= link_to 'Leagues', leagues_path %>
+            </li>
         <% end %>
         <li>
           <%= link_to "Rules and Guidance", rules_and_guidance_path %>
