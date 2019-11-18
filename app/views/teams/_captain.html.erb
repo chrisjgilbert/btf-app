@@ -1,6 +1,8 @@
-<label for="team_captain_id">Captain</label>
-<select name="team[captain_id]" id="team_captain_id">
-  <% @captain_options.each do |option| %>
-    <option value="<%= option.id %>" <%= @current_captain == option ? 'selected' : '' %>><%= option.name %> for <%= option.competition.name.truncate(15) %></option>
-  <% end %>
-</select>
+<div class="form-group">
+  <label for="team_captain_id">Captain</label>
+  <select class="form-control" name="team[captain_id]" id="team_captain_id">
+    <% @captain_options.each do |option| %>
+      <option value="<%= option.id %>" <%= @current_captain == option ? 'selected' : '' %>><%= option.name %> for <%= option.competition.name %></option>
+    <% end %>
+  </select>
+</div>
