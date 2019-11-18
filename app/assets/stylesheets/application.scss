@@ -35,10 +35,18 @@
 .navbar-brand
 {
   padding: 0;
+  padding: 0 10px;
 }
 
-ul
+ul, ol
 {
   list-style-type: none;
   padding-inline-start: 0;
+}
+
+.error-message
+{
+  color: #dc3545;
+  font-size: 20px;
+  text-align: center;
 }

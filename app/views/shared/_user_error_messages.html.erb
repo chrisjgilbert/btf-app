@@ -1,7 +1,7 @@
 <% if @user.errors.any? %>
-  <%= @user.errors.full_messages do |error_msg| %>
-  <ul class="list-group">
-    <li class="list-group-item"><%= error_msg %></li>
-  </ul>
+  <ul>
+  <% @user.errors.full_messages.each do |error_msg| %>
+    <li class="error-message"><%= error_msg %></li>
   <% end %>
+  </ul>
 <% end %>

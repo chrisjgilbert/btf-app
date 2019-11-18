@@ -4,26 +4,28 @@
 
 <div class="container">
   <div class="row">
-  <h1><%= league_name %></h1>
+    <div class="col-xs-10 col-xs-offset-1">
+      <h1><%= league_name %></h1>
 
-  <% unless current_user.owns_league?(league_id) || league.is_btf_main_league? %>
-    <% if current_user.team.belongs_to_league?(league_id)%>
-      <%= button_to "Leave league", league_membership_path , method: :delete, params: { league_id: league_id, team_id: current_user.team.id } %>
-    <% else %>
-      <%= button_to "Join league", league_memberships_path , method: :post, params: { league_id: league_id, team_id: current_user.team.id } %>
-    <% end %>
-  <% end %>
+      <% unless current_user.owns_league?(league_id) || league.is_btf_main_league? %>
+        <% if current_user.team.belongs_to_league?(league_id)%>
+          <h4>Actions:</h4><%= button_to "Leave league", league_membership_path, method: :delete, params: { league_id: league_id, team_id: current_user.team.id }, class: 'btn btn-primary' %>
+        <% else %>
+          <h4>Actions:</h4><%= button_to "Join league", league_memberships_path, method: :post, params: { league_id: league_id, team_id: current_user.team.id }, class: 'btn btn-primary' %>
+        <% end %>
+      <% end %>
+      <h4>Teams:</h4>
+      <ol>
+        <% league.teams.each do |team| %>
+          <li><%= team.name %> (<%= team.user.first_name %> <%= team.user.last_name %>)</li>
+        <% end %>
+      </ol>
+      <p><%= link_to 'View all leagues', leagues_path %></p>
 
-  <ol>
-    <% league.teams.each do |team| %>
-      <li><%= team.name %> (<%= team.user.first_name %> <%= team.user.last_name %>)</li>
-    <% end %>
-  </ol>
-  <p><%= link_to 'View all leagues', leagues_path %></p>
-
-  <% if current_user.owns_league?(league_id) %>
-    <a href="whatsapp://send?text=<%= request.original_url %>?invite=true">Invite friends to join <%= league_name %> by sharing on WhatsApp!</a>
-  <% end %>
+      <% if current_user.owns_league?(league_id) %>
+        <a href="whatsapp://send?text=<%= request.original_url %>?invite=true">Invite friends to join <%= league_name %> by sharing on WhatsApp!</a>
+      <% end %>
+    </div>
   </div>
 </div>
 

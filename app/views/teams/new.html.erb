@@ -1,12 +1,11 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1">
       <h1 class="text-center">Choose a team name and make your picks</h1>
-      <h5 class="text-center">Please note: you can come back and upate these before midnight on 31st Decemeber 2019.</h5>
       <h3 id="favourite_count">You currently have <span class='fav-count'><%= pluralize(@favourite_count, 'favourite') %></span> selected</h3>
-      <%= bootstrap_form_for(@team, url: teams_path) do |f| %>
+      <%= bootstrap_form_for(@team, url: teams_path, inline_errors: false) do |f| %>
         <%= render 'shared/team_error_messages' %>
-        <%= f.text_field :name, label: "Your team name (can't be blank)", :required => true %>
+        <%= f.text_field :name, label: "Your team name (required)", :required => true %>
         <%= f.fields_for :picks do |pick| %>
           <% competition = @competitions[pick.index] %>
           <%= pick.label competition.name %>
@@ -22,6 +21,7 @@
           </script>
         <% end %>
       <% end %>
+      <h5 class="text-center">Please note: you can come back and upate these before midnight on 31st Decemeber 2019.</h5>
     </div>
   </div>
 </div>
