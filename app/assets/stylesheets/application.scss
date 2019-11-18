@@ -28,17 +28,13 @@
 
 .navbar
 {
-  background-color: #db8379;
+  box-shadow: 0 6px 7px 0 rgba(0,0,0,.15);
+  padding: 10px 0;
 }
 
 .navbar-brand
 {
   padding: 0;
-}
-
-.navbar-default .navbar-nav > li > a
-{
-  color: white;;
 }
 
 ul

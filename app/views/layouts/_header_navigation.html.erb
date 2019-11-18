@@ -26,13 +26,13 @@
             <li>
               <%= link_to 'Leagues', leagues_path %>
             </li>
+          <li>
+            <%= link_to "Rules and Guidance", rules_and_guidance_path %>
+          </li>
+          <li>
+            <%= link_to "Blog", blog_path %>
+          </li>
         <% end %>
-        <li>
-          <%= link_to "Rules and Guidance", rules_and_guidance_path %>
-        </li>
-        <li>
-          <%= link_to "Blog", blog_path %>
-        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right" align="right">
         <% if logged_in? && activated? %>
