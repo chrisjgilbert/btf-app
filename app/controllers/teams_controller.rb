@@ -77,14 +77,14 @@ class TeamsController < ApplicationController
   def user_has_already_created_a_team
     if Team.where(user_id: current_user.id).exists?
       team_already_created_flash_message
-      redirect_to dashboard_path
+      redirect_to team_path(current_user.team)
     end
   end
 
   def before_update_team_deadline
     unless before_update_team_deadline?
       past_deadline_flash_message
-      redirect_to dashboard_path
+      redirect_to team_path(current_user.team)
     end
   end
 
