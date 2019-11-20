@@ -1,6 +1,6 @@
 module LeagueMembershipsHelper
   def successful_league_membership_create_flash_msg(league_name)
-    flash[:info] = "You have joined #{league_name}!"
+    flash.now[:info] = "You have joined #{league_name}!"
   end
 
   def unsuccessful_league_membership_create_flash_msg
@@ -8,7 +8,7 @@ module LeagueMembershipsHelper
   end
 
   def successful_league_membership_destroy_flash_msg(league_name)
-    flash[:info] = "You have left #{league_name}!"
+    flash.now[:info] = "You have left #{league_name}!"
   end
 
   def unsuccessful_league_membership_destroy_flash_msg
