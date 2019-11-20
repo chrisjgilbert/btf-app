@@ -17,6 +17,11 @@
 @import "bootstrap";
 @import "rails_bootstrap_forms";
 
+body
+{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
 .over-fav-limit
 {
   color: #dc3545;
