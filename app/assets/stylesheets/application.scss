@@ -22,6 +22,38 @@ body
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
+h1
+{
+  margin-bottom: 20px;
+}
+
+h3#favourite_count
+{
+  position: sticky;
+  position: -webkit-sticky;
+  background-color: white;
+  top: 0;
+  text-align: center;
+}
+p#favourite_count
+{
+  margin-bottom: 0;
+}
+
+.scroll-padding
+{
+  padding: 10px 0;
+  box-shadow: 0 6px 7px 0 rgba(0,0,0,.15);
+}
+div#team_captain_id
+{
+  margin-bottom: 20px;
+}
+form
+{
+  padding: 20px;
+}
+
 .over-fav-limit
 {
   color: #dc3545;
