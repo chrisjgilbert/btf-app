@@ -6,7 +6,7 @@ class AccountActivationsController < ApplicationController
       user.activate
       log_in user
       account_activation_success_flash_msg
-      redirect_to new_team_path
+      redirect_to welcome_path
     else
       account_activation_failure_flash_msg
       redirect_to root_url

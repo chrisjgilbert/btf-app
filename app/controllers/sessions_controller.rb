@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(user_password)
       if user.activated?
         log_in user
-        redirect_back_or team_path(user.team)
+        redirect_back_or redirect_from_login_path(user)
       else
         flash[:warning] = 'Account not activated yet. Check your email for the activation link.'
         redirect_to root_url
@@ -33,5 +33,13 @@ class SessionsController < ApplicationController
 
   def user_password
     params[:session][:password]
+  end
+
+  def redirect_from_login_path(user)
+    if user.has_created_a_team?
+      team_path(user.team)
+    else
+      welcome_path
+    end
   end
 end

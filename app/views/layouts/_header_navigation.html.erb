@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse" id="navbar-collapsable">
       <ul class="nav navbar-nav foo" id="menu">
         <% if logged_in? && activated? %>
-          <% if current_user.team %>
+          <% if current_user.has_created_a_team? %>
             <li>
               <%= link_to 'Team', current_user.team %>
             </li>
