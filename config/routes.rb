@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     get 'homepage/index'
 
     # Root
-    root to: 'sessions#new'
+    root to: 'root#root'
 
     # Sign Up
     get  '/signup',     to: 'users#new'
