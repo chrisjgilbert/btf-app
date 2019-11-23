@@ -1,5 +1,5 @@
 class Competition < ApplicationRecord
-  default_scope { order('competitions.start_date') }
+  default_scope { order('competitions.end_date') }
   has_many :competitors
 
   def self.favourites
