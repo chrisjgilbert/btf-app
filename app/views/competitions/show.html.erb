@@ -3,6 +3,10 @@
     <div class="col-sm-8 col-sm-offset-2">
       <h3 class="text-muted">Name</h3>
       <h4><%= @competition.name %></h4>
+      <h3 class="text-muted">Location</h3>
+      <h4><%= @competition.location %></h4>
+      <h3 class="text-muted">More information</h3>
+      <h4><%= link_to @competition.research_link, @competition.research_link %></h4>
       <h3 class="text-muted">Start date</h3>
       <h4><%= @competition.start_date %></h4>
       <h3 class="text-muted">End date</h3>
