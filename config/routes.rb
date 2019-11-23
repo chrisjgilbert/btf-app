@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'errors/show'
     # homepage
     get 'homepage/index'
 
@@ -35,6 +34,8 @@ Rails.application.routes.draw do
 
     # Account activations
     resources :account_activations, only: [:edit]
+
+    resources :competitions, only: [:show]
 
     get '/rules-and-guidance', to: 'static#rules_and_guidance'
     get '/blog', to: 'static#blog'

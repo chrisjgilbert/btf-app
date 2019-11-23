@@ -1,5 +1,5 @@
 class Competitor < ApplicationRecord
-  # default_scope { order(:name) } # uncomment this line for alphabetically ordered competitors
+  default_scope { order(:name) } # uncomment this line for alphabetically ordered competitors
   belongs_to :competition
   has_many :picks
   has_many :teams, through: :picks
