@@ -22,7 +22,9 @@ class TeamsController < ApplicationController
       create_team_success_flash_message
       redirect_to @team
     else
-      @current_captain = Competitor.find(team_params[:captain_id])
+      if team_params[:captain_id].present?
+        @current_captain = Competitor.find(team_params[:captain_id])
+      end
       render 'new'
     end
   end
