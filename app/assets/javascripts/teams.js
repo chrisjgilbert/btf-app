@@ -1,8 +1,8 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-function TeamSelection(currentCaptainId) {
-  this.currentCaptainId = currentCaptainId;
+function TeamSelection() {
+  this.currentCaptainId = "";
   this.competitons = $('select');
   this.pickIds = this.getCurrentPickIds();
 
