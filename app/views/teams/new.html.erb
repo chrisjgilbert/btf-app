@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <h1 class="text-center">Choose a team name and make your picks</h1>
-      <h3 id="favourite_count">You currently have <span class='fav-count'><%= pluralize(@favourite_count, 'favourite') %></span> selected</h3>
+      <h3 id="favourite_count"></h3>
       <%= bootstrap_form_for(@team, url: teams_path, inline_errors: false) do |f| %>
         <%= render 'shared/team_error_messages' %>
         <%= f.text_field :name, label: "Your team name (required)", :required => true %>

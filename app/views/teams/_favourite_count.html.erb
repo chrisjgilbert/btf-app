@@ -1,2 +1,8 @@
 <% fav_color_class = @favourite_count > TeamValidator::FAVOURITE_LIMIT ? 'over-fav-limit' : 'under-fav-limit' %>
-<p id="favourite_count" class="<%= fav_color_class %>">You currently have <%= pluralize(@favourite_count, 'favourite') %> selected</p>
+<% fav_count = @favourite_count %>
+<% if @favourite_count < TeamValidator::FAVOURITE_LIMIT  %>
+    <% available_count = TeamValidator::FAVOURITE_LIMIT - fav_count %>
+    <p id="favourite_count" class="<%= fav_color_class %>"><%= pluralize(available_count, 'favourite') %> available</p>
+  <% else %>
+    <p id="favourite_count" class="<%= fav_color_class %>"><%= pluralize(fav_count, 'favourite') %> picked</p>
+<% end %>
