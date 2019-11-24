@@ -53,7 +53,10 @@ class TeamsController < ApplicationController
   end
 
   def team_selection
-    current_selection = team_selection_params[:currentSelection].reject(&:empty?)
+    if team_selection_params[:currentSelection].present?
+      current_selection = team_selection_params[:currentSelection].reject(&:empty?)
+    end
+
     current_captain = team_selection_params[:currentCaptainId]
 
     unless current_selection.empty?

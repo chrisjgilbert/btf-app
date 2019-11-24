@@ -5,7 +5,6 @@
       <% @captain_options.each do |option| %>
         <option value="<%= option.id %>" <%= @current_captain == option ? 'selected' : '' %>><%= option.name %> for <%= option.competition.name %></option>
       <% end %>
-      <%= p  @current_captain %>
     <% else %>
         <option disabled selected value> -- captain options will appear here -- </option>
     <% end %>
