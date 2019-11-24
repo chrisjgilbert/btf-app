@@ -13,7 +13,6 @@ class TeamsController < ApplicationController
   def new
     @team = Team.new
     @picks = @competitions.count.times { @team.picks.build }
-    @current_captain = Competitor.find(1) # set this to be the first non favorite
   end
 
   def create
@@ -55,12 +54,14 @@ class TeamsController < ApplicationController
 
   def team_selection
     current_selection = team_selection_params[:currentSelection].reject(&:empty?)
+    current_captain = team_selection_params[:currentCaptainId]
 
     unless current_selection.empty?
-      if team_selection_params[:currentCaptainId].present?
-        @current_captain = Competitor.find(team_selection_params[:currentCaptainId])
+      if current_captain.present?
+        current_captain = Competitor.find(team_selection_params[:currentCaptainId])
+        @current_captain = current_captain.is_favourite? ? nil : current_captain
       end
-      current_selection = Competitor.find(team_selection_params[:currentSelection])
+      current_selection = Competitor.find(current_selection)
       @captain_options = current_selection.reject { |option| option.is_favourite? }
       @favourite_count = current_selection.length - @captain_options.length
     end

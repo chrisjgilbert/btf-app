@@ -1,6 +1,4 @@
-<% if @captain_options.present? %>
-  $('#team_captain_id').html("<%= j render(:partial => 'teams/captain', :locals => { :captain_options => @captain_options }) %>");
-<% end %>
+$('#team_captain_id').html("<%= j render(:partial => 'teams/captain', :locals => { :captain_options => @captain_options }) %>");
 <% if @favourite_count.present?%>
   $('#favourite_count').html("<%= j render(:partial => 'teams/favourite_count', :locals => { :favourite_count => @favourite_count }) %>");
 <% end %>

@@ -1,8 +1,13 @@
 <div class="form-group">
   <label for="team_captain_id">Captain</label>
   <select class="form-control" name="team[captain_id]" id="team_captain_id">
-    <% @captain_options.each do |option| %>
-      <option value="<%= option.id %>" <%= @current_captain == option ? 'selected' : '' %>><%= option.name %> for <%= option.competition.name %></option>
+    <% if @captain_options.present? %>
+      <% @captain_options.each do |option| %>
+        <option value="<%= option.id %>" <%= @current_captain == option ? 'selected' : '' %>><%= option.name %> for <%= option.competition.name %></option>
+      <% end %>
+      <%= p  @current_captain %>
+    <% else %>
+        <option disabled selected value> -- captain options will appear here -- </option>
     <% end %>
   </select>
 </div>

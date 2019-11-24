@@ -2,7 +2,7 @@
 // All this logic will automatically be available in application.js.
 
 function TeamSelection() {
-  this.currentCaptainId = "";
+  this.currentCaptainId = this.getCurrentCaptainId();
   this.competitons = $('select');
   this.pickIds = this.getCurrentPickIds();
 
