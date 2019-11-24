@@ -11,7 +11,7 @@
           <%= pick.label competition.id, competition.name %>
           <br>
           <%= link_to '(view competition info)', competition_path(competition), target: '_blank' %>
-          <%= pick.collection_select :id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, include_blank: :true, hide_label: true %>
+          <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, include_blank: :true, hide_label: true %>
         <% end %>
         <div id="team_captain_id"></div>
         <%= f.submit 'Submit', class: 'btn btn-primary btn-block' %>
