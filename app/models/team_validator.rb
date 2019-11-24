@@ -3,6 +3,11 @@ class TeamValidator < ActiveModel::Validator
   NUMBER_OF_PICKS = Competition.all.count
   def validate(record)
     picks = record.picks.reject { |pick| pick.competitor_id == nil }
+    puts "*"*100
+    puts "*"*100
+    puts picks
+    puts "*"*100
+    puts "*"*100
     if picks.count != NUMBER_OF_PICKS
       record.errors[:base] << "You have blank entries. You must chose a competitor for each competition"
     end
