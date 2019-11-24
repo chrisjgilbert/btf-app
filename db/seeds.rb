@@ -42,8 +42,32 @@ Dir.glob("#{Rails.root}/db/seeds/*.csv").map do |file|
       else
         puts "Failed to add a end date to #{competition.name}"
       end
-    # favourite 
+    # location
     elsif index == 3
+      location = row.join(",")
+      if competition.update(location: location)
+        puts "Added location of #{location} to #{competition.name}"
+      else
+        puts "Failed to add a location to #{competition.name}"
+      end
+      # previous winner
+    elsif index == 4
+      previous_winner = row.join(",")
+      if competition.update(previous_winner: previous_winner)
+        puts "Added previous winner of #{previous_winner} to #{competition.name}"
+      else
+        puts "Failed to add a previous winner to #{competition.name}"
+      end
+      # research link
+    elsif index == 5
+      research_link = row.join(",")
+      if competition.update(research_link: research_link)
+        puts "Added research link of #{research_link} to #{competition.name}"
+      else
+        puts "Failed to add a research link  to #{competition.name}"
+      end
+    # favourite
+    elsif index == 6
       favourite = Competitor.new(name: row.join, competition_id: competition.id)
       if favourite.save
         puts "Created #{favourite.name} and added to #{competition.name}"
@@ -76,7 +100,7 @@ Dir.glob("#{Rails.root}/db/seeds/*.csv").map do |file|
   puts "************************"
 end
 
-ryder_cup = Competition.find_by_name('Ryder Cup - Winners + Margin')
+ryder_cup = Competition.find_by_name('Golf - Ryder Cup Winning Margin')
 ryder_cup.favourite_id = nil
 ryder_cup.save!
 

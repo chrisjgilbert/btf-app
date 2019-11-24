@@ -24,8 +24,6 @@ class TeamsController < ApplicationController
     else
       if team_params[:captain_id].present?
         @current_captain = Competitor.find(team_params[:captain_id])
-      else
-        @current_captain = Competitor.first
       end
       render 'new'
     end
