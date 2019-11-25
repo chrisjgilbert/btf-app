@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
     # Teams
     resources :teams, only: [:new, :create, :show, :edit, :update]
+    get '/teams', to: 'root#root'
 
     # Team selection Ajax
     post '/team_selection', to: 'teams#team_selection'
