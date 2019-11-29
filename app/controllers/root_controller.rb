@@ -7,7 +7,7 @@ class RootController < ApplicationController
         redirect_to welcome_path
       end
     else
-      redirect_to login_path
+      redirect_to signup_path
     end
   end
 end
