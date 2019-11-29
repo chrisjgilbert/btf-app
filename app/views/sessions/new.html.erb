@@ -1,14 +1,16 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
-      <h1 class="text-center">Login</h1>
+      <h1 class="text-center">Log in</h1>
       <%= bootstrap_form_for(:session, url: login_path, inline_errors: false) do |f| %>
-      <%= f.email_field :email, label: "Email (required)", :required => true %>
-      <%= f.password_field :password, label: "Password (required)", :required => true %>
+      <%= f.email_field :email, label: "Email", :required => true %>
+      <%= f.password_field :password, label: "Password", :required => true %>
       <%= f.submit "Log in", class: 'btn btn-primary' %>
       <% end %>
-      <p>Not a member? <%= link_to "Signup", signup_path %> instead</p>
-      <p><%= link_to "Forgot password?", new_password_reset_path %></p>
+      <div class="form-footer">
+        <p>Not a BTFer yet? <%= link_to "Sign up here", signup_path %> instead</p>
+        <p><%= link_to "Forgot password?", new_password_reset_path %></p>
+      </div>
     </div>
   </div>
 </div>

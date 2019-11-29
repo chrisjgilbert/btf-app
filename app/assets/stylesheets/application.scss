@@ -56,6 +56,11 @@ form
   padding: 20px;
 }
 
+.form-footer
+{
+  padding: 0  20px;
+}
+
 .over-fav-limit
 {
   color: #dc3545;
@@ -74,6 +79,7 @@ form
 .navbar-default
 {
   background-color: $btf-pink;
+  padding: 10px 20px;
 }
 
 .navbar-brand
