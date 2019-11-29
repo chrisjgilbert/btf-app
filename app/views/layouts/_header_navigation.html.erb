@@ -16,15 +16,15 @@
         <% if logged_in? && activated? %>
           <% if current_user.has_created_a_team? %>
             <li>
-              <%= link_to 'Team', current_user.team %>
+              <%= link_to 'My Team', current_user.team %>
             </li>
           <% else %>
             <li>
-            <%= link_to "Team", new_team_path %>
+            <%= link_to "My Team", new_team_path %>
             </li>
           <% end %>
             <li>
-              <%= link_to 'Leagues', leagues_path %>
+              <%= link_to "My Leagues", leagues_path %>
             </li>
           <li>
             <%= link_to "Rules and Guidance", rules_and_guidance_path %>
