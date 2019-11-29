@@ -8,7 +8,7 @@ module TeamsHelper
   end
 
   def past_deadline_flash_message
-    flash[:danger] = 'Cheeky. The deadline has passed to update your team.'
+    flash[:danger] = 'Cheeky. The deadline to update your team has passed!'
   end
 
   def team_already_created_flash_message
@@ -20,7 +20,7 @@ module TeamsHelper
   end
 
   def deadline
-    # Midnight on NYE
-    Date.new(2019, 12, 31).midnight
+    # 6pm on 4th January
+    Time.gm(2020,1,6,16,0,0)
   end
 end

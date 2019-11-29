@@ -13,7 +13,7 @@
       </ul>
 
       <% if before_update_team_deadline? && @team.user == current_user %>
-        <h4>You can update your team until 31st December 2019. <%= link_to 'Click here', edit_team_path(@team) %> to do so.</h4>
+        <h4>You can update your team until the deadline @ 6pm Saturday 4th January. <%= link_to 'Click here', edit_team_path(@team) %> to do so.</h4>
       <% end %>
 
       <% if !before_update_team_deadline? %>
