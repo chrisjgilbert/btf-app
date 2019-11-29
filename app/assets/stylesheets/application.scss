@@ -140,4 +140,13 @@ ul, ol
     color: $btf-pink;
     border-color: $btf-pink;
   }
+
+  &:active:disabled,
+  &:hover:disabled,
+  &:enabled:active
+  {
+    background-color: $btf-pink;
+    border-color: $btf-pink;
+    color: white;
+  }
 }

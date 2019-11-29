@@ -14,6 +14,7 @@
           <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, include_blank: false, hide_label: true %>
         <% end %>
         <div id="team_captain_id"></div>
+        <h5>Remember, you can change your picks right up until the deadline @ 6pm Saturday 4th January.</h5>
         <%= f.submit 'Submit', class: 'btn btn-primary btn-block' %>
         <% content_for :javascript do %>
           <script type='text/javascript'>
@@ -23,7 +24,6 @@
           </script>
         <% end %>
       <% end %>
-    <h5 class="text-center">You can come back and upate these before midnight on 31st December 2019.</h5>
     </div>
   </div>
 </div>
