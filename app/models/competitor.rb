@@ -13,7 +13,7 @@ class Competitor < ApplicationRecord
   end
 
   def name_with_favourite_status
-    is_favourite? ? "#{name} (F)" : "#{name}"
+    is_favourite? ? "#{name} (Favourite)" : "#{name}"
   end
 
   def favourite_status

@@ -5,7 +5,8 @@
       <h3 id="favourite_count"></h3>
       <%= bootstrap_form_for(@team, url: teams_path, inline_errors: false) do |f| %>
         <%= render 'shared/team_error_messages' %>
-        <%= f.text_field :name, label: "Your team name (required)", :required => true %>
+        <%= f.text_field :name, label: "What is your team name going to be?", :required => true %>
+        <h5>Now you need to make your 25 picks, remember you can only use 5 favourites.</h5>
         <%= f.fields_for :picks do |pick| %>
           <% competition = @competitions[pick.index] %>
           <%= pick.label competition.id, competition.name %>
@@ -13,8 +14,11 @@
           <%= link_to '(view competition info)', competition_path(competition), target: '_blank' %>
           <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, include_blank: :true, hide_label: true %>
         <% end %>
-        <div id="team_captain_id"></div>
-        <%= f.submit 'Submit', class: 'btn btn-primary btn-block' %>
+        <div id="team_captain_id">
+          <p>Now you have made your 25 picks you need to select your captain who will score you double points in the season. It can't be one of your favourites so your options are in the drop down.</p>
+        </div>
+        <h5>Ready to submit your picks? Remember, you can change your picks right up until the deadline @ 6pm Saturday 4th January.</h5>
+        <%= f.submit 'Confirm My Team', class: 'btn btn-primary btn-block' %>
         <% content_for :javascript do %>
           <script type='text/javascript'>
             $(document).on('turbolinks:load', function() {
@@ -23,7 +27,6 @@
           </script>
         <% end %>
       <% end %>
-      <h5 class="text-center">Please note: you can come back and upate these before midnight on 31st December 2019.</h5>
     </div>
   </div>
 </div>
