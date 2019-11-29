@@ -93,6 +93,11 @@ form
 .navbar-default .navbar-nav > li > a
 {
   color: white;
+
+  &.active
+  {
+    color: black;
+  }
 }
 
 .navbar-default .navbar-toggle .icon-bar {

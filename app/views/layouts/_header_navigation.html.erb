@@ -16,35 +16,35 @@
         <% if logged_in? && activated? %>
           <% if current_user.has_created_a_team? %>
             <li>
-              <%= link_to 'My Team', current_user.team %>
+              <%= link_to 'My Team', current_user.team, class: current_class?(team_path(current_user.team)) %>
             </li>
           <% else %>
             <li>
-            <%= link_to "My Team", new_team_path %>
+            <%= link_to "My Team", new_team_path, class: current_class?(new_team_path) %>
             </li>
           <% end %>
             <li>
-              <%= link_to "My Leagues", leagues_path %>
+              <%= link_to "My Leagues", leagues_path, class: current_class?(leagues_path) %>
             </li>
           <li>
-            <%= link_to "Rules and Guidance", rules_and_guidance_path %>
+            <%= link_to "Rules and Guidance", rules_and_guidance_path, class: current_class?(rules_and_guidance_path) %>
           </li>
           <li>
-            <%= link_to "Blog", blog_path %>
+            <%= link_to "Blog", blog_path, class: current_class?(blog_path) %>
           </li>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right" align="right">
         <% if logged_in? && activated? %>
           <li>
-            <%= link_to 'Log out', logout_path, method: :delete %>
+            <%= link_to 'Log out', logout_path, method: :delete, class: current_class?(logout_path) %>
           </li>
           <% else %>
           <li>
-            <%= link_to 'Log in', login_path %>
+            <%= link_to 'Log in', login_path, class: current_class?(login_path) %>
           </li>
           <li>
-            <%= link_to 'Sign up', signup_path %>
+            <%= link_to 'Sign up', signup_path, class: current_class?(signup_path)  %>
           </li>
         <% end %>
       </ul>
