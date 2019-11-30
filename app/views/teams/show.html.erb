@@ -8,7 +8,7 @@
         <h4><%= @team.points %></h4>
         <h3 class="text-muted">My Team</h3>
       </div>
-      <ul class="list-group card"">
+      <ul class="list-group card">
       <% @team.picks.each do |pick| %>
         <li class="list-group-item <%= pick.competitor.is_favourite? ? 'favourite-color' : '' %> <%= pick.competitor.id == @team.captain.id ? 'captain-color' : '' %>">
           <%= pick.competitor.name_with_favourite_status %> for <%= pick.competitor.competition.name %>
