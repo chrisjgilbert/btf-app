@@ -215,5 +215,11 @@ ul
 .p-wrapper
 {
   text-align: justify;
-  padding: 0 105px;
+  padding: 0 90px;
+
+  @media screen and (max-width: 600px) {
+    & {
+      padding: 0 20px;
+    }
+  }
 }
