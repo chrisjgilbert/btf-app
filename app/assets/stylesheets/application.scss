@@ -110,11 +110,22 @@ form
   box-shadow: none;
 }
 
-ul, ol
+ul
 {
   list-style-type: none;
   padding-inline-start: 0;
 }
+
+// #########################
+// this is what removes the league positions from the list
+// comment out lines 124 and 125 and uncomment line 126 to put them back in
+ol
+{
+  list-style-type: none;
+  padding-inline-start: 0;
+  // padding-inline-start: 20px;
+}
+// #########################
 
 .error-message
 {
