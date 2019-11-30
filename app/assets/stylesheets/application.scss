@@ -40,6 +40,7 @@ h3#favourite_count
   background-color: white;
   top: 0;
   text-align: center;
+  margin-bottom: 20px;
 }
 p#favourite_count
 {
@@ -168,6 +169,12 @@ ul
     border-color: $btf-pink;
     color: white;
     outline: none !important;
+  }
+
+  &.welcome-page-btn
+  {
+    display: block;
+    margin-top: 20px;
   }
 }
 
