@@ -11,7 +11,9 @@
     <%= favicon_link_tag asset_path('btf_logo_red.png') %>
   </head>
   <%= render 'layouts/header_navigation' %>
-  <% render 'layouts/payment_notice' %>
+  <div class="container">
+    <%= render 'layouts/payment_notice' %>
+  </div>
   <body>
     <div class="container">
       <%= render 'shared/flash_messages' %>

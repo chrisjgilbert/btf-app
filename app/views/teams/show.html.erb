@@ -15,10 +15,17 @@
       </div>
       <ul class="list-group card">
       <% @team.picks.each do |pick| %>
+        <% pick_favourite_status = pick.competitor.is_favourite? %>
+        <% pick_captain_status = pick.competitor.id == @team.captain.id %>
         <li
-          class="list-group-item <%= pick.competitor.is_favourite? ? 'favourite-color' : '' %> <%= pick.competitor.id == @team.captain.id ? 'captain-color' : '' %>"
+          class="list-group-item <%= pick_favourite_status ? 'favourite-color' : '' %> <%= pick_captain_status ? 'captain-color' : '' %>"
         >
-          <%= pick.competitor.name_with_favourite_status %> for <%= pick.competitor.competition.name %>
+          <%= pick.competitor.name %> for <%= pick.competitor.competition.name %>
+          <% if pick_favourite_status %>
+            <span>(Favourite)</span>
+          <% elsif pick_captain_status %>
+            <span>(Captain)</span>
+          <% end %>
         </li>
       <% end %>
       </ul>

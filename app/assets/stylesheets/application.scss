@@ -109,7 +109,8 @@ form
 {
   color: white;
 
-  &.active
+  &.active,
+  &:hover
   {
     color: $btf-blue;
   }
@@ -180,18 +181,19 @@ ul
   padding: 10px 15px;
 }
 
-.list-group.card
-{
-  padding: 0 15px;
-}
-
 .list-group-item
 {
-  position: relative;
-  padding: 10px 75px 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
   border: none;
   margin-bottom: 0;
   border-bottom: 1px solid #ddd;
+
+  &:last-of-type
+  {
+    border-radius: 0;
+  }
 
   .btf-logo,
   .captains-logo
@@ -203,8 +205,10 @@ ul
   }
 }
 
+
 // flash notices
-.alert-info
+.alert-info,
+.alert-danger
 {
   text-align: center;
 }
