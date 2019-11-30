@@ -15,14 +15,10 @@
       </div>
       <ul class="list-group card">
       <% @team.picks.each do |pick| %>
-        <li class="list-group-item">
+        <li
+          class="list-group-item <%= pick.competitor.is_favourite? ? 'favourite-color' : '' %> <%= pick.competitor.id == @team.captain.id ? 'captain-color' : '' %>"
+        >
           <%= pick.competitor.name_with_favourite_status %> for <%= pick.competitor.competition.name %>
-          <% if pick.competitor.is_favourite? %>
-            <%= image_tag("btf_logo_red.png", size: "50x26", alt: "BTF Logo", class: 'btf-logo') %>
-          <% end %>
-          <% if pick.competitor.id == @team.captain.id %>
-            <%= image_tag("captains-armband.png", size: "50x26", alt: "BTF Logo", class: 'captains-logo') %>
-          <% end %>
         </li>
       <% end %>
       </ul>

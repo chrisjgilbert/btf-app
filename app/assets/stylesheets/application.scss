@@ -151,9 +151,11 @@ ul
   }
 
   &:active:disabled,
+  &:active:enabled,
   &:hover:disabled,
   &:enabled:active,
-  &:enabled:focus
+  &:enabled:focus,
+  &:disabled:focus
   {
     background-color: $btf-pink;
     border-color: $btf-pink;
@@ -190,11 +192,6 @@ ul
   border: none;
   margin-bottom: 0;
   border-bottom: 1px solid #ddd;
-
-  &:last-of-type
-  {
-    border-bottom: none;
-  }
 
   .btf-logo,
   .captains-logo
@@ -255,4 +252,19 @@ ul
 .league-btn
 {
   margin-bottom: 10px;
+}
+
+
+.list-group-item
+{
+  &.favourite-color
+  {
+    background-color: $btf-pink;
+    color: white;
+  }
+  &.captain-color
+  {
+    background-color: $btf-blue;
+    color: white;
+  }
 }
