@@ -1,24 +1,33 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-      <h3 class="text-muted">Team Name</h3>
-      <h4><%= @team.name %></h4>
-      <h3 class="text-muted">Points</h3>
-      <h4><%= @team.points %></h4>
-      <h3 class="text-muted">My Team</h3>
+    <div class=" col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1">
+      <div class="team-info-wrapper">
+        <h3 class="text-muted">Team Name</h3>
+        <h4><%= @team.name %></h4>
+        <h3 class="text-muted">Points</h3>
+        <h4><%= @team.points %></h4>
+        <h3 class="text-muted">My Team</h3>
+      </div>
       <ul class="list-group"">
       <% @team.picks.each do |pick| %>
-        <li class="list-group-item <%= pick.competitor.is_favourite? ? 'favourite-color' : '' %> <%= pick.competitor.id == @team.captain.id ? 'captain-color' : '' %>"><%= pick.competitor.name_with_favourite_status %> for <%= pick.competitor.competition.name %></li>
+        <li class="list-group-item <%= pick.competitor.is_favourite? ? 'favourite-color' : '' %> <%= pick.competitor.id == @team.captain.id ? 'captain-color' : '' %>">
+          <%= pick.competitor.name_with_favourite_status %> for <%= pick.competitor.competition.name %>
+          <% if pick.competitor.is_favourite? %>
+            <%= image_tag("btf_logo_red.png", size: "50x26", alt: "BTF Logo", class: 'btf-logo') %>
+          <% end %>
+        </li>
       <% end %>
       </ul>
 
-      <% if before_update_team_deadline? && @team.user == current_user %>
-        <h4>You can update your team until the deadline @ 6pm Saturday 4th January. <%= link_to 'Click here', edit_team_path(@team) %> to do so.</h4>
-      <% end %>
+      <div class="deadline-text-wrapper">
+        <% if before_update_team_deadline? && @team.user == current_user %>
+          <h4>You can update your team until the deadline @ 6pm Saturday 4th January. <%= link_to 'Click here', edit_team_path(@team) %> to do so.</h4>
+        <% end %>
 
-      <% if !before_update_team_deadline? %>
-        <h4>The team update deadline has now passed.</h4>
-      <% end %>
+        <% if !before_update_team_deadline? %>
+          <h4>The team update deadline has now passed.</h4>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
