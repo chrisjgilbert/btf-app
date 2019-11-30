@@ -22,6 +22,9 @@ $btf-pink: #ff5757;
 body
 {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1
@@ -169,7 +172,8 @@ ol
 
 // Team show
 .team-info-wrapper,
-.deadline-text-wrapper
+.deadline-text-wrapper,
+.league-info-wrapper
 {
   padding: 10px 15px;
 }

@@ -4,23 +4,25 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
-      <h1><%= league_name %></h1>
-      <h3 class="text-muted">Prize Money</h3>
-      <h4><%= league.prize_money %></h4>
-      <% if current_user.has_created_a_team? %>
-        <% unless current_user.owns_league?(league_id) || league.is_btf_main_league? %>
-          <% if current_user.team.belongs_to_league?(league_id)%>
-            <h4>Actions:</h4><%= button_to "Leave league", league_membership_path, method: :delete, params: { league_id: league_id, team_id: current_user.team.id }, class: 'btn btn-primary' %>
-          <% else %>
-            <h4>Actions:</h4><%= button_to "Join league", league_memberships_path, method: :post, params: { league_id: league_id, team_id: current_user.team.id }, class: 'btn btn-primary' %>
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <div class="league-info-wrapper">
+        <h1><%= league_name %></h1>
+        <h3 class="text-muted">Prize Money</h3>
+        <h4><%= league.prize_money %></h4>
+        <% if current_user.has_created_a_team? %>
+          <% unless current_user.owns_league?(league_id) || league.is_btf_main_league? %>
+            <% if current_user.team.belongs_to_league?(league_id)%>
+              <h4>Actions:</h4><%= button_to "Leave league", league_membership_path, method: :delete, params: { league_id: league_id, team_id: current_user.team.id }, class: 'btn btn-primary' %>
+            <% else %>
+              <h4>Actions:</h4><%= button_to "Join league", league_memberships_path, method: :post, params: { league_id: league_id, team_id: current_user.team.id }, class: 'btn btn-primary' %>
+            <% end %>
           <% end %>
         <% end %>
-      <% end %>
-      <h3 class="text-muted">Teams</h3>
-      <ol>
+        <h3 class="text-muted">Teams</h3>
+      </div>
+      <ol class="list-group"">
         <% league.teams.each do |team| %>
-          <li><%= team.name %> (<%= team.user.first_name %> <%= team.user.last_name %>)</li>
+          <li class="list-group-item"><%= team.name %> (<%= team.user.first_name %> <%= team.user.last_name %>)</li>
         <% end %>
       </ol>
       <p><%= link_to 'View all leagues', leagues_path %></p>
