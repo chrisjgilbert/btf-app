@@ -1,19 +1,21 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
-      <h1 class="text-center">Leagues</h1>
-      <% if current_user.has_created_a_team? %>
-        <i><%= link_to 'Create your own league', new_league_path %></i>
-      <% end %>
+    <div class=" col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1">
+      <h1 class="text-center">My Leagues</h1>
       <ul>
         <% @leagues.each do |league| %>
           <% if league.is_btf_main_league? %>
             <li><h3><%= link_to league.name, league %></h3></li>
-            <h3>User created leagues</h3>
+            <hr>
+            <h3>Local Leagues</h3>
+            <% if current_user.has_created_a_team? %>
+              <%= link_to 'Create your own local league', new_league_path, class: 'btn btn-primary league-btn' %>
+            <% end %>
           <% else %>
             <li><%= link_to league.name, league %> (<%= league.user.first_name %> <%= league.user.last_name %>)</li>
           <% end %>
         <% end %>
+        <hr>
       </ul>
     </div>
   </div>

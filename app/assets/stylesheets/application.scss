@@ -178,6 +178,11 @@ ul
   padding: 10px 15px;
 }
 
+.list-group.card
+{
+  padding: 0 15px;
+}
+
 .list-group-item
 {
   position: relative;
@@ -230,4 +235,24 @@ ul
   {
     margin-top: 0;
   }
+}
+
+.league-info-wrapper
+{
+  form
+  {
+    padding: 0;
+
+    .block-page-btn
+    {
+      margin-top: 0;
+    }
+
+  }
+
+}
+
+.league-btn
+{
+  margin-bottom: 10px;
 }

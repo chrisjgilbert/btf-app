@@ -8,7 +8,7 @@ module LeagueMembershipsHelper
   end
 
   def successful_league_membership_destroy_flash_msg(league_name)
-    flash[:info] = "You have left #{league_name}!"
+    # flash[:info] = "You have left #{league_name}!"
   end
 
   def unsuccessful_league_membership_destroy_flash_msg

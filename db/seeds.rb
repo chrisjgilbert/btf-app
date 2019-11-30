@@ -107,7 +107,7 @@ ryder_cup.save!
 puts "Set #{ryder_cup.name} favourite id to be #{ryder_cup.favourite_id == nil ? 'nil' : 'not nil'}"
 
 # League creation
-league = League.new(name: 'The BTF Main League')
+league = League.new(name: 'The BTF Leaderboard')
 if league.save
   puts "Created #{league.name}"
 else

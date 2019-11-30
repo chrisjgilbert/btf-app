@@ -7,20 +7,25 @@
     <div class="col-xs-12 col-md-8 col-md-offset-2">
       <div class="league-info-wrapper card">
         <h1><%= league_name %></h1>
-        <h3 class="text-muted">Prize Money</h3>
-        <h4><%= league.prize_money %></h4>
-        <h3 class="text-muted">Teams Competing</h3>
-        <h4><%= league.teams.count %></h4>
+        <hr>
         <% if current_user.has_created_a_team? %>
           <% unless current_user.owns_league?(league_id) || league.is_btf_main_league? %>
             <% if current_user.team.belongs_to_league?(league_id)%>
-              <h4>Actions:</h4><%= button_to "Leave league", league_membership_path, method: :delete, params: { league_id: league_id, team_id: current_user.team.id }, class: 'btn btn-primary' %>
+              <%= button_to "Leave league", league_membership_path, method: :delete, params: { league_id: league_id, team_id: current_user.team.id }, class: 'btn btn-primary block-page-btn' %>
             <% else %>
-              <h4>Actions:</h4><%= button_to "Join league", league_memberships_path, method: :post, params: { league_id: league_id, team_id: current_user.team.id }, class: 'btn btn-primary' %>
+              <%= button_to "Join league", league_memberships_path, method: :post, params: { league_id: league_id, team_id: current_user.team.id }, class: 'btn btn-primary block-page-btn' %>
             <% end %>
           <% end %>
         <% end %>
-        <h3 class="text-muted">Teams</h3>
+        <% if league.is_btf_main_league? %>
+          <h3 class="text-muted">Prize Money</h3>
+          <% if league.prize_money == 0 %>
+            <h4>TBC</h4>
+          <% else %>
+            <h4><%= league.prize_money %></h4>
+          <% end %>
+        <% end %>
+        <h3 class="text-muted">Teams (<%= league.teams.count %> <%= 'team'.pluralize(league.teams.count) %> participating)</h3>
       </div>
       <ol class="list-group card"">
         <% league.teams.each.with_index(1) do |team, index| %>
@@ -32,10 +37,6 @@
         <% end %>
       </ol>
       <p><%= link_to 'View all leagues', leagues_path %></p>
-
-      <% if current_user.owns_league?(league_id) %>
-        <a href="whatsapp://send?text=<%= request.original_url %>?invite=true">Invite friends to join <%= league_name %> by sharing on WhatsApp!</a>
-      <% end %>
     </div>
   </div>
 </div>
