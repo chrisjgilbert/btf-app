@@ -21,8 +21,12 @@
         <h3 class="text-muted">Teams</h3>
       </div>
       <ol class="list-group"">
-        <% league.teams.each do |team| %>
-          <li class="list-group-item"><%= team.name %> (<%= team.user.first_name %> <%= team.user.last_name %>)</li>
+        <% league.teams.each.with_index(1) do |team, index| %>
+          <li class="list-group-item">
+            <span class="league-position"><%= index %>.</span>
+            <span class="team-info"><%= team.name %> (<%= team.user.first_name %> <%= team.user.last_name %>)</span>
+            <span class="team-points"><%= team.points %>pts</span>
+          </li>
         <% end %>
       </ol>
       <p><%= link_to 'View all leagues', leagues_path %></p>
