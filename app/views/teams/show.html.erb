@@ -1,14 +1,14 @@
 <div class="container">
   <div class="row">
     <div class=" col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1">
-      <div class="team-info-wrapper">
+      <div class="team-info-wrapper card">
         <h3 class="text-muted">Team Name</h3>
         <h4><%= @team.name %></h4>
         <h3 class="text-muted">Points</h3>
         <h4><%= @team.points %></h4>
         <h3 class="text-muted">My Team</h3>
       </div>
-      <ul class="list-group"">
+      <ul class="list-group card"">
       <% @team.picks.each do |pick| %>
         <li class="list-group-item <%= pick.competitor.is_favourite? ? 'favourite-color' : '' %> <%= pick.competitor.id == @team.captain.id ? 'captain-color' : '' %>">
           <%= pick.competitor.name_with_favourite_status %> for <%= pick.competitor.competition.name %>
@@ -22,7 +22,7 @@
       <% end %>
       </ul>
 
-      <div class="deadline-text-wrapper">
+      <div class="deadline-text-wrapper card">
         <% if before_update_team_deadline? && @team.user == current_user %>
           <h4>You can update your team until the deadline @ 6pm Saturday 4th January. <%= link_to 'Click here', edit_team_path(@team) %> to do so.</h4>
         <% end %>

@@ -45,6 +45,17 @@ p#favourite_count
   margin-bottom: 0;
 }
 
+.card
+{
+  border-radius: 4px;
+  box-shadow: 0 0 2px 0 rgba(0,0,0,.15), 0 0 2px 0 rgba(0,0,0,0.15);
+
+  &.with-padding
+  {
+    padding: 10px 15px;
+  }
+}
+
 .scroll-padding
 {
   padding: 10px 0;
@@ -175,6 +186,14 @@ ul
 {
   position: relative;
   padding: 10px 75px 10px 15px;
+  border: none;
+  margin-bottom: 0;
+  border-bottom: 1px solid #ddd;
+
+  &:last-of-type
+  {
+    border-bottom: none;
+  }
 
   .btf-logo,
   .captains-logo
