@@ -18,14 +18,14 @@
             <li>
               <%= link_to 'My Team', current_user.team, class: current_class?(team_path(current_user.team)) %>
             </li>
+            <li>
+              <%= link_to "My Leagues", leagues_path, class: current_class?(leagues_path) %>
+            </li>
           <% else %>
             <li>
             <%= link_to "My Team", new_team_path, class: current_class?(new_team_path) %>
             </li>
           <% end %>
-            <li>
-              <%= link_to "My Leagues", leagues_path, class: current_class?(leagues_path) %>
-            </li>
           <li>
             <%= link_to "Rules and Guidance", rules_and_guidance_path, class: current_class?(rules_and_guidance_path) %>
           </li>
