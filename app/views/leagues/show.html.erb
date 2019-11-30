@@ -9,6 +9,8 @@
         <h1><%= league_name %></h1>
         <h3 class="text-muted">Prize Money</h3>
         <h4><%= league.prize_money %></h4>
+        <h3 class="text-muted">Teams Competing</h3>
+        <h4><%= league.teams.count %></h4>
         <% if current_user.has_created_a_team? %>
           <% unless current_user.owns_league?(league_id) || league.is_btf_main_league? %>
             <% if current_user.team.belongs_to_league?(league_id)%>

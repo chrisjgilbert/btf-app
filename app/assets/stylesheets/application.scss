@@ -160,11 +160,13 @@ ul
 
   &:active:disabled,
   &:hover:disabled,
-  &:enabled:active
+  &:enabled:active,
+  &:enabled:focus
   {
     background-color: $btf-pink;
     border-color: $btf-pink;
     color: white;
+    outline: none !important;
   }
 }
 
@@ -201,4 +203,10 @@ ul
     top: 0;
     height: 100%;
   }
+}
+
+// flash notices
+.alert-info
+{
+  text-align: center;
 }
