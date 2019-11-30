@@ -1,5 +1,5 @@
 <% if current_user && current_user.team && current_user.payment_status == false %>
-<div class="payment-notice-wrapper">
+<div class="payment-notice-wrapper alert-warning alert-dismissible">
     <h4>You still need to pay!</h4>
 </div>
 <% end %>
