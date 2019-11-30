@@ -57,7 +57,7 @@ class TeamsController < ApplicationController
 
     current_captain = team_selection_params[:currentCaptainId]
 
-    unless current_selection.empty?
+    unless current_selection&.empty?
       if current_captain.present?
         current_captain = Competitor.find(team_selection_params[:currentCaptainId])
         @current_captain = current_captain.is_favourite? ? nil : current_captain

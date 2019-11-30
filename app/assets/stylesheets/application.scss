@@ -180,7 +180,7 @@ ul
 .deadline-text-wrapper,
 .league-info-wrapper
 {
-  padding: 10px 15px;
+  padding: 10px 0px;
 }
 
 .list-group-item
@@ -191,6 +191,11 @@ ul
   border: none;
   margin-bottom: 0;
   border-bottom: 1px solid #ddd;
+
+  &.competitions-index
+  {
+    display: block;
+  }
 
   &:last-of-type
   {
