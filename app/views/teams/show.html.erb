@@ -15,6 +15,9 @@
           <% if pick.competitor.is_favourite? %>
             <%= image_tag("btf_logo_red.png", size: "50x26", alt: "BTF Logo", class: 'btf-logo') %>
           <% end %>
+          <% if pick.competitor.id == @team.captain.id %>
+            <%= image_tag("captains-armband.png", size: "50x26", alt: "BTF Logo", class: 'captains-logo') %>
+          <% end %>
         </li>
       <% end %>
       </ul>
