@@ -1,6 +1,6 @@
 module TeamsHelper
   def create_team_success_flash_message
-    flash[:info] = "Strong picks...are you sure about your women's downhill skier though?? Remember you can change change your picks right up until the deadline @ 6pm Saturday 4th January"
+    flash[:info] = "Strong picks! Are you sure about your Women's Downhill skier though? Remember you can change your picks right up until the deadline @ 6pm Saturday 4th January."
   end
 
   def update_team_success_flash_message

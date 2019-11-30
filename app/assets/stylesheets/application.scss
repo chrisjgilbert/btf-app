@@ -138,17 +138,6 @@ ul
   text-align: center;
 }
 
-.favourite-color
-{
-  background-color: #FFEF6F;
-  // border: 1px solid #FFEF6F;
-}
-.captain-color
-{
-  background-color: #91d67c;
-  // border: 1px solid #91d67c;
-}
-
 .btn-primary
 {
   background-color: $btf-pink;
@@ -227,5 +216,18 @@ ul
     & {
       padding: 0 20px;
     }
+  }
+}
+
+.text-muted
+{
+  color: $btf-blue;
+}
+
+.deadline-text-wrapper
+{
+  .block-page-btn
+  {
+    margin-top: 0;
   }
 }

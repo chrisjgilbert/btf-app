@@ -7,12 +7,13 @@
         <%= f.text_field :name, label: "What is your team name going to be?", :required => true %>
         <hr>
         <p>Now you need to make your 25 picks, remember you can only use 5 favourites.</p>
+        <p><%= link_to 'View all the favourites here', competitions_path, target: '_blank' %></p>
         <h3 id="favourite_count"></h3>
         <%= f.fields_for :picks do |pick| %>
           <% competition = @competitions[pick.index] %>
           <%= pick.label competition.id, competition.name %>
           <br>
-          <%= link_to '(view competition info)', competition_path(competition), target: '_blank' %>
+          <%= link_to '(View competition info)', competition_path(competition), target: '_blank' %>
           <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, include_blank: :true, hide_label: true %>
         <% end %>
         <hr>

@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     # Account activations
     resources :account_activations, only: [:edit]
 
-    resources :competitions, only: [:show]
+    resources :competitions, only: [:index, :show]
 
     get '/rules-and-guidance', to: 'static#rules_and_guidance'
     get '/blog', to: 'static#blog'

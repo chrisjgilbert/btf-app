@@ -8,7 +8,7 @@
         <option value="<%= option.id %>" <%= @current_captain == option ? 'selected' : '' %>><%= option.name %> for <%= option.competition.name %></option>
       <% end %>
     <% else %>
-        <option disabled selected value> -- captain options will appear here -- </option>
+        <option disabled selected value> -- Captain options will appear here -- </option>
     <% end %>
   </select>
 </div>

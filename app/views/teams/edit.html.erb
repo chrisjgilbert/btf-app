@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center">Update team name and your picks</h1>
+      <h1 class="text-center">Update Team</h1>
       <h3 id="favourite_count">You currently have <span class='fav-count'><%= pluralize(@favourite_count, 'favourite') %></span> selected</h3>
       <%= bootstrap_form_for(@team, url: team_path(params[:id]), method: :patch, inline_errors: false) do |f| %>
         <%= render 'shared/team_error_messages' %>
-        <%= f.text_field :name, label: "Your team name (required)", :required => true %>
+        <%= f.text_field :name, label: "Team Name", :required => true %>
         <%= f.fields_for :picks do |pick| %>
           <% competition = @competitions[pick.index] %>
           <%= pick.label competition.id, competition.name %>
@@ -15,7 +15,7 @@
         <% end %>
         <div id="team_captain_id"></div>
         <h5>Remember, you can change your picks right up until the deadline @ 6pm Saturday 4th January.</h5>
-        <%= f.submit 'Submit', class: 'btn btn-primary btn-block' %>
+        <%= f.submit 'Submit', class: 'btn btn-primary btn-block block-page-btn' %>
         <% content_for :javascript do %>
           <script type='text/javascript'>
             $(document).on('turbolinks:load', function() {
