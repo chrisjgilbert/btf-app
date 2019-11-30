@@ -2,6 +2,6 @@ Back The Favourite
 
 Hi, <%= @user.first_name %>!
 
-Welcome, to Back The Favourite 2020! Click on the link below to activate your account:
+Welcome to Back The Favourite 2020! Click on the link below to activate your account
 
 <%= link_to "Activate account", edit_account_activation_url(@user.activation_token, email: @user.email) %>
