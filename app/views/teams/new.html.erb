@@ -17,11 +17,12 @@
         <% end %>
         <hr>
         <div id="team_captain_id">
-          <p>Now you have made your 25 picks you need to select your captain who will score you double points in the season. It can't be one of your favourites so your options are in the drop down.</p>
+          <p>Now you have made your 25 picks you need to select your captain who will score you double points in the season.</p>
+          <p>It can't be one of your favourites so your options are in the drop down.</p>
         </div>
         <hr>
         <p>Ready to submit your picks? Remember, you can change your picks right up until the deadline @ 6pm Saturday 4th January.</p>
-        <%= f.submit 'Confirm My Team', class: 'btn btn-primary btn-block' %>
+        <%= f.submit 'Confirm My Team', class: 'btn btn-primary block-page-btn' %>
         <% content_for :javascript do %>
           <script type='text/javascript'>
             $(document).on('turbolinks:load', function() {

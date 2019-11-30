@@ -18,6 +18,7 @@
 @import "rails_bootstrap_forms";
 
 $btf-pink: #ff5757;
+$btf-blue: #1d1160;
 
 body
 {
@@ -38,6 +39,7 @@ h3#favourite_count
   position: sticky;
   position: -webkit-sticky;
   background-color: white;
+  color: $btf-pink;
   top: 0;
   text-align: center;
   margin-bottom: 20px;
@@ -59,7 +61,6 @@ p#favourite_count
 .scroll-padding
 {
   padding: 10px 0;
-  box-shadow: 0 6px 7px 0 rgba(0,0,0,.15);
 }
 div#team_captain_id
 {
@@ -77,11 +78,11 @@ form
 
 .over-fav-limit
 {
-  color: #dc3545;
+  color: $btf-blue;
 }
 .under-fav-limit
 {
-  color: #28a745;
+  color: $btf-pink;
 }
 
 .navbar
@@ -110,7 +111,7 @@ form
 
   &.active
   {
-    color: black;
+    color: $btf-blue;
   }
 }
 
@@ -171,11 +172,13 @@ ul
     outline: none !important;
   }
 
-  &.welcome-page-btn
+  &.block-page-btn
   {
     display: block;
     margin-top: 20px;
+    width: 100%;
   }
+  
 }
 
 // Team show
@@ -185,11 +188,7 @@ ul
 {
   padding: 10px 15px;
 }
-// .team-info-wrapper,
-// ul.list-group
-// {
-//   box-shadow: 0 6px 7px 0 rgba(0,0,0,.15);
-// }
+
 .list-group-item
 {
   position: relative;
