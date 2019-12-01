@@ -1,6 +1,6 @@
 <% if current_user && current_user.team && current_user.payment_status == false %>
-<a href="/payment">
-    <div class="payment-notice-wrapper alert-warning alert-dismissible">
+<a class="payment-notice-link" href="/payment">
+    <div class="payment-notice-wrapper alert-warning">
         <h4>Please pay here so your team can be processed!</h4>
     </div>
 </a>
