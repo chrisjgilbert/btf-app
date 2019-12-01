@@ -22,9 +22,9 @@
         >
           <%= pick.competitor.name %> for <%= pick.competitor.competition.name %>
           <% if pick_favourite_status %>
-            <span>(Favourite)</span>
+            <span class="pick-status-label">(Favourite)</span>
           <% elsif pick_captain_status %>
-            <span>(Captain)</span>
+            <span class="pick-status-label">(Captain)</span>
           <% end %>
         </li>
       <% end %>
