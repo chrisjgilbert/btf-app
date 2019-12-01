@@ -280,11 +280,15 @@ ul
   }
 }
 
-.payment-notice-link:hover
+.payment-notice-link
 {
-  text-decoration: none;
-  cursor: pointer;
+  &:hover
+  {
+    text-decoration: none;
+    cursor: pointer;
+  }
 }
+
 
 .payment-notice-wrapper
 {
