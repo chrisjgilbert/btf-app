@@ -8,4 +8,8 @@ class StaticController < ApplicationController
 
   def welcome
   end
+
+  def payment
+    @payment_link = 'https://monzo.me/danielwilliams502/20.00?d=BTF%202020%20(type%20email%20address%20here)%20'.html_safe
+  end
 end

@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <h1 class="text-center">Payment</h1>
+      <div class="p-wrapper">
+        <p>The entry fee this year is £20. Use the link below to pay your entry fee.</p>
+        <p>Please could you add the email you used to sign up with as a reference to the payment.</p>
+        <%= link_to 'Pay here', @payment_link, class: 'btn btn-primary league-btn', target: '_blank' %>
+        <p>Please note that it may take up to 3 days to process your entry fee. Until then you will still see a payment reminder until your fee has been processed.</p>
+        <p>For any payment related queries please email <%= mail_to 'backthefavourite@gmail.com' %>.</p>
+      </div>
+    </div>
+  </div>
+</div>

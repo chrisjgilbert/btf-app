@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :payment do
+    user_id { nil }
+  end
+
   factory :league_membership do
     league { nil }
     team { nil }
