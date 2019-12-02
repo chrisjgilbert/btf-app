@@ -1,8 +1,10 @@
 <% if current_user && current_user.team && current_user.payment_status == false %>
-<a class="payment-notice-link" href="/payment">
-    <div class="payment-notice-wrapper alert-warning">
-        <h4>You still need to pay your entry fee!</h4>
-        <h4>Click here to pay</h4>
-    </div>
-</a>
-<% end %>
+<div class="container">
+    <a class="payment-notice-link" href="/payment">
+        <div class="payment-notice-wrapper alert-warning">
+            <h4>You still need to pay your entry fee!</h4>
+            <h4>Click here to pay.</h4>
+        </div>
+    </a>
+    <% end %>
+</div>

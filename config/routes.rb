@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     get '/blog', to: 'static#blog'
     get '/welcome', to: 'static#welcome'
     get '/payment', to: 'static#payment'
+    get '/contact', to: 'static#contact'
 
     match '*path' => 'application#error_404', via: :all
 end
