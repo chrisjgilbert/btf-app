@@ -9,6 +9,6 @@ module AccountActivationsHelper
   end
 
   def account_activation_safety_flash_msg
-    flash[:danger] = 'Please login'
+    flash[:info] = 'Please login'
   end
 end
