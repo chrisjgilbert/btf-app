@@ -2,6 +2,11 @@ class AccountActivationsController < ApplicationController
   include AccountActivationsHelper
   def edit
     user = User.find_by(email: params[:email])
+    puts "*"*1000
+    p user
+    p !user.activated?
+    p user.authenticated?(:activation, params[:id])
+    puts "*"*1000
     if user && !user.activated? && user.authenticated?(:activation, params[:id])
       user.activate
       log_in user
