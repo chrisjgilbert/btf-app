@@ -5,7 +5,7 @@
       <ul class="list-group">
         <% @competitions.each do |competition| %>
           <li class="list-group-item competitions-index">
-            <h3 class="text-muted">Event Name</h3>
+            <h3 class="text-muted">Event</h3>
             <h4><%= competition.name %></h4>
             <p><%= link_to '(View competition info)', competition_path(competition), target: '_blank' %></p>
             <h3 class="text-muted">Favourite</h3>
