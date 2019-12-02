@@ -10,6 +10,7 @@ class AccountActivationsController < ApplicationController
     elsif
       user && user.activated? && user.authenticated?(:activation, params[:id])
       account_activation_safety_flash_msg
+      redirect_to login_path
     else
       account_activation_failure_flash_msg
       redirect_to root_url
