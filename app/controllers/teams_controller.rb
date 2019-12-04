@@ -101,10 +101,10 @@ class TeamsController < ApplicationController
   end
 
   def load_all_competitions
-    @competitions = Competition.all
+    @competitions ||= Competition.all
   end
 
   def load_all_competitors
-    @competitors = Competitor.all
+    @competitors ||= Competitor.all
   end
 end
