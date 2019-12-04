@@ -12,7 +12,7 @@ class PasswordResetsController < ApplicationController
     if @user
       @user.create_password_reset_digest
       @user.send_password_reset_email
-      flash[:info] = 'Password reset email'
+      flash.now[:info] = 'Password reset email sent.'
       render 'new'
     else
       flash[:danger] = 'Email address not found'
