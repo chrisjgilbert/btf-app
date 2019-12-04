@@ -26,6 +26,15 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
+  def self.update_payment_status_to_true(email)
+    user = find_by_email(email)
+    return p "Can't find a user with email #{email}" unless user.present?
+    return p "User with email #{email} has already paid" if user.payment_status == true
+
+    user.update_columns(payment_status: true)
+    p "#{user.email} payment status is now #{user.payment_status}"
+  end
+
   def create_password_reset_digest
     self.password_reset_token = User.new_token
     update_columns(password_reset_digest: User.digest(password_reset_token), password_reset_sent_at: Time.zone.now)
