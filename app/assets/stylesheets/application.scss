@@ -262,10 +262,18 @@ ul
 
 .list-group
 {
-  .team-info
+
+  .team-name,
+  .user-name
   {
-    text-align: center;
+    text-align: center; 
+    @media screen and (max-width: 600px) {
+      & {
+        display: block;
+      }
+    }  
   }
+
   .league-position
   {
     margin-right: 10px;

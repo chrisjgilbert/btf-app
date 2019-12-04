@@ -32,7 +32,10 @@
         <% league.teams.each.with_index(1) do |team, index| %>
           <li class="list-group-item">
             <span class="league-position"><%= index %>.</span>
-            <span class="team-info"><%= team.name %> (<%= team.user.first_name %> <%= team.user.last_name %>)</span>
+            <div class="team-info">
+              <span class="team-name"><%= team.name %></span>
+              <span class="user-name">(<%= team.user.first_name %> <%= team.user.last_name %>)</span>
+            </div>
             <span class="team-points"><%= team.points %>pts</span>
           </li>
         <% end %>
