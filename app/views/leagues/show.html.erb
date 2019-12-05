@@ -8,6 +8,7 @@
   <div class="col-xs-12 col-md-8 col-md-offset-2">
       <div class="league-info-wrapper card with-padding">
         <h1><%= league_name %></h1>
+        <p><%= link_to 'Back to all leagues', leagues_path, class: 'btn btn-primary block-page-btn' %></p>
         <hr>
         <% if current_user.has_created_a_team? %>
           <% unless current_user.owns_league?(league_id) || league.is_btf_main_league? %>
@@ -40,7 +41,6 @@
           </li>
         <% end %>
       </ol>
-      <p><%= link_to 'Back to all leagues', leagues_path, class: 'btn btn-primary' %></p>
     </div>
   </div>
 </div>
