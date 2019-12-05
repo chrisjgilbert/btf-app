@@ -53,6 +53,10 @@ class Team < ApplicationRecord
     league_memberships.map(&:league)
   end
 
+  def leagues_minus_btf_main_leagues
+    leagues.reject { |league| league.id == 1}
+  end
+
   def favourites
     self.picks.select { |pick| pick.competitor.is_favourite? }
   end

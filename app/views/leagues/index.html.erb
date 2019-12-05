@@ -3,22 +3,33 @@
   <div class="row">
     <div class=" col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1 card with-padding">
       <h1 class="text-center">My Leagues</h1>
+      <h3>BTF Leagues</h3>
       <ul>
-        <% @leagues.each do |league| %>
-          <% if league.is_btf_main_league? %>
-            <li><h3><%= link_to league.name, league %></h3></li>
-            <hr>
-            <h3>Local Leagues</h3>
-            <% if current_user.has_created_a_team? %>
-              <%= link_to 'Create your own local league', new_league_path, class: 'btn btn-primary league-btn' %>
-            <% end %>
-          <% else %>
-            <li><%= link_to league.name, league %> (<%= league.user.first_name %> <%= league.user.last_name %>)</li>
-          <% end %>
+        <% @btf_leagues.each do |league| %>
+            <li><%= link_to league.name, league %></li>
         <% end %>
+        <hr>
+      </ul>
+      <h3>My Leagues</h3>
+      <ul>
+      <% if @my_leagues.any? %>
+        <% @my_leagues.each do |league| %>
+            <li><%= link_to league.name, league %> (<%= league.user.first_name %> <%= league.user.last_name %>)</li>
+        <% end %>
+      <% end %>
+      <br>
+      <%= link_to 'Create your own local league', new_league_path, class: 'btn btn-primary league-btn' %>
+      <hr>
+      </ul>
+      <h3>Other Leagues</h3>
+      <ul>
+      <% if @other_leagues.any? %>
+        <% @other_leagues.each do |league| %>
+            <li><%= link_to league.name, league %> (<%= league.user.first_name %> <%= league.user.last_name %>)</li>
+        <% end %>
+      <% end %>
         <hr>
       </ul>
     </div>
   </div>
 </div>
-
