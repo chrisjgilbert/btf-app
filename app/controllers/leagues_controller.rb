@@ -5,8 +5,8 @@ class LeaguesController < ApplicationController
 
   def index
     @btf_leagues = [League.first]
-    @my_leagues = current_user.team.leagues_minus_btf_main_leagues
-    @other_leagues = League.all - @my_leagues - @btf_leagues
+    @my_leagues = current_user.team.leagues_a_member_of
+    @other_leagues = current_user.team.leagues_not_a_member_of
   end
 
   def new

@@ -53,8 +53,14 @@ class Team < ApplicationRecord
     league_memberships.map(&:league)
   end
 
-  def leagues_minus_btf_main_leagues
-    leagues.reject { |league| league.id == 1}
+  def leagues_a_member_of
+    leagues.reject { |league| league.id == 1} # we don't want the main league in here
+  end
+
+  def leagues_not_a_member_of
+    League.all.reject do |league|
+      belongs_to_league?(league.id)
+    end
   end
 
   def favourites
