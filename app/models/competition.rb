@@ -3,7 +3,7 @@ class Competition < ApplicationRecord
   has_many :competitors
 
   def self.favourites
-    @favourites ||= all.map(&:favourite_id)
+    all.map(&:favourite_id)
   end
 
   def favourite
