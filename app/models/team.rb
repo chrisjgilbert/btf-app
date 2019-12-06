@@ -23,7 +23,7 @@ class Team < ApplicationRecord
   end
 
   def captain
-    @captain ||= Competitor.find(self.captain_id)
+    Competitor.find(self.captain_id)
   end
 
   def calculate_points
@@ -50,7 +50,7 @@ class Team < ApplicationRecord
   end
 
   def leagues
-    @leagues ||= league_memberships.map(&:league)
+    league_memberships.map(&:league)
   end
 
   def leagues_a_member_of
