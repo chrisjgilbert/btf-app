@@ -17,7 +17,7 @@ class LeaguesController < ApplicationController
     @league = League.new(league_params)
     @league.user = current_user
     if @league.save
-      @league.join(@current_user.team.id)
+      @league.join(current_user.team.id)
       league_successfully_created_flash_message
       redirect_to @league
     else
