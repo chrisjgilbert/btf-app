@@ -1,10 +1,10 @@
 module TeamsHelper
   def create_team_success_flash_message
-    flash[:info] = "Strong picks! Are you sure about your Women's Downhill skier though? Remember you can change your picks right up until the deadline @ 6pm Saturday 4th January."
+    flash[:info] = "Strong picks! Are you sure about your Women's Downhill skier though? Remember you can change your picks right up until the deadline @ 10:30am Saturday 11th January."
   end
 
   def update_team_success_flash_message
-    flash[:info] = "Your team has been updated! Dont't forget you can come back and update your picks until the deadline @ 6pm Saturday 4th January."
+    flash[:info] = "Your team has been updated! Dont't forget you can come back and update your picks until the deadline @ 10:30am Saturday 11th January."
   end
 
   def past_deadline_flash_message
@@ -20,7 +20,7 @@ module TeamsHelper
   end
 
   def deadline
-    # 6pm on 4th January
-    Time.gm(2020,1,6,16,0,0)
+    # Saturday 11th January, 10:30
+    Time.gm(2020,1,11,10,30,0)
   end
 end
