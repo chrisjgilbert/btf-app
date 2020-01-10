@@ -1,11 +1,19 @@
 class UsersController < ApplicationController
   include UsersHelper
+  include TeamsHelper
 
   def new
-    @user = User.new
+    unless before_update_team_deadline?
+      flash[:info] = 'The deadline to sign up by has now passed'
+      return redirect_to login_path
+    else
+      @user = User.new
+    end
   end
 
   def create
+    return redirect_to login_path unless before_update_team_deadline?
+
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
