@@ -11,6 +11,11 @@ class TeamsController < ApplicationController
   skip_before_action :verify_authenticity_token,  only: [:team_selection]
   
   def new
+    unless before_update_team_deadline?
+      flash[:info] = 'The deadline for creating a team has now passed'
+      return redirect_to welcome_path
+    end
+
     @team = Team.new
     @picks = @competitions.count.times { @team.picks.build }
   end

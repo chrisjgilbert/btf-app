@@ -49,9 +49,11 @@
           <li>
             <%= link_to 'Log in', login_path, class: current_class?(login_path) %>
           </li>
-          <li>
-            <%= link_to 'Sign up', signup_path, class: current_class?(signup_path)  %>
-          </li>
+          <% if before_update_team_deadline? %>
+            <li>
+              <%= link_to 'Sign up', signup_path, class: current_class?(signup_path)  %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     </div>

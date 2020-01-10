@@ -17,8 +17,12 @@
         <hr>
         <p>You can find more detailed information on scoring, transfers, leagues and rules in the <a href="/rules-and-guidance" target="_blank">Rules and Guidance tab</a>.</p>
         <hr>
-        <p>Ready to make your picks?</p>
-        <p><%= link_to "Pick Your Team", new_team_path, class: 'btn btn-primary block-page-btn' %></p> 
+        <% if before_update_team_deadline? %>
+          <p>Ready to make your picks?</p>
+          <p><%= link_to "Pick Your Team", new_team_path, class: 'btn btn-primary block-page-btn' %></p> 
+        <% else %>
+          <p><strong>The deadline to enter this year's competition has now passed. Please email us at <%= mail_to 'backthefavourite@gmail.com' %> to register your interest in next year's game.</strong></p>
+        <% end %>
       </div>
     </div>
   </div>
