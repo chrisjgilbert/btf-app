@@ -21,6 +21,6 @@ module TeamsHelper
 
   def deadline
     # Saturday 11th January, 10:40
-    Time.gm(2020,1,1,11,40,0)
+    Time.gm(2020,1,11,10,40,0)
   end
 end
