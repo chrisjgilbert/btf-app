@@ -27,7 +27,11 @@
             <h4><%= league.prize_money %></h4>
           <% end %>
         <% end %>
-        <h3 class="text-muted">Teams (<%= league.teams.count %> <%= 'team'.pluralize(league.teams.count) %> participating)</h3>
+        <% if current_user.team.belongs_to_league?(league) %>
+          <h3 class="text-muted">Teams (<%= league.position(current_user.team).ordinalize  %> of <%= league.teams.count %> <%= 'team'.pluralize(league.teams.count) %> participating) </h3>
+        <% else %>
+          <h3 class="text-muted">Teams (<%= league.teams.count %> <%= 'team'.pluralize(league.teams.count) %> participating)</h3>
+        <% end %>
       </div>
       <ol class="list-group card"">
         <% league.teams.each.with_index(1) do |team, index| %>
