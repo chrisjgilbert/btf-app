@@ -209,6 +209,12 @@ ul
     border-radius: 0;
   }
 
+  &.current-users-team
+  {
+    background-color: $btf-pink;
+    color: white;
+  }
+
   .btf-logo,
   .captains-logo
   {
