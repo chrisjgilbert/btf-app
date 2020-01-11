@@ -36,7 +36,6 @@ class TeamsController < ApplicationController
   
   def show
     return redirect_to welcome_path unless current_user.has_created_a_team?
-    return redirect_to current_user.team unless @team == current_user.team
   end
   
   def edit
