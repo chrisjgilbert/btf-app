@@ -198,6 +198,7 @@ ul
   border: none;
   margin-bottom: 0;
   border-bottom: 1px solid #ddd;
+  color: black;
 
   &.competitions-index
   {
@@ -207,6 +208,12 @@ ul
   &:last-of-type
   {
     border-radius: 0;
+  }
+
+  &.current-users-team
+  {
+    background-color: $btf-pink;
+    color: white;
   }
 
   .btf-logo,
