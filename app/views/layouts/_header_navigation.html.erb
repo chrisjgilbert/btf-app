@@ -21,6 +21,9 @@
             <li>
               <%= link_to "My Leagues", leagues_path, class: current_class?(leagues_path) %>
             </li>
+            <li>
+              <%= link_to "Transfers", transfers_path, class: current_class?(transfers_path) %>
+            </li>
           <% else %>
             <li>
             <%= link_to "My Team", new_team_path, class: current_class?(new_team_path) %>
