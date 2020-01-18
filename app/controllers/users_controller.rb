@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def new
     unless before_update_team_deadline?
-      flash[:info] = 'The deadline to sign up by has now passed'
+      flash[:info] = 'Sorry, the signup deadline has now passed'
       return redirect_to login_path
     else
       @user = User.new
