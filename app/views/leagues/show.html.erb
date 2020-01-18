@@ -24,7 +24,7 @@
           <% if league.prize_money == 0 %>
             <h4>TBC</h4>
           <% else %>
-            <h4><%= league.prize_money %></h4>
+            <h4><%= number_to_currency(league.prize_money, unit: '£') %></h4>
           <% end %>
         <% end %>
         <% if current_user.team.belongs_to_league?(league) %>
