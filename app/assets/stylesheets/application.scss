@@ -63,6 +63,11 @@ p#favourite_count
   {
     padding: 10px 15px;
   }
+
+  &.with-padding.transfers
+  {
+    padding: 10px 0px;
+  }
 }
 
 .scroll-padding
@@ -349,6 +354,20 @@ ul
   p
   {
     text-align: justify;
+  }
+
+  ul
+  {
+    list-style-type: circle;
+    padding-inline-start: 20px;
+  }
+
+}
+.transfers
+{
+  p
+  {
+    text-align: left;
   }
 
   ul
