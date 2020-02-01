@@ -1,4 +1,5 @@
 class Team < ApplicationRecord
+  TRANSFER_LIMIT = 4
   belongs_to :user
   has_many :picks, -> { order(created_at: :asc) }
   has_many :competitors, through: :picks
@@ -42,6 +43,29 @@ class Team < ApplicationRecord
       "#{self.name} now has #{self.points}. They previously had #{existing_points}"
     else
       "There was a problem updating #{self.name} points"
+    end
+  end
+
+  def transfer(pick_out_id, pick_in_id)
+    return "#{self.name} has already made #{self.transfers_made}" unless self.transfers_made < TRANSFER_LIMIT
+
+    pick_out = Competitor.find(pick_out_id)
+    pick_in = Competitor.find(pick_in_id)
+
+    return "Sorry can't find competitors with the ids OUT: #{pick_out_id} and IN: #{pick_in_id}" if pick_out.nil? || pick_in.nil?
+
+    pick_to_transfer = self.picks.select { |pick| pick.competitor_id == pick_out.id }&.first
+
+    return "Sorry we can't find that pick to transfer" unless pick_to_transfer.present?
+
+    pick_to_transfer.competitor_id = pick_in_id
+
+    if pick_to_transfer.save!
+      update(transfers_made: self.transfers_made +=1)
+      p "Successfully transfered OUT: #{pick_out.name} and IN: #{pick_in.name}"
+      p "#{self.name} has #{TRANSFER_LIMIT - self.transfers_made} transfers remaining"
+    else
+      p "Hmm, something went wrong and that transfer didn't work."
     end
   end
 
