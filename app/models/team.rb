@@ -46,22 +46,26 @@ class Team < ApplicationRecord
     end
   end
 
-  def transfer(pick_out_id, pick_in_id)
+  def transfer(pick_out, pick_in)
     return "#{self.name} has already made #{self.transfers_made}" unless self.transfers_made < TRANSFER_LIMIT
 
-    pick_out = Competitor.find(pick_out_id)
-    pick_in = Competitor.find(pick_in_id)
+    pick_out = Competitor.find(pick_out.id)
+    pick_in = Competitor.find(pick_in.id)
 
-    return "Sorry can't find competitors with the ids OUT: #{pick_out_id} and IN: #{pick_in_id}" if pick_out.nil? || pick_in.nil?
+    return "Sorry can't find competitors OUT: #{pick_out} and IN: #{pick_in}" if pick_out.nil? || pick_in.nil?
 
     pick_to_transfer = self.picks.select { |pick| pick.competitor_id == pick_out.id }&.first
 
     return "Sorry we can't find that pick to transfer" unless pick_to_transfer.present?
 
-    pick_to_transfer.competitor_id = pick_in_id
+    pick_to_transfer.competitor_id = pick_in.id
 
     if pick_to_transfer.save!
       update(transfers_made: self.transfers_made +=1)
+      if pick_out == captain
+        update(captain_id: pick_in.id)
+        p "#{pick_out.name} was the captain so #{captain.name} will now be the captain"
+      end
       p "Successfully transfered OUT: #{pick_out.name} and IN: #{pick_in.name}"
       p "#{self.name} has #{TRANSFER_LIMIT - self.transfers_made} transfers remaining"
     else
