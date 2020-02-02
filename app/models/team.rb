@@ -12,7 +12,7 @@ class Team < ApplicationRecord
   validates_with TeamValidator
 
   def self.calculate_all_points
-    all.map { |team| team.calculate_points }
+    all.each(&:calculate_points)
   end
 
   def join_main_btf_league
