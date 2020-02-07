@@ -6,7 +6,6 @@
       <h3 id="transfers_count">You currently have <span class='transfers-count'><%= pluralize(@transfers_count, 'transfers') %></span> remaining</h3>
       <%= bootstrap_form_for(@team, url: team_path(params[:id]), method: :patch, inline_errors: false) do |f| %>
         <%= render 'shared/team_error_messages' %>
-        <%= f.text_field :name, label: "Team Name", :required => true %>
         <%= f.fields_for :picks do |pick| %>
           <% competition = @competitions[pick.index] %>
           <%= pick.label competition.id, competition.name %>
