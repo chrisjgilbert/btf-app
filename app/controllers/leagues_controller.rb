@@ -5,8 +5,8 @@ class LeaguesController < ApplicationController
 
   def index
     @btf_leagues = [League.first]
-    @my_leagues = current_user.team.leagues_a_member_of
-    @other_leagues = current_user.team.leagues_not_a_member_of
+    @my_leagues = current_user.team.leagues_a_member_of&.sort_by(&:name)
+    @other_leagues = current_user.team.leagues_not_a_member_of&.sort_by(&:name)
   end
 
   def new
