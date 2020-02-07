@@ -17,7 +17,7 @@
         <li
           class="list-group-item <%= pick_favourite_status ? 'favourite-color' : '' %> <%= pick_captain_status ? 'captain-color' : '' %>"
         >
-          <%= pick.competitor.name %> for <%= pick.competitor.competition.name %>
+          <%= pick.competitor.name %> for <%= pick.competitor.competition.name %> (<%= pick.competitor.team_points(@team) %>pts)
           <% if pick_favourite_status %>
             <span class="pick-status-label">(Favourite)</span>
           <% elsif pick_captain_status %>

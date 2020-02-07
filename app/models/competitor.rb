@@ -20,6 +20,14 @@ class Competitor < ApplicationRecord
     "#{name} (Captain)"
   end
 
+  def team_points(team)
+    if captains_teams?(team)
+      self.points * 2
+    else
+      self.points
+    end
+  end
+
   def favourite_status
     is_favourite? ? 'favourite' : ''
   end
