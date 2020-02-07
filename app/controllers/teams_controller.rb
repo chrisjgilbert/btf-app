@@ -69,7 +69,7 @@ class TeamsController < ApplicationController
   private
 
   def current_team_picks
-    @current_team_picks ||= current_user.team.picks.map(&:competitor).map(&:id)
+    current_user.team.picks.map(&:competitor).map(&:id)
   end
 
   def team_params
