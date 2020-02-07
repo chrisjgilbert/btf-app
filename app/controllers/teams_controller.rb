@@ -50,25 +50,17 @@ class TeamsController < ApplicationController
   end
 
   def team_selection
-    if team_selection_params[:currentSelection].present?
-      current_selection = team_selection_params[:currentSelection].map(&:to_i)
-    end
+    current_team      =  current_user.team.picks.map(&:competitor).map(&:id)
+    current_selection = team_selection_params[:currentSelection].map(&:to_i)
 
-    current_team = current_user_pick_ids
+    @transfers_count  = current_user.team.transfers_made + ((current_selection - current_team).length)
 
-    @transfers_count = current_user.team.transfers_made + ((current_selection - current_team).length)
+    current_captain   = Competitor.find(team_selection_params[:currentCaptainId])
+    @current_captain  = current_captain.is_favourite? ? nil : current_captain
 
-    current_captain = team_selection_params[:currentCaptainId]
-
-    unless current_selection&.empty?
-      if current_captain.present?
-        current_captain = Competitor.find(team_selection_params[:currentCaptainId])
-        @current_captain = current_captain.is_favourite? ? nil : current_captain
-      end
-      current_selection = Competitor.find(current_selection)
-      @captain_options = current_selection.reject { |option| option.is_favourite? }
-      @favourite_count = current_selection.length - @captain_options.length
-    end
+    current_selection = Competitor.find(current_selection)
+    @captain_options  = current_selection.reject { |option| option.is_favourite? }
+    @favourite_count  = current_selection.length - @captain_options.length
 
     respond_to do |format|
       format.js { render action: :team_selection }
@@ -76,10 +68,6 @@ class TeamsController < ApplicationController
   end
 
   private
-
-  def current_user_pick_ids
-    current_user.team.picks.map(&:competitor).map(&:id)
-  end
 
   def team_params
     params.require(:team).permit(:name, :captain_id, picks_attributes: [:id, :competitor_id])
