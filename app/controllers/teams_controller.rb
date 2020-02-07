@@ -56,10 +56,8 @@ class TeamsController < ApplicationController
     @transfers_count        = current_user_team.transfers_made + ((current_selection - current_team_picks).length) + @captain_transfer_value
 
     current_selection = Competitor.find(current_selection)
-
-    currently_selected_non_favourites = current_selection.reject(&:is_favourite?)
-    @favourite_count                  = current_selection.length - currently_selected_non_favourites.length
-    @captain_options                  = currently_selected_non_favourites.select { |option| option.available_for_transfer? }
+    @captain_options  = current_selection.reject(&:is_favourite?)
+    @favourite_count  = current_selection.length - @captain_options.length
 
     respond_to do |format|
       format.js { render action: :team_selection }
