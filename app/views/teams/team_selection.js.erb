@@ -4,4 +4,5 @@ $('#team_captain_id').html("<%= j render(:partial => 'teams/captain', :locals =>
 <% end %>
 <% if @transfers_count.present? %>
   $('#transfers_count').html("<%= j render(:partial => 'teams/transfers_count', :locals => { :transfers_count => @transfers_count }) %>");
+  $('#transfers_count_hidden_field').val(<%= @transfers_count %>);
 <% end %>

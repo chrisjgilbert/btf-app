@@ -49,7 +49,7 @@ class TeamsController < ApplicationController
   end
 
   def team_selection
-    current_team      =  current_user.team.picks.map(&:competitor).map(&:id)
+    current_team      = current_team_picks
     current_selection = team_selection_params[:currentSelection].map(&:to_i)
 
     @transfers_count  = current_user.team.transfers_made + ((current_selection - current_team).length)
@@ -68,8 +68,12 @@ class TeamsController < ApplicationController
 
   private
 
+  def current_team_picks
+    @current_team_picks ||= current_user.team.picks.map(&:competitor).map(&:id)
+  end
+
   def team_params
-    params.require(:team).permit(:name, :captain_id, picks_attributes: [:id, :competitor_id])
+    params.require(:team).permit(:name, :captain_id, :transfers_made, picks_attributes: [:id, :competitor_id])
   end
 
   def team_selection_params
