@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'transfers/new'
+  get 'transfers/create'
     # homepage
     get 'homepage/index'
 
