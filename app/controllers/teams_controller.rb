@@ -64,9 +64,8 @@ class TeamsController < ApplicationController
       @inbound_captain = @current_captain_selection
     end
 
-    @transfers_count = current_user_team.transfers_made + @current_transfer_selections.length + @captain_transfer_value
-
-    @active_transfer_count = @transfers_count - current_user_team.transfers_made
+    @active_transfer_count = @current_transfer_selections.length + @captain_transfer_value
+    @transfers_count = @active_transfer_count + current_user_team.transfers_made
 
     @current_transfer_selections = Competitor.find(@current_transfer_selections)
     @replaced_picks              = Competitor.find(replaced_picks)

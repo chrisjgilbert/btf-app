@@ -1,13 +1,13 @@
 <h3>Transfer summary</h3>
 
-<% if @current_transfer_selections&.any? %>
+<% if @current_transfer_selections.present? %>
   <h4>Transfers (<%= @current_transfer_selections.length %> <%= 'transfer'.pluralize(@current_transfer_selections.length) %>)</h4>
   <table class="table table-striped transfer-summary">
     <tr>
       <th scope="col">Out</th>
     </tr>
     <tr>
-    <% @replaced_picks.each do |transfer| %>
+    <% @replaced_picks&.each do |transfer| %>
       <td><%= transfer.name %> for <%= transfer.competition.name %></td>
     <% end %>
     </tr>
@@ -17,7 +17,7 @@
       <th scope="col">In</th>
     </tr>
     <tr>
-    <% @current_transfer_selections.each do |transfer| %>
+    <% @current_transfer_selections&.each do |transfer| %>
       <td><%= transfer.name %> for <%= transfer.competition.name %></td>
     <% end %>
     </tr>
@@ -44,4 +44,4 @@
   </table>
 <% end %>
 
-<h5>You are about to make <%= 'transfer'.pluralize(@active_transfer_count) %></h5>
+<h4>Total: <%= pluralize(@active_transfer_count, 'transfer') %></h4>
