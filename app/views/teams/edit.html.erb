@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center">Update Team</h1>
+      <h1 class="text-center">Make transfers</h1>
       <h3 id="favourite_count">You currently have <span class='fav-count'><%= pluralize(@favourite_count, 'favourite') %></span> selected</h3>
       <%= bootstrap_form_for(@team, url: team_path(params[:id]), method: :patch, inline_errors: false) do |f| %>
         <%= render 'shared/team_error_messages' %>
@@ -11,7 +11,11 @@
           <%= pick.label competition.id, competition.name %>
           <br>
           <%= link_to '(view competition info)', competition_path(competition), target: '_blank' %>
-          <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, include_blank: false, hide_label: true %>
+          <% if competition.transfer_window_open? %>
+            <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, { hide_label: true }, { include_blank: false } %>
+          <% else %>
+            <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, { hide_label: true }, { include_blank: false, disabled: 'disabled'} %>
+          <% end %>
         <% end %>
         <div id="team_captain_id"></div>
         <h5>Remember, you can change your picks right up until the deadline @ 10:30am Saturday 11th January.</h5>
