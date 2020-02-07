@@ -4,5 +4,5 @@
     <p id="transfers_count" class="under-transfer-limit">You have <%= available_count %> transfers left</p>
 <% elsif @transfers_count > TeamValidator::TRANSFER_LIMIT %>
     <% over_count = transfers_count - TeamValidator::TRANSFER_LIMIT %>
-    <p id="transfers_count" class="over-transfer-limit">You are <%= over_count  %> transfers over the limit!</p>
+    <p id="transfers_count" class="over-transfer-limit">You are <%= pluralize(over_count, 'transfer') %> over the limit</p>
 <% end %>
