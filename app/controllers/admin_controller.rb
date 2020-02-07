@@ -17,9 +17,12 @@ class AdminController < ApplicationController
   end
 
   def update_all_points
-    Team.calculate_all_points
-    redirect_to admin_points_path
-    flash[:success] = "Points updated!"
+    if Team.calculate_all_points
+      redirect_to admin_points_path
+      flash[:success] = "Points updated!"
+    else
+      flash[:dander] = "Woah that didn't work!"
+    end
   end
 
   private
