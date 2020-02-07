@@ -1,4 +1,6 @@
 class AdminController < ApplicationController
+  before_action :admin_user
+
   def points
     @competitors ||= Competitor.all
   end
@@ -24,5 +26,12 @@ class AdminController < ApplicationController
 
   def points_params
     params.require(:points).permit(:competitor_id, :awarded_points)
+  end
+
+  def admin_user
+    unless current_user.admin == true
+      flash[:danger] = 'Admin area only!'
+      redirect_to root_path
+    end
   end
 end

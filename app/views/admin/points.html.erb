@@ -1,8 +1,14 @@
-<%= button_to "Update all team points", admin_update_all_points_path, method: :post, class: 'btn btn-primary block-page-btn' %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= bootstrap_form_for(:points, url: admin_award_points_path, inline_errors: false) do |f| %>
+        <%= f.select :competitor_id, @competitors.collect { |p| [ "#{p.name} for #{p.competition.name}", p.id ] }%>
+        <%= f.select :awarded_points, options_for_select(0..10) %>
+        <%= f.submit "Award points to player!", class: 'btn btn-primary' %>
+      <% end %>
+      <%= button_to "Update all team points!", admin_update_all_points_path, method: :post, class: 'btn btn-primary block-page-btn' %>
+    </div>
+  </div>
+</div>
 
-<%= bootstrap_form_for(:points, url: admin_award_points_path, inline_errors: false) do |f| %>
-  <%= f.select :competitor_id, @competitors.collect { |p| [ "#{p.name} for #{p.competition.name}", p.id ] }%>
-  <%= f.select :awarded_points, options_for_select(0..10) %>
-  <%= f.submit "Submit", class: 'btn btn-primary' %>
-<% end %>
 
