@@ -36,7 +36,6 @@ class TeamsController < ApplicationController
     @picks = @team.picks
     @captain_options = @picks.map { |pick| pick.competitor }
     @current_captain = @team.captain
-    @transfers_count = TeamValidator::TRANSFER_LIMIT - @team.transfers_made
   end
 
   def update
