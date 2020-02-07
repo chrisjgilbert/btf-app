@@ -1,9 +1,9 @@
-<% transfer_color_class = @transfer_count > TeamValidator::TRANSFER_LIMIT ? 'over-transfer-limit' : 'under-transfer-limit' %>
-<% transfer_count = @transfer_count %>
-<% if @transfer_count <= TeamValidator::TRANSFER_LIMIT %>
-    <% available_count = TeamValidator::TRANSFER_LIMIT - transfer_count %>
-    <p id="favourite_count" class="<%= fav_color_class %>">You have <%= available_count %> transfers left</p>
-<% elsif @transfer_count > TeamValidator::TRANSFER_LIMIT %>
-    <% over_count = transfer_count - TeamValidator::TRANSFER_LIMIT %>
-    <p id="favourite_count" class="<%= fav_color_class %>">You have <%= over_count  %> too many transfers</p>
+<% transfer_color_class = @transfers_count > TeamValidator::TRANSFER_LIMIT ? 'over-transfer-limit' : 'under-transfer-limit' %>
+<% transfers_count = @transfers_count %>
+<% if @transfers_count <= TeamValidator::TRANSFER_LIMIT %>
+    <% available_count = TeamValidator::TRANSFER_LIMIT - transfers_count %>
+    <p id="transfers_count" class="<%= transfer_color_class %>">You have <%= available_count %> transfers left</p>
+<% elsif @transfers_count > TeamValidator::TRANSFER_LIMIT %>
+    <% over_count = transfers_count - TeamValidator::TRANSFER_LIMIT %>
+    <p id="transfers_count" class="<%= transfer_color_class %>">You have <%= over_count  %> too many transfers</p>
 <% end %>

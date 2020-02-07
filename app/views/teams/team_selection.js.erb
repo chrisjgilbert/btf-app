@@ -2,3 +2,6 @@ $('#team_captain_id').html("<%= j render(:partial => 'teams/captain', :locals =>
 <% if @favourite_count.present?%>
   $('#favourite_count').html("<%= j render(:partial => 'teams/favourite_count', :locals => { :favourite_count => @favourite_count }) %>");
 <% end %>
+<% if @transfers_count.present? %>
+  $('#transfers_count').html("<%= j render(:partial => 'teams/transfers_count', :locals => { :transfers_count => @transfers_count }) %>");
+<% end %>
