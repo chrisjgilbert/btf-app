@@ -6,3 +6,7 @@ $('#team_captain_id').html("<%= j render(:partial => 'teams/captain', :locals =>
   $('#transfers_count').html("<%= j render(:partial => 'teams/transfers_count', :locals => { :transfers_count => @transfers_count }) %>");
   $('#transfers_count_hidden_field').val(<%= @transfers_count %>);
 <% end %>
+<% if @current_transfer_selections&.any? %>
+  $('#transfer_summary').html("<%= j render(:partial => 'teams/transfer_summary', :locals => { :current_transfer_selections => @current_transfer_selections, :replaced_picks => @replaced_picks }) %>");
+<% end %>
+

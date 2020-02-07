@@ -1,0 +1,21 @@
+<h3>Transfer summary (<%= @current_transfer_selections.length %>)</h3>
+<table class="table table-striped transfer-summary">
+  <tr>
+    <th scope="col">Out</th>
+  </tr>
+  <tr>
+  <% @replaced_picks.each do |transfer| %>
+    <td><%= transfer.name %> for <%= transfer.competition.name %></td>
+  <% end %>
+  </tr>
+</table>
+<table class="table table-striped transfer-summary">
+  <tr>
+    <th scope="col">In</th>
+  </tr>
+  <tr>
+  <% @current_transfer_selections.each do |transfer| %>
+    <td><%= transfer.name %> for <%= transfer.competition.name %></td>
+  <% end %>
+  </tr>
+</table>

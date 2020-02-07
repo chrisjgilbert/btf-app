@@ -19,6 +19,7 @@
             <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, { hide_label: true }, { include_blank: false, disabled: 'disabled'} %>
           <% end %>
         <% end %>
+        <div id="transfer_summary"></div>
         <div id="team_captain_id"></div>
         <%= f.hidden_field :transfers_made, value: @transfers_count, id: 'transfers_count_hidden_field' %>
         <%= f.submit 'Submit', class: 'btn btn-primary btn-block block-page-btn' %>

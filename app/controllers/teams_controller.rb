@@ -49,12 +49,20 @@ class TeamsController < ApplicationController
   end
 
   def team_selection
-    current_selection          = team_selection_params[:currentSelection].map(&:to_i)
-    @current_captain_selection = Competitor.find(team_selection_params[:currentCaptainId])
-    @current_team_captain      = current_team_captain
+    current_selection            = team_selection_params[:currentSelection].map(&:to_i)
+    @current_transfer_selections = current_selection - current_team_picks
+    replaced_picks               = current_team_picks - current_selection
 
+    @current_captain_selection    = Competitor.find(team_selection_params[:currentCaptainId])
+    @current_team_captain         = current_team_captain
     @captain_transfer_value = @current_team_captain == @current_captain_selection ? 0 : 1
-    @transfers_count        = current_user_team.transfers_made + ((current_selection - current_team_picks).length) + @captain_transfer_value
+
+    @transfers_count        = current_user_team.transfers_made + @current_transfer_selections.length + @captain_transfer_value
+
+    @active_transfer_count = @transfers_count - current_user_team.transfers_made
+
+    @current_transfer_selections = Competitor.find(@current_transfer_selections)
+    @replaced_picks              = Competitor.find(replaced_picks)
 
     current_selection = Competitor.find(current_selection)
     @captain_options  = current_selection.reject(&:is_favourite?)
