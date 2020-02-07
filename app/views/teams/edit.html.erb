@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <h1 class="text-center">Make transfers</h1>
-      <h3 id="favourite_count">You currently have <span class='fav-count'><%= pluralize(@favourite_count, 'favourite') %></span> selected</h3>
-      <h3 id="transfers_count">You currently have <span class='transfers-count'><%= pluralize(@transfers_count, 'transfers') %></span> remaining</h3>
+      <h3 id="favourite_count"></h3>
+      <h3 id="transfers_count"></h3>
       <%= bootstrap_form_for(@team, url: team_path(params[:id]), method: :patch, inline_errors: false) do |f| %>
         <%= render 'shared/team_error_messages' %>
         <%= f.fields_for :picks do |pick| %>
