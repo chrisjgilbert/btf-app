@@ -12,8 +12,7 @@
           <li>You are able to change your captain however this will cost a transfer (it must be to another non-favourite and before both events have started)</li>
         </ul>
         <h2>How to make a transfer</h2>
-        <p>We are working on a more permanent solution, but in the short term please make transfers by email <%= mail_to 'backthefavourite@gmail.com' %> with the players / teams you would like to transfer in and out</p>
-        <h2>Transfer deadlines</h2>
+        <%= link_to 'Make transfers', transfers_new_path, class: 'btn btn-primary league-btn' %>
         <table class="table table-striped">
           <tr>
             <th scope="col">Sport</th>
