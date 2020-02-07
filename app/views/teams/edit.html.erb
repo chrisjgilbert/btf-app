@@ -10,10 +10,10 @@
           <% competition = @competitions[pick.index] %>
           <%= pick.label competition.id, competition.name %>
           <br>
-          <%= link_to '(view competition info)', competition_path(competition), target: '_blank' %>
           <% if competition.transfer_window_open? %>
             <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, { hide_label: true }, { include_blank: false } %>
           <% else %>
+            <small>Transfer unavailable</small>
             <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, { hide_label: true }, { include_blank: false, disabled: 'disabled'} %>
           <% end %>
         <% end %>
