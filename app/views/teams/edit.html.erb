@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-3 transfers-page">
       <h1 class="text-center">Make transfers</h1>
       <div id="count-wrapper">
         <h3 id="favourite_count"></h3>
@@ -13,9 +13,10 @@
           <%= pick.label competition.id, competition.name %>
           <br>
           <% if competition.transfer_window_open? %>
+            <span class="transfer-available"><small>Transfer window open</small></span>
             <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, { hide_label: true }, { include_blank: false } %>
           <% else %>
-            <small>Transfer unavailable</small>
+            <span class="transfer-unavailable"><small>Transfer window closed</small></span>
             <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, { hide_label: true }, { include_blank: false, disabled: 'disabled'} %>
           <% end %>
         <% end %>

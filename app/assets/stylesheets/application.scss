@@ -36,15 +36,45 @@ body
   font-size: 15px;
 }
 
-small
+.transfer-unavailable
 {
-  color: $btf-pink;
+  padding: 0px 10px;
+  margin: 5px 0;
+  border-radius: 25px;
+  background-color: $btf-pink;
+  color: white;
+  align-items: center;
+  display: inline-flex;
+  position: relative;
+  top: -5px;
 }
 
+.transfer-available
+{
+  padding: 0px 10px;
+  margin: 5px 0;
+  border-radius: 25px;
+  background-color: $btf-blue;
+  color: white;
+  align-items: center;
+  display: inline-flex;
+  position: relative;
+  top: -5px;
+}
 
 .transfer-summary > tbody > tr > td
 {
   display: block;
+}
+
+.transfers-page
+{
+  .form-group
+  {
+    margin-bottom: 15px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+  }
 }
 
 h1
@@ -61,6 +91,7 @@ h1
   top: 0;
   text-align: center;
   margin-bottom: 20px;
+  z-index: 999;
 }
 h3#favourite_count, h3#transfers_count
 {
