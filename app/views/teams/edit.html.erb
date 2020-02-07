@@ -2,8 +2,10 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <h1 class="text-center">Make transfers</h1>
-      <h3 id="favourite_count"></h3>
-      <h3 id="transfers_count"></h3>
+      <div id="count-wrapper">
+        <h3 id="favourite_count"></h3>
+        <h3 id="transfers_count"></h3>
+      </div>
       <%= bootstrap_form_for(@team, url: team_path(params[:id]), method: :patch, inline_errors: false) do |f| %>
         <%= render 'shared/team_error_messages' %>
         <%= f.fields_for :picks do |pick| %>
@@ -31,7 +33,7 @@
   </div>
 </div>
 <script>
-  var count = $('h3#favourite_count')
+  var count = $('#count-wrapper')
   var stickyClassAdded = false;
   $(document).on('scroll', function() {
   var countPosition = count[0].getBoundingClientRect().top;

@@ -41,7 +41,7 @@ h1
   margin-bottom: 20px;
 }
 
-h3#favourite_count
+#count-wrapper
 {
   position: sticky;
   position: -webkit-sticky;
@@ -51,10 +51,12 @@ h3#favourite_count
   text-align: center;
   margin-bottom: 20px;
 }
-p#favourite_count
+h3#favourite_count, h3#transfers_count
 {
   margin-bottom: 0;
+  margin-top: 0;
 }
+
 
 .card
 {
@@ -88,11 +90,11 @@ form
   padding: 0  20px;
 }
 
-.over-fav-limit
+.over-fav-limit, .over-transfer-limit
 {
   color: $btf-blue;
 }
-.under-fav-limit
+.under-fav-limit, .under-transfer-limit
 {
   color: $btf-pink;
 }

@@ -1,6 +1,6 @@
 class TeamValidator < ActiveModel::Validator
   FAVOURITE_LIMIT = 5
-  TRANSFER_LIMIT  = 5
+  TRANSFER_LIMIT  = 4
   NUMBER_OF_PICKS = Competition.all.count
   def validate(record)
     picks = record.picks.reject { |pick| pick.competitor_id == nil }

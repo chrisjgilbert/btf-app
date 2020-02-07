@@ -1,4 +1,4 @@
-<% transfer_color_class = @transfers_count > TeamValidator::TRANSFER_LIMIT ? 'over-transfer-limit' : 'under-transfer-limit' %>
+<% transfer_color_class = @transfers_count < TeamValidator::TRANSFER_LIMIT ? 'over-transfer-limit' : 'under-transfer-limit' %>
 <% transfers_count = @transfers_count %>
 <% if @transfers_count <= TeamValidator::TRANSFER_LIMIT %>
     <% available_count = TeamValidator::TRANSFER_LIMIT - transfers_count %>
