@@ -5,7 +5,7 @@
   <select class="form-control" name="team[captain_id]" id="team_captain_id">
     <% if @captain_options.present? %>
       <% @captain_options.each do |option| %>
-        <option value="<%= option.id %>" <%= @current_captain == option ? 'selected' : '' %>><%= option.name %> for <%= option.competition.name %></option>
+        <option value="<%= option.id %>" <%= @current_captain_selection == option ? 'selected' : '' %>><%= option.name %> for <%= option.competition.name %></option>
       <% end %>
     <% else %>
         <option disabled selected value> -- Captain options will appear here -- </option>

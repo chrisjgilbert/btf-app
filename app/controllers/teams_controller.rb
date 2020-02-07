@@ -49,21 +49,17 @@ class TeamsController < ApplicationController
   end
 
   def team_selection
-    current_team      = current_team_picks
-    current_selection = team_selection_params[:currentSelection].map(&:to_i)
-    @current_captain  = Competitor.find(team_selection_params[:currentCaptainId])
+    current_selection          = team_selection_params[:currentSelection].map(&:to_i)
+    @current_captain_selection = Competitor.find(team_selection_params[:currentCaptainId])
 
-    if current_team_captain != @current_captain
-      @captain_transfer_count = 1
-    elsif current_team_captain == @current_captain
-      @captain_transfer_count = 0
-    end
-
-    @transfers_count  = current_user.team.transfers_made + ((current_selection - current_team).length) + @captain_transfer_count
+    @captain_transfer_value = current_team_captain == @current_captain_selection ? 0 : 1
+    @transfers_count        = current_user_team.transfers_made + ((current_selection - current_team_picks).length) + @captain_transfer_value
 
     current_selection = Competitor.find(current_selection)
-    @captain_options  = current_selection.reject { |option| option.is_favourite? }
-    @favourite_count  = current_selection.length - @captain_options.length
+
+    currently_selected_non_favourites = current_selection.reject(&:is_favourite?)
+    @favourite_count                  = current_selection.length - currently_selected_non_favourites.length
+    @captain_options                  = currently_selected_non_favourites.select { |option| option.available_for_transfer? }
 
     respond_to do |format|
       format.js { render action: :team_selection }
@@ -72,12 +68,16 @@ class TeamsController < ApplicationController
 
   private
 
+  def current_user_team
+    current_user.team
+  end
+
   def current_team_picks
-    current_user.team.picks.map(&:competitor).map(&:id)
+    current_user_team.picks.map(&:competitor).map(&:id)
   end
 
   def current_team_captain
-    current_user.team.captain
+    current_user_team.captain
   end
 
   def team_params
