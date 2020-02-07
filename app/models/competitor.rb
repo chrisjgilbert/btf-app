@@ -33,4 +33,8 @@ class Competitor < ApplicationRecord
       "There was a problem updating #{self.name} points"
     end
   end
+
+  def available_for_transfer?
+    competition.transfer_window_open?
+  end
 end

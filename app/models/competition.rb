@@ -10,4 +10,10 @@ class Competition < ApplicationRecord
     Competitor.find(self.favourite_id)
   end
 
+  def transfer_window_open?
+    return false unless transfer_deadline.present?
+
+    DateTime.now < self.transfer_deadline
+  end
+
 end
