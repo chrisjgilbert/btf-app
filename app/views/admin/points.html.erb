@@ -11,7 +11,7 @@
         <%= f.submit "Award points to player!", class: 'btn btn-primary' %>
       <% end %>
       <h3>Or...</h3>
-      <%= button_to "Update all team points!", admin_update_all_points_path, method: :post, class: 'btn btn-primary block-page-btn' %>
+      <%= button_to "Update all team points!", admin_update_all_points_path, method: :post, class: 'btn btn-primary block-page-btn', data: { disable_with: "Please wait..." } %>
     </div>
   </div>
 </div>
