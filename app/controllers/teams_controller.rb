@@ -4,18 +4,12 @@ class TeamsController < ApplicationController
   before_action :logged_in_user
   before_action :activated_user
   before_action :user_has_already_created_a_team, only: [:new, :create]
-  before_action :before_update_team_deadline,     only: [:edit, :update]
   before_action :set_team,                        only: [:show, :edit, :update]
   before_action :load_all_competitions,           only: [:new, :create, :edit, :update]
   before_action :load_all_competitors,            only: [:new, :create, :edit, :update]
   skip_before_action :verify_authenticity_token,  only: [:team_selection]
   
   def new
-    unless before_update_team_deadline?
-      flash[:info] = 'The deadline for creating a team has now passed'
-      return redirect_to welcome_path
-    end
-
     @team = Team.new
     @picks = @competitions.count.times { @team.picks.build }
   end
