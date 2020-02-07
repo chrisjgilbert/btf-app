@@ -1,0 +1,9 @@
+<% transfer_color_class = @transfer_count > 5 ? 'over-transfer-limit' : 'under-transfer-limit' %>
+<% transfer_count = @transfer_count %>
+<% if @transfer_count <= 5  %>
+    <% available_count = 5 - transfer_count %>
+    <p id="favourite_count" class="<%= fav_color_class %>">You have <%= available_count %> transfers left</p>
+<% elsif @transfer_count > 5  %>
+    <% over_count = transfer_count - 5  %>
+    <p id="favourite_count" class="<%= fav_color_class %>">You have <%= over_count  %> too many transfers</p>
+<% end %>
