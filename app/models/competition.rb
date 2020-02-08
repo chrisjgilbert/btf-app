@@ -16,4 +16,8 @@ class Competition < ApplicationRecord
     DateTime.now < self.transfer_deadline
   end
 
+  def picked_competitor_by_team(team)
+    team.picks.find { |pick| pick.competitor.competition_id == self.id }.competitor
+  end
+
 end

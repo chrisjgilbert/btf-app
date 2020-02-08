@@ -14,10 +14,10 @@
           <br>
           <% if competition.transfer_window_open? %>
             <span class="transfer-available"><small>Transfer window open</small></span>
-            <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, { hide_label: true }, { include_blank: false } %>
+            <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, { selected: competition.picked_competitor_by_team(@team).id, hide_label: true }, { include_blank: false } %>
           <% else %>
             <span class="transfer-unavailable"><small>Transfer window closed</small></span>
-            <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, { hide_label: true }, { include_blank: false, disabled: 'disabled'} %>
+            <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, { selected: competition.picked_competitor_by_team(@team).id, hide_label: true }, { include_blank: false, disabled: 'disabled'} %>
           <% end %>
         <% end %>
         <div id="team_captain_id"></div>
