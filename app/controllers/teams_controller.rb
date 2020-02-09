@@ -56,7 +56,7 @@ class TeamsController < ApplicationController
     @current_team_captain         = current_team_captain
     @current_captain_selection    = Competitor.find(team_selection_params[:currentCaptainId])
 
-    if @current_team_captain == @current_captain_selection
+    if @current_team_captain.competition_id == @current_captain_selection.competition_id
       captain_transfer_value = 0
     else
       captain_transfer_value = 1
