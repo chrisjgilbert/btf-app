@@ -5,10 +5,8 @@ function TeamSelection(currentCaptainId = "") {
   this.currentCaptainId = currentCaptainId;
   this.competitons = $('select');
   this.pickIds = this.getCurrentPickIds();
-
   this.setInitialOptions();
   this.listenForSelectionChanges();
-  this.listendForCurrentTeamSelectionion();
 }
 
 TeamSelection.prototype.setInitialOptions = function() {
@@ -22,15 +20,6 @@ TeamSelection.prototype.listenForSelectionChanges = function() {
     $(this).change(function() {
       self.updateOptions();
     });
-  });
-},
-
-TeamSelection.prototype.listendForCurrentTeamSelectionion = function() {
-  var self = this;
-  $('#team_captain_id').change(function() {
-    self.currentCaptainId = self.getCurrentCaptainId();
-    self.pickIds = self.getCurrentPickIds();
-    self.postData(self.pickIds, self.currentCaptainId);
   });
 },
 

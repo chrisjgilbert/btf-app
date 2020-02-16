@@ -24,13 +24,9 @@
         <div id="transfer_summary"></div>
         <%= f.hidden_field :transfers_made, value: @transfers_count, id: 'transfers_count_hidden_field' %>
         <%= f.submit 'Submit', class: 'btn btn-primary btn-block block-page-btn' %>
-        <% content_for :javascript do %>
-          <script type='text/javascript'>
-            $(document).on('turbolinks:load', function() {
-              new TeamSelection('<%= @current_captain.id %>');
-            });
-          </script>
-        <% end %>
+        <script type='text/javascript'>
+          new TeamSelection('<%= @current_captain.id %>');
+        </script>
       <% end %>
     </div>
   </div>
