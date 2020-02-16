@@ -7,6 +7,8 @@ class TeamsController < ApplicationController
   before_action :set_team,                        only: [:show, :edit, :update]
   before_action :load_all_competitions,           only: [:new, :create, :edit, :update]
   before_action :load_all_competitors,            only: [:new, :create, :edit, :update]
+  before_action :make_sure_correct_user_makes_transfers, only: [:edit, :update]
+  before_action :make_sure_current_user_has_available_transfers, only: [:edit, :update]
   
   def new
     @team = Team.new
@@ -111,6 +113,20 @@ class TeamsController < ApplicationController
     unless before_update_team_deadline?
       past_deadline_flash_message
       redirect_to team_path(current_user.team)
+    end
+  end
+
+  def make_sure_current_user_has_available_transfers
+    unless current_user.can_make_transfers?
+      flash[:danger] = 'You have used all of your transfers and cannot make anymore!'
+      return redirect_to current_user.team 
+    end
+  end
+
+  def make_sure_correct_user_makes_transfers
+    unless @team == current_user.team
+      flash[:danger] = 'You can only make transfers for your own team!'
+      return redirect_to current_user.team 
     end
   end
 

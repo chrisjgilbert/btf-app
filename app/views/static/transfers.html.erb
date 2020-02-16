@@ -12,7 +12,9 @@
           <li>You are able to change your captain however this will cost a transfer (it must be to another non-favourite and before both events have started)</li>
         </ul>
         <h2>How to make a transfer</h2>
-        <%= link_to 'Make transfers', edit_team_path(current_user.team), class: 'btn btn-primary league-btn' %>
+        <% if current_user&.can_make_transfers? %>
+          <%= link_to 'Make transfers', edit_team_path(current_user.team), class: 'btn btn-primary league-btn' %>
+        <% end %>   
         <table class="table table-striped">
           <tr>
             <th scope="col">Sport</th>
