@@ -13,7 +13,7 @@
         </ul>
         <h2>How to make a transfer</h2>
         <% if current_user&.can_make_transfers? %>
-          <%= link_to 'Make transfers', edit_team_path(current_user.team), class: 'btn btn-primary league-btn' %>
+          <%= link_to 'Make transfers', edit_team_path(current_user.team), class: 'btn btn-primary block-page-btn transfers' %>
         <% end %>   
         <table class="table table-striped">
           <tr>
