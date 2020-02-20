@@ -57,6 +57,20 @@ class TeamsController < ApplicationController
     @current_team_captain         = current_team_captain
     @current_captain_selection    = Competitor.find(team_selection_params[:currentCaptainId])
 
+    @current_transfer_selections = Competitor.find(current_transfer_selections)
+    @replaced_picks              = Competitor.find(replaced_picks)
+
+    current_selection = Competitor.find(current_selection)
+    @captain_options  = current_selection.reject(&:is_favourite?)
+
+    if @captain_options.include?(@current_captain_selection)
+      @current_captain_selection = @current_captain_selection
+    else
+      @current_captain_selection = @captain_options.find(&:available_for_transfer?)
+    end
+
+    @favourite_count  = current_selection.length - @captain_options.length
+
     if @current_team_captain.competition_id == @current_captain_selection.competition_id
       captain_transfer_value = 0
     else
@@ -67,13 +81,6 @@ class TeamsController < ApplicationController
 
     @active_transfer_count = current_transfer_selections.length + captain_transfer_value
     @transfers_count = @active_transfer_count + current_user_team.transfers_made
-
-    @current_transfer_selections = Competitor.find(current_transfer_selections)
-    @replaced_picks              = Competitor.find(replaced_picks)
-
-    current_selection = Competitor.find(current_selection)
-    @captain_options  = current_selection.reject(&:is_favourite?)
-    @favourite_count  = current_selection.length - @captain_options.length
 
     respond_to do |format|
       format.js { render action: :team_selection }
