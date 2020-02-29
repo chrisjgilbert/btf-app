@@ -50,10 +50,10 @@ TeamSelection.prototype.updateOptions = function() {
   var prevPickIds = this.pickIds;
   this.pickIds = this.getCurrentPickIds()
   this.currentCaptainId = this.getCurrentCaptainId();
-  // if (!this.pickIds.includes(this.currentCaptainId) && prevPickIds !== undefined) {
-  //   prevCaptainIndex = prevPickIds.indexOf(this.currentCaptainId)
-  //   this.currentCaptainId = this.pickIds[prevCaptainIndex]
-  // }
+  if (!this.pickIds.includes(this.currentCaptainId) && prevPickIds !== undefined) {
+    prevCaptainIndex = prevPickIds.indexOf(this.currentCaptainId)
+    this.currentCaptainId = this.pickIds[prevCaptainIndex]
+  }
   this.postData(this.pickIds, this.currentCaptainId);
 },
 
