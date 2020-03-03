@@ -57,8 +57,8 @@ class TeamsController < ApplicationController
     @current_team_captain         = current_team_captain
     @current_captain_selection    = Competitor.find(team_selection_params[:currentCaptainId])
 
-    @current_transfer_selections = Competitor.find(current_transfer_selections)
-    @replaced_picks              = Competitor.find(replaced_picks)
+    @current_transfer_selections = Competitor.find(current_transfer_selections).sort_by { |competitor| competitor.competition.start_date }
+    @replaced_picks              = Competitor.find(replaced_picks).sort_by { |competitor| competitor.competition.start_date }
 
     current_selection = Competitor.find(current_selection)
     @captain_options  = current_selection.reject(&:is_favourite?)
