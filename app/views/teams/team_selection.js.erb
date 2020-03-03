@@ -2,3 +2,8 @@ $('#team_captain_id').html("<%= j render(:partial => 'teams/captain', :locals =>
 <% if @favourite_count.present?%>
   $('#favourite_count').html("<%= j render(:partial => 'teams/favourite_count', :locals => { :favourite_count => @favourite_count }) %>");
 <% end %>
+<% if @transfers_count.present? %>
+  $('#transfers_count').html("<%= j render(:partial => 'teams/transfers_count', :locals => { :transfers_count => @transfers_count }) %>");
+  $('#transfers_count_hidden_field').val(<%= @transfers_count %>);
+<% end %>
+$('#transfer_summary').html("<%= j render(:partial => 'teams/transfer_summary', :locals => { :current_transfer_selections => @current_transfer_selections, :replaced_picks => @replaced_picks, :outbound_captain => @outbound_captain, :inbound_captain => @inbound_captain, :active_transfer_count  => @active_transfer_count }) %>");

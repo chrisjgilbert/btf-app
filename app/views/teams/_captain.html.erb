@@ -1,11 +1,17 @@
-<p>Now you have made your 25 picks you need to select your captain who will score you double points in the season.</p>
-<p>It can't be one of your favourites so your options are in the drop down.</p>
+<p>If you would like to transfer out your captain please select a new captain from below.</p>
+<p>Remember captains cost one transfer, score you double points and can't be on of your favourites.</p>
 <div class="form-group">
   <label for="team_captain_id">Captain</label>
-  <select class="form-control" name="team[captain_id]" id="team_captain_id">
+  <select class="form-control" name="team[captain_id]" id="team_captain_id" <%= 'disabled' unless @current_team_captain.available_for_transfer? %>>
     <% if @captain_options.present? %>
+    <%= @current_team_captain %>
       <% @captain_options.each do |option| %>
-        <option value="<%= option.id %>" <%= @current_captain == option ? 'selected' : '' %>><%= option.name %> for <%= option.competition.name %></option>
+        <% next unless option == @current_team_captain || option.available_for_transfer? %>
+        <option
+          value="<%= option.id %>"<%= @current_captain_selection == option ? 'selected' : ''%>
+        >
+          <%= option.name %> for <%= option.competition.name %>
+        </option>
       <% end %>
     <% else %>
         <option disabled selected value> -- Captain options will appear here -- </option>

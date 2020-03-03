@@ -4,18 +4,13 @@ class TeamsController < ApplicationController
   before_action :logged_in_user
   before_action :activated_user
   before_action :user_has_already_created_a_team, only: [:new, :create]
-  before_action :before_update_team_deadline,     only: [:edit, :update]
   before_action :set_team,                        only: [:show, :edit, :update]
   before_action :load_all_competitions,           only: [:new, :create, :edit, :update]
   before_action :load_all_competitors,            only: [:new, :create, :edit, :update]
-  skip_before_action :verify_authenticity_token,  only: [:team_selection]
+  before_action :make_sure_correct_user_makes_transfers, only: [:edit, :update]
+  before_action :make_sure_current_user_has_available_transfers, only: [:edit, :update]
   
   def new
-    unless before_update_team_deadline?
-      flash[:info] = 'The deadline for creating a team has now passed'
-      return redirect_to welcome_path
-    end
-
     @team = Team.new
     @picks = @competitions.count.times { @team.picks.build }
   end
@@ -40,7 +35,7 @@ class TeamsController < ApplicationController
   
   def edit
     @picks = @team.picks
-    @captain_options = @picks.map { |pick| pick.competitor }
+    @captain_options = @picks.map { |pick| pick.competitor }.reject(&:is_favourite?)
     @current_captain = @team.captain
   end
 
@@ -55,21 +50,37 @@ class TeamsController < ApplicationController
   end
 
   def team_selection
-    if team_selection_params[:currentSelection].present?
-      current_selection = team_selection_params[:currentSelection].reject(&:empty?)
+    current_selection           = team_selection_params[:currentSelection].map(&:to_i)
+    current_transfer_selections = current_selection - current_team_picks
+    replaced_picks              = current_team_picks - current_selection
+
+    @current_team_captain         = current_team_captain
+    @current_captain_selection    = Competitor.find(team_selection_params[:currentCaptainId])
+
+    @current_transfer_selections = Competitor.find(current_transfer_selections).sort_by { |competitor| competitor.competition.start_date }
+    @replaced_picks              = Competitor.find(replaced_picks).sort_by { |competitor| competitor.competition.start_date }
+
+    current_selection = Competitor.find(current_selection)
+    @captain_options  = current_selection.reject(&:is_favourite?)
+
+    if @captain_options.include?(@current_captain_selection)
+      @current_captain_selection = @current_captain_selection
+    else
+      @current_captain_selection = @captain_options.find(&:available_for_transfer?)
     end
 
-    current_captain = team_selection_params[:currentCaptainId]
+    @favourite_count  = current_selection.length - @captain_options.length
 
-    unless current_selection&.empty?
-      if current_captain.present?
-        current_captain = Competitor.find(team_selection_params[:currentCaptainId])
-        @current_captain = current_captain.is_favourite? ? nil : current_captain
-      end
-      current_selection = Competitor.find(current_selection)
-      @captain_options = current_selection.reject { |option| option.is_favourite? }
-      @favourite_count = current_selection.length - @captain_options.length
+    if @current_team_captain.competition_id == @current_captain_selection.competition_id
+      captain_transfer_value = 0
+    else
+      captain_transfer_value = 1
+      @outbound_captain = @current_team_captain
+      @inbound_captain = @current_captain_selection
     end
+
+    @active_transfer_count = current_transfer_selections.length + captain_transfer_value
+    @transfers_count = @active_transfer_count + current_user_team.transfers_made
 
     respond_to do |format|
       format.js { render action: :team_selection }
@@ -78,8 +89,20 @@ class TeamsController < ApplicationController
 
   private
 
+  def current_user_team
+    current_user.team
+  end
+
+  def current_team_picks
+    current_user_team.picks.map(&:competitor).map(&:id)
+  end
+
+  def current_team_captain
+    current_user_team.captain
+  end
+
   def team_params
-    params.require(:team).permit(:name, :captain_id, picks_attributes: [:id, :competitor_id])
+    params.require(:team).permit(:name, :captain_id, :transfers_made, picks_attributes: [:id, :competitor_id])
   end
 
   def team_selection_params
@@ -97,6 +120,20 @@ class TeamsController < ApplicationController
     unless before_update_team_deadline?
       past_deadline_flash_message
       redirect_to team_path(current_user.team)
+    end
+  end
+
+  def make_sure_current_user_has_available_transfers
+    unless current_user.can_make_transfers?
+      flash[:danger] = 'You have used all of your transfers and cannot make anymore!'
+      return redirect_to current_user.team 
+    end
+  end
+
+  def make_sure_correct_user_makes_transfers
+    unless @team == current_user.team
+      flash[:danger] = 'You can only make transfers for your own team!'
+      return redirect_to current_user.team 
     end
   end
 

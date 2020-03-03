@@ -48,7 +48,12 @@
           <li>
             <%= link_to 'Log out', logout_path, method: :delete, class: current_class?(logout_path) %>
           </li>
-          <% else %>
+          <% if current_user.admin == true %>
+            <li>
+              <%= link_to "Admin", admin_points_path, class: current_class?(admin_points_path) %>
+            </li>
+          <% end %>
+        <% else %>
           <li>
             <%= link_to 'Log in', login_path, class: current_class?(login_path) %>
           </li>

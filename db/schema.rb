@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_01_151420) do
+ActiveRecord::Schema.define(version: 2020_02_07_191740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2020_02_01_151420) do
     t.string "location"
     t.string "research_link"
     t.string "previous_winner"
+    t.datetime "transfer_deadline"
     t.index ["favourite_id"], name: "index_competitions_on_favourite_id"
   end
 
@@ -89,6 +90,7 @@ ActiveRecord::Schema.define(version: 2020_02_01_151420) do
     t.boolean "activated", default: false
     t.datetime "activated_at"
     t.boolean "payment_status", default: false
+    t.boolean "admin", default: false
   end
 
   add_foreign_key "competitions", "competitors", column: "favourite_id"

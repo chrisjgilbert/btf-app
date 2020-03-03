@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h1>Admin</h1>
+      <p><strong>Awarding points is slow due to the db queries being heavy so please make sure the app is in maintenance mode on Heroku!</strong></p>
+
+      <h3>Awards points to a competitor here...</h3>
+      <%= bootstrap_form_for(:points, url: admin_award_points_path, inline_errors: false) do |f| %>
+        <%= f.select :competitor_id, @competitors.collect { |p| [ "#{p.name} for #{p.competition.name}", p.id ] }%>
+        <%= f.select :awarded_points, options_for_select(0..10) %>
+        <%= f.submit "Award points to player!", class: 'btn btn-primary' %>
+      <% end %>
+      <h3>Or...</h3>
+      <%= button_to "Update all team points!", admin_update_all_points_path, method: :post, class: 'btn btn-primary block-page-btn', data: { disable_with: "Please wait..." } %>
+    </div>
+  </div>
+</div>
+
+

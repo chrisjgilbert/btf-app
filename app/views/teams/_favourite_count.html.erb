@@ -1,9 +1,6 @@
 <% fav_color_class = @favourite_count > TeamValidator::FAVOURITE_LIMIT ? 'over-fav-limit' : 'under-fav-limit' %>
 <% fav_count = @favourite_count %>
-<% if @favourite_count <= TeamValidator::FAVOURITE_LIMIT  %>
-    <% available_count = TeamValidator::FAVOURITE_LIMIT - fav_count %>
-    <p id="favourite_count" class="<%= fav_color_class %>">You have <%= available_count %> favourites left</p>
-<% elsif @favourite_count > TeamValidator::FAVOURITE_LIMIT  %>
+<% if @favourite_count > TeamValidator::FAVOURITE_LIMIT  %>
     <% over_count = fav_count - TeamValidator::FAVOURITE_LIMIT  %>
     <p id="favourite_count" class="<%= fav_color_class %>">You have <%= over_count  %> too many favourites </p>
 <% end %>

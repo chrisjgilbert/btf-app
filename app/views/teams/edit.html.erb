@@ -1,34 +1,38 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center">Update Team</h1>
-      <h3 id="favourite_count">You currently have <span class='fav-count'><%= pluralize(@favourite_count, 'favourite') %></span> selected</h3>
+    <div class="col-md-6 col-md-offset-3 transfers-page">
+      <h1 class="text-center">Make transfers</h1>
+      <div id="count-wrapper">
+        <h3 id="favourite_count"></h3>
+        <h3 id="transfers_count"></h3>
+      </div>
       <%= bootstrap_form_for(@team, url: team_path(params[:id]), method: :patch, inline_errors: false) do |f| %>
         <%= render 'shared/team_error_messages' %>
-        <%= f.text_field :name, label: "Team Name", :required => true %>
         <%= f.fields_for :picks do |pick| %>
           <% competition = @competitions[pick.index] %>
           <%= pick.label competition.id, competition.name %>
           <br>
-          <%= link_to '(view competition info)', competition_path(competition), target: '_blank' %>
-          <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, include_blank: false, hide_label: true %>
+          <% if competition.transfer_window_open? %>
+            <span class="transfer-available"><small>Transfer window open</small></span>
+            <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, { selected: competition.picked_competitor_by_team(@team).id, hide_label: true }, { include_blank: false } %>
+          <% else %>
+            <span class="transfer-unavailable"><small>Transfer window closed</small></span>
+            <%= pick.collection_select :competitor_id, @competitors.select { |competitor| competitor.competition_id == competition.id }, :id , :name_with_favourite_status, { selected: competition.picked_competitor_by_team(@team).id, hide_label: true }, { include_blank: false, disabled: 'disabled'} %>
+          <% end %>
         <% end %>
         <div id="team_captain_id"></div>
-        <h5>Remember, you can change your picks right up until the deadline @ 10:30am Saturday 11th January.</h5>
-        <%= f.submit 'Submit', class: 'btn btn-primary btn-block block-page-btn' %>
-        <% content_for :javascript do %>
-          <script type='text/javascript'>
-            $(document).on('turbolinks:load', function() {
-              new TeamSelection('<%= @current_captain.id %>');
-            });
-          </script>
-        <% end %>
+        <div id="transfer_summary"></div>
+        <%= f.hidden_field :transfers_made, value: @transfers_count, id: 'transfers_count_hidden_field' %>
+        <%= f.submit 'Submit', class: 'btn btn-primary btn-block block-page-btn', data: { confirm: 'Are you sure you want to make these transfers?' }  %>
+        <script type='text/javascript'>
+          new TeamSelection('<%= @current_captain.id %>');
+        </script>
       <% end %>
     </div>
   </div>
 </div>
 <script>
-  var count = $('h3#favourite_count')
+  var count = $('#count-wrapper')
   var stickyClassAdded = false;
   $(document).on('scroll', function() {
   var countPosition = count[0].getBoundingClientRect().top;

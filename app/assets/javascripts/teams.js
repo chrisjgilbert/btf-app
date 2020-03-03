@@ -5,10 +5,9 @@ function TeamSelection(currentCaptainId = "") {
   this.currentCaptainId = currentCaptainId;
   this.competitons = $('select');
   this.pickIds = this.getCurrentPickIds();
-
   this.setInitialOptions();
   this.listenForSelectionChanges();
-  this.listendForCurrentTeamSelectionion();
+  this.listenForCaptainChange();
 }
 
 TeamSelection.prototype.setInitialOptions = function() {
@@ -25,7 +24,7 @@ TeamSelection.prototype.listenForSelectionChanges = function() {
   });
 },
 
-TeamSelection.prototype.listendForCurrentTeamSelectionion = function() {
+TeamSelection.prototype.listenForCaptainChange = function() {
   var self = this;
   $('#team_captain_id').change(function() {
     self.currentCaptainId = self.getCurrentCaptainId();

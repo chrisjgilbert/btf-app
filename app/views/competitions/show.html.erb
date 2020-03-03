@@ -16,6 +16,14 @@
         <h3 class="text-muted">Research link</h3>
         <h4><%= link_to @competition.research_link, @competition.research_link %></h4>
       <% end %>
+      <h3 class="text-muted">Transfer deadline</h3>
+      <% if @competition.transfer_deadline.present? %>
+        <% date = @competition.transfer_deadline.strftime("%d/%m/%Y") %>
+        <% time = @competition.transfer_deadline.strftime("%I:%M") %>
+        <h4><%= date %> @ <%= time %></h4>
+      <% else %>
+        <h4>N/A</h4>
+      <% end %>
       <h3 class="text-muted">Competitors</h3>
       <ul class="list-group"">
       <% @competition.competitors.each do |competitor| %>

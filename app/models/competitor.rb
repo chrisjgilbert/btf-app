@@ -20,6 +20,14 @@ class Competitor < ApplicationRecord
     "#{name} (Captain)"
   end
 
+  def team_points(team)
+    if captains_teams?(team)
+      self.points * 2
+    else
+      self.points
+    end
+  end
+
   def favourite_status
     is_favourite? ? 'favourite' : ''
   end
@@ -32,5 +40,9 @@ class Competitor < ApplicationRecord
     else
       "There was a problem updating #{self.name} points"
     end
+  end
+
+  def available_for_transfer?
+    competition.transfer_window_open?
   end
 end

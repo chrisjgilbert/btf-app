@@ -4,7 +4,7 @@ module TeamsHelper
   end
 
   def update_team_success_flash_message
-    flash[:info] = "Your team has been updated! Dont't forget you can come back and update your picks until the deadline @ 10:30am Saturday 11th January."
+    flash[:info] = "Nice, liking your transfer strategy. Your team has been updated."
   end
 
   def past_deadline_flash_message

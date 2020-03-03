@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+    # admin
+    get 'admin/points'
+    post 'admin/award_points'
+    post 'admin/update_all_points'
+
     # homepage
     get 'homepage/index'
 

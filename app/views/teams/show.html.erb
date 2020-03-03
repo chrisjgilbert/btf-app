@@ -3,8 +3,10 @@
   <div class="row">
     <div class=" col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1">
       <div class="deadline-text-wrapper card with-padding">
-          <% if before_update_team_deadline? && @team.user == current_user %>
-            <%= link_to "Change My Team", edit_team_path(@team), class: 'btn btn-primary block-page-btn' %>
+          <% if @team.user == current_user %>
+            <% if current_user.can_make_transfers? %>
+              <%= link_to "Make Transfers", edit_team_path(@team), class: 'btn btn-primary block-page-btn' %>
+            <% end %>
           <% end %>
         </div>
       <div class="team-info-wrapper card"> 
@@ -17,7 +19,7 @@
         <li
           class="list-group-item <%= pick_favourite_status ? 'favourite-color' : '' %> <%= pick_captain_status ? 'captain-color' : '' %>"
         >
-          <%= pick.competitor.name %> for <%= pick.competitor.competition.name %>
+          <%= pick.competitor.name %> for <%= pick.competitor.competition.name %> (<%= pick.competitor.team_points(@team) %>pts)
           <% if pick_favourite_status %>
             <span class="pick-status-label">(Favourite)</span>
           <% elsif pick_captain_status %>

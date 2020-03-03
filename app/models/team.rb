@@ -27,6 +27,14 @@ class Team < ApplicationRecord
     Competitor.find(self.captain_id)
   end
 
+  def has_available_transfers?
+    self.transfers_made < TRANSFER_LIMIT
+  end
+
+  def transfers_remaining
+    TRANSFER_LIMIT - self.transfers_made
+  end
+
   def calculate_points
     existing_points = self.points
     new_points_total = 0
