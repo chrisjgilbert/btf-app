@@ -431,3 +431,45 @@ ul
 {
   margin-left: 25px;
 }
+
+// stats
+.stats
+{
+  .competitions-container
+  {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    overflow: scroll;
+    white-space: nowrap;
+    display: flex;
+    border-left: 1px solid #ddd;
+
+    .competition
+    {
+      display: inline-block;
+      border-right: 1px solid #ddd;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .competitions-name
+    {
+      font-weight: bold;
+      background-color: #f9f9f9;
+      padding: 8px;
+    }
+
+    .competitors-name
+    {
+      padding: 8px;
+      border-top: 1px solid #ddd;
+      font-weight: normal;
+
+      &:nth-child(even)
+      {
+        background-color: white;
+      }
+    }
+  }
+
+}

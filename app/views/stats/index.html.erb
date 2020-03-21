@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 stats">
+      <div class="card with-padding">
+        <h1 class="text-center">Total picks</h1>
+        <small>Scroll 👉 to view more</small>
+        <ul class="competitions-container">
+        <% @competitions.each do |competition| %>
+          <ul class="competition">
+          <li class="competitions-name"><%= competition.name %></li>
+          <% competition.competitors.each do |competitor| %>
+            <li class="competitors-name"><%= competitor.name %> <span class="picks">(<%= competitor.picks.count %>)</span></li>
+          <% end %>
+          </ul>
+        <% end %>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</div>

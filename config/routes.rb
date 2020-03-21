@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  
+    # stats
+    get 'stats', to: 'stats#index'
+
     # admin
     get 'admin/points'
     post 'admin/award_points'
