@@ -20,4 +20,8 @@ class Competition < ApplicationRecord
     team.picks.find { |pick| pick.competitor.competition_id == self.id }.competitor
   end
 
+  def competitors_sorted_by_pick_count
+    self.competitors.select { |competitor| competitor.picks.count > 0 }.sort_by { |competitor| competitor.picks.count }.reverse
+  end
+
 end

@@ -8,7 +8,7 @@
         <% @competitions.each do |competition| %>
           <ul class="competition">
           <li class="competitions-name"><%= competition.name %></li>
-          <% competition.competitors.each do |competitor| %>
+          <% competition.competitors_sorted_by_pick_count.each do |competitor| %>
             <li class="competitors-name"><%= competitor.name %> <span class="picks">(<%= competitor.picks.count %>)</span></li>
           <% end %>
           </ul>
