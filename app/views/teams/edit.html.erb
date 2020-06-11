@@ -4,7 +4,6 @@
       <h1 class="text-center">Make transfers</h1>
       <div id="count-wrapper">
         <h3 id="favourite_count"></h3>
-        <h3 id="transfers_count"></h3>
       </div>
       <noscript><h2 class="text-center">Your browser does not support JavaScript and this form will not work correctly! Please enable it if you wish to make transfers</h2></noscript>
       <%= bootstrap_form_for(@team, url: team_path(params[:id]), method: :patch, inline_errors: false) do |f| %>
