@@ -6,6 +6,10 @@ class Competition < ApplicationRecord
     [192, 119, 345, 442, 508, 502, 157, 222, 452, 276, 422, 97, 472, 1, 27, 554, 302, 377, 333, 202, 464, 533, 11, 77]
   end
 
+  def self.all_active
+    where(active: true)
+  end
+
   def favourite
     Competitor.find(self.favourite_id)
   end

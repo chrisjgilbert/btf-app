@@ -8,6 +8,10 @@ class Competitor < ApplicationRecord
     team.captain_id == self.id
   end
 
+  def active?
+    competition.active?
+  end
+
   def is_favourite?
     Competition.favourites.include?(self.id)
   end
