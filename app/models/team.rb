@@ -1,5 +1,5 @@
 class Team < ApplicationRecord
-  TRANSFER_LIMIT = 4
+  TRANSFER_LIMIT = 100
   belongs_to :user
   has_many :picks, -> { order(created_at: :asc) }
   has_many :competitors, through: :picks

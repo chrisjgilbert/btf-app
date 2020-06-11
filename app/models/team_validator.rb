@@ -1,6 +1,6 @@
 class TeamValidator < ActiveModel::Validator
   FAVOURITE_LIMIT = 5
-  TRANSFER_LIMIT  = 4
+  TRANSFER_LIMIT  = 500
   NUMBER_OF_PICKS = Competition.all.count
   def validate(record)
     picks = record.picks.reject { |pick| pick.competitor_id == nil }
@@ -10,7 +10,7 @@ class TeamValidator < ActiveModel::Validator
     if picks.select { |pick| pick.competitor.is_favourite? }.count > FAVOURITE_LIMIT
       record.errors[:base] << "Please review your team, you cannot have more than #{FAVOURITE_LIMIT} favourites"
     end
-    if record.transfers_made > 4
+    if record.transfers_made > TRANSFER_LIMIT
       record.errors[:base] << "Please review your team, you cannot make more than #{TRANSFER_LIMIT} transfers"
     end
     if record.captain_id == nil
