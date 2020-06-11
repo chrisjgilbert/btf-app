@@ -14,6 +14,7 @@
       </div>
       <ul class="list-group card">
       <% @team.picks.each do |pick| %>
+      <% next unless pick.competitor.competition.active? %>
         <% pick_favourite_status = pick.competitor.is_favourite? %>
         <% pick_captain_status = pick.competitor.id == @team.captain.id %>
         <li

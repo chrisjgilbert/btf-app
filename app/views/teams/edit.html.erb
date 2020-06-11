@@ -10,6 +10,7 @@
         <%= render 'shared/team_error_messages' %>
         <%= f.fields_for :picks do |pick| %>
           <% competition = @competitions[pick.index] %>
+          <% next unless competition.active? %>
           <%= pick.label competition.id, competition.name %>
           <br>
           <% if competition.transfer_window_open? %>

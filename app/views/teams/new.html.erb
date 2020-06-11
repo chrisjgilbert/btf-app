@@ -11,6 +11,7 @@
         <h3 id="favourite_count"></h3>
         <%= f.fields_for :picks do |pick| %>
           <% competition = @competitions[pick.index] %>
+          <% next unless pick.competitor.competition.active? %>
           <%= pick.label competition.id, competition.name %>
           <br>
           <%= link_to '(View competition info)', competition_path(competition), target: '_blank' %>
