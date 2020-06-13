@@ -1,17 +1,46 @@
 require 'csv'
 
 namespace :competitions do
-  desc "Add transfer deadlines to Competitions"
-  task :cancel, [:id] => [:environment] do |task, args|
-    comp = Competition.find(args.id)
+  desc "Update transfer deadline"
+  task :update_transfer_deadlines, [:id] => [:environment] do |task, args|
+    competitions = Competition.all
+    competitions.each do |competition|
+      case competition.id
+      # F1
+      when 4 then competition.update(transfer_deadline: DateTime.new(2020, 7, 5, 12, 0, 0).utc)
+      # Euros
+      when 25 then competition.update(transfer_deadline: DateTime.new(2020, 12, 1, 12, 0, 0).utc)
+      # The Masters
+      when 10 then competition.update(transfer_deadline: DateTime.new(2020, 11, 12, 11, 0, 0).utc)
+        # Women's US Open (formerly Wimbledon)
+      when 3
+        competition.update(transfer_deadline: DateTime.new(2020, 8, 26, 11, 0, 0).utc)
+        competition.update(name: 'Tennis - Women\'s US Open')
+      # Tour de France
+      when 12 then competition.update(transfer_deadline: DateTime.new(2020, 8, 29, 8, 0, 0).utc)
+      end
+    end 
+  end
+  
+  desc "Cancel competitions"
+  task cancel: :environment do |task, args|
+    euros = 25
+    womens_100 = 15
+    womens_hockey = 13
+    overall_olympic_cycling = 9
+    comps = Competition.find(euros, womens_100, womens_hockey, overall_olympic_cycling)
 
-    comp.name = "#{comp.name} - CANCELLED - but available to transfer"
-    if comp.save
-      p "SUCCESSFULLY SAVED #{comp.name}"
-    else
-      p "FALIED TO SAVE #{comp.name}"
+    comps.each do |comp|
+      comp.update(name: "#{comp.name} - CANCELLED - but available to transfer")
+      comp.update(transfer_deadline: DateTime.new(2020, 12, 1, 12, 0, 0).utc)
+      if comp.save
+        p "SUCCESSFULLY SAVED #{comp.name}"
+      else
+        p "FALIED TO SAVE #{comp.name}"
+      end
     end
   end
+
   task add_transfer_deadlines: :environment do
     competitions = Competition.all
 
