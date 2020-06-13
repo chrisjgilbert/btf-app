@@ -2,6 +2,16 @@ require 'csv'
 
 namespace :competitions do
   desc "Add transfer deadlines to Competitions"
+  task :cancel, [:id] => [:environment] do |task, args|
+    comp = Competition.find(args.id)
+
+    comp.name = "#{comp.name} - CANCELLED - but available to transfer"
+    if comp.save
+      p "SUCCESSFULLY SAVED #{comp.name}"
+    else
+      p "FALIED TO SAVE #{comp.name}"
+    end
+  end
   task add_transfer_deadlines: :environment do
     competitions = Competition.all
 
