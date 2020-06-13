@@ -19,7 +19,7 @@
             <% if competition.transfer_deadline.present? %>
               <% date = competition.transfer_deadline.strftime("%d/%m/%Y") %>
               <% time = competition.transfer_deadline.strftime("%I:%M") %>
-              <h4><%= date %> @ <%= time %></h4>
+              <h4><%= date %> @ <%= time %> (UK)</h4>
             <% else %>
               <h4>N/A</h4>
             <% end %>
