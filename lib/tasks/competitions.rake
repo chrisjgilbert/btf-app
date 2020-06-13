@@ -18,6 +18,8 @@ namespace :competitions do
         competition.update(name: 'Tennis - Women\'s US Open')
       # Tour de France
       when 12 then competition.update(transfer_deadline: DateTime.new(2020, 8, 29, 8, 0, 0).utc)
+      # The Hundred
+      when 19 then competition.update(transfer_deadline: DateTime.new(2020, 12, 1, 12, 0, 0).utc)
       end
     end 
   end
