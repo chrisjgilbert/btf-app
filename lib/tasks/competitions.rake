@@ -1,6 +1,32 @@
 require 'csv'
 
 namespace :competitions do
+  desc "Update Men‘s - T20 Blast cricket comp"
+  task t20_blast_update: :environment do |task, args|
+    %w(
+      Birmingham Bears
+      Derbyshire Falcons
+      Durham
+      Essex Eagles
+      Glamorgan
+      Gloucestershire
+      Hampshire
+      Kent Spitfires
+      Lancashire Lightning
+      Leicestershire Foxes
+      Middlesex
+      Northamptonshire Steelbacks
+      Nottinghamshire Outlaws
+      Somerset
+      Surrey
+      Sussex Sharks
+      Worcestershire Rapids
+      Yorkshire Vikings
+    ).each do |team|
+      Competitor.create(name: team, competition_id: 19)
+    end
+  end
+
   desc "Update transfer deadline"
   task :update_transfer_deadlines, [:id] => [:environment] do |task, args|
     competitions = Competition.all
