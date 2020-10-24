@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     post '/team_selection', to: 'teams#team_selection'
 
     # Leagues
+    get '/leagues/stage-3', to: 'leagues#stage_3'
     resources :leagues, only: [:index, :new, :create, :show]
 
     # League memberships
