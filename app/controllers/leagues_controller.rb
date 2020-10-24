@@ -29,6 +29,9 @@ class LeaguesController < ApplicationController
     @league = League.find(params[:id])
   end
 
+  def stage_3
+  end
+
   private
 
   def league_params
