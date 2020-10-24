@@ -52,11 +52,9 @@ namespace :competitions do
   
   desc "Cancel competitions"
   task cancel: :environment do |task, args|
-    euros = 25
-    womens_100 = 15
-    womens_hockey = 13
-    overall_olympic_cycling = 9
-    comps = Competition.find(euros, womens_100, womens_hockey, overall_olympic_cycling)
+    ryder_cup = 24
+    cricket = 2
+    comps = Competition.find(ryder_cup, cricket)
 
     comps.each do |comp|
       comp.update(name: "#{comp.name} - CANCELLED - but available to transfer")
